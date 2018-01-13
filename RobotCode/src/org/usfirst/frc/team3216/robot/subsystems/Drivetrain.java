@@ -2,6 +2,7 @@ package org.usfirst.frc.team3216.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
 
@@ -13,10 +14,16 @@ import edu.wpi.first.wpilibj.Talon;
  *
  */
 public class Drivetrain extends Subsystem {
-
+	/** Configuration Constants ***********************************************/
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
+	
+	/** Instance Variables ****************************************************/
 	private SpeedController leftMotors, rightMotors;
+	private Logger log = new Logger(LOG_LEVEL, getName());
 
 	public Drivetrain() {
+		log.add("Constructor", LOG_LEVEL);
+		
     	if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
     		leftMotors = new VictorSP(RobotMap.PWM_LEFT_MOTOR);
     		rightMotors = new VictorSP(RobotMap.PWM_RIGHT_MOTOR);

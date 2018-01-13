@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3216.robot;
 
+import org.usfirst.frc.team3216.lib.Logger;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -22,5 +23,20 @@ public class RobotMap {
 	public static final boolean REVERSE_LEFT_MOTOR = false;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
 	public static final double ACCELERATION_MAX = 1.5;
-	
+		
+	/** Logger Settings *******************************************************/
+	public static final String 		LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";
+	public static final String 		LOG_TIME_FORMAT = "hh:mm:ss:SSS";
+	public static final String 		LOG_DIRECTORY_PATH = "c:\\logs";
+	public static final String 		LOG_TIME_ZONE = "America/Denver";
+	public static final boolean 	LOG_TO_CONSOLE 				= true;
+	public static final boolean 	LOG_TO_FILE 				= false;
+	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.DEBUG;
+	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
+	public static final Logger.Level	LOG_OI 					= Logger.Level.TRACE;
+	public static final Logger.Level	LOG_AXIS_TRIGGER 		= Logger.Level.ERROR;
+	public static final Logger.Level	LOG_POV_BUTTON			= Logger.Level.ERROR;
+	/** Subsystems **/                                                   
+	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
+	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
 }

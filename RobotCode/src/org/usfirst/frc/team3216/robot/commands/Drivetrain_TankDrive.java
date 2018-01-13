@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3216.robot.commands;
 
+import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.OI;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
@@ -12,17 +13,26 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drivetrain_TankDrive extends Command {
+	/** Configuration Constants ***********************************************/
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
+	
+	/** Instance Variables ****************************************************/
+	Logger log = new Logger(LOG_LEVEL, getName());
 	Drivetrain drivetrain = Robot.drivetrain;
 	OI oi = Robot.oi;
 	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();
 	
     public Drivetrain_TankDrive() {
+    	log.add("Constructor", Logger.Level.TRACE);
+    	
     	requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	log.add("Initialize", Logger.Level.TRACE);
+    	
     	drivetrain.stop();
 		leftPowerOld = 0.0;
 		rightPowerOld = 0.0;
@@ -67,11 +77,19 @@ public class Drivetrain_TankDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	drivetrain.stop();
+    	log.add("End", Logger.Level.TRACE);
+    	terminate();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	log.add("Interrupted", Logger.Level.TRACE);
+    	terminate();
     }
+    
+	/** Graceful End **********************************************************/
+	private void terminate() {
+		drivetrain.stop();
+	}    
 }

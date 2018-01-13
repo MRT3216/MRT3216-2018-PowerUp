@@ -1,13 +1,21 @@
 package org.usfirst.frc.team3216.robot;
 
+import org.usfirst.frc.team3216.lib.Logger;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	/** Configuration Constants ***********************************************/
 	Gamepad gamepad;
 	
+	/** Instance Variables ****************************************************/
+	Logger log = new Logger(RobotMap.LOG_OI, "OI");
+	
 	public OI() {
+		log.add("OI Constructor", Logger.Level.TRACE);
+		
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
 	}
 	

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 
 /**
@@ -18,7 +19,11 @@ import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	/** Configuration Constants ***********************************************/
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
+	
+	/** Create Subsystems *****************************************************/
+	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static OI oi;
 
@@ -31,6 +36,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		log.add("Robot Init", Logger.Level.TRACE);
+		
 		oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -44,7 +51,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		log.add("Disabled Init", Logger.Level.TRACE);
 	}
 
 	@Override
@@ -65,6 +72,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		log.add("Autonomous Init", Logger.Level.TRACE);
+		
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -89,6 +98,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		log.add("Teleop Init", Logger.Level.TRACE);
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
