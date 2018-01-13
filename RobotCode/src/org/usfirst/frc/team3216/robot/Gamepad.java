@@ -4,7 +4,6 @@ package org.usfirst.frc.team3216.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 
 public class Gamepad extends Joystick{
 	/** Gamepad Button and Axis Mapping ***************************************/

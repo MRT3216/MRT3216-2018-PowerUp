@@ -3,6 +3,7 @@ package org.usfirst.frc.team3216.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team3216.robot.RobotMap;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -11,11 +12,11 @@ import edu.wpi.first.wpilibj.Talon;
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
 
 	private SpeedController leftMotors, rightMotors;
 
-	public DriveTrain() {
+	public Drivetrain() {
     	if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
     		leftMotors = new VictorSP(RobotMap.PWM_LEFT_MOTOR);
     		rightMotors = new VictorSP(RobotMap.PWM_RIGHT_MOTOR);
@@ -32,7 +33,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	private void initMotor(Talon motor, boolean reverse) {
-		motor.setInverted(reverse); 	// affects percent Vbus mode
+		motor.setInverted(reverse); 	// affects percent Vbus mode???
 		//motor.setSensorPhase(reverse); 	// affects closed-loop mode
 	}
 	
@@ -64,4 +65,3 @@ public class DriveTrain extends Subsystem {
 		return power;
 	}
 }
-
