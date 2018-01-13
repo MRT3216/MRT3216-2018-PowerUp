@@ -21,12 +21,14 @@ public class OI {
 	
 	public double getDriveLeft() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
+		log.add("getDriveLeft", Logger.Level.TRACE);
 		joystickValue = scaleJoystick(joystickValue);
 		return joystickValue;
 	}
 	
 	public double getDriveRight() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_Y_AXIS);
+		log.add("getDriveRight", Logger.Level.TRACE);
 		joystickValue = scaleJoystick(joystickValue);
 		return joystickValue;		
 	}
@@ -39,7 +41,7 @@ public class OI {
 	}
 	
 	private double checkDeadZone(double joystickValue) {
-		//if (Math.abs(joystickValue) < JOYSTICK_DEAD_ZONE) joystickValue = 0.0;
+		if (Math.abs(joystickValue) < RobotMap.JOYSTICK_DEAD_ZONE) joystickValue = 0.0;
 		return joystickValue;
 	}
 }

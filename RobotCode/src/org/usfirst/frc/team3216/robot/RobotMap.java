@@ -39,4 +39,6 @@ public class RobotMap {
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
+	
+	public static final double JOYSTICK_DEAD_ZONE = 0.7;
 }
