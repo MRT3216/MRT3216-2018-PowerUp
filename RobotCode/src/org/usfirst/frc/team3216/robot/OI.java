@@ -7,31 +7,33 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
+	Gamepad gamepad;
+	
+	public OI() {
+		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
+	}
+	
+	public double getDriveLeft() {
+		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
+		joystickValue = scaleJoystick(joystickValue);
+		return joystickValue;
+	}
+	
+	public double getDriveRight() {
+		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_Y_AXIS);
+		joystickValue = scaleJoystick(joystickValue);
+		return joystickValue;		
+	}
+	
+	private double scaleJoystick(double joystickValue) {
+		joystickValue = checkDeadZone(joystickValue);
+		//joystickValue *= JOYSTICK_DRIVE_SCALE;
+		//joystickValue *= -1.0;
+		return joystickValue;
+	}
+	
+	private double checkDeadZone(double joystickValue) {
+		//if (Math.abs(joystickValue) < JOYSTICK_DEAD_ZONE) joystickValue = 0.0;
+		return joystickValue;
+	}
 }
