@@ -2,6 +2,10 @@ let ux = {
     slider: {
         button: document.getElementById('foo')
     },
+    startMatch: {
+    	startButton: document.getElementById('startTimer')
+    	//stopButton: document.getElementById('stopTimer')
+    }
 }
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
@@ -35,11 +39,13 @@ function outputUpdate3(dead) {
     document.querySelector('#dead').value = dead;
 }
 
+
+// JS code for timer
 document.getElementById('timer').innerHTML =
   02 + ":" + 30;
-startTimer();
 
-function startTimer() {
+// JS Code for match start
+ux.startMatch.startButton.onclick = function startTimer(){
   var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
   var m = timeArray[0];
@@ -57,3 +63,5 @@ function checkSecond(sec) {
   if (sec < 0) {sec = "59"};
   return sec;
 }
+
+
