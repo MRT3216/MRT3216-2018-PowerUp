@@ -44,7 +44,7 @@ function outputUpdate3(deadzone) {
 
 // JS code for timer
 document.getElementById('timer').innerHTML =
-  00 + ":" + 03;
+  02 + ":" + 30;
 
 // JS Code for match start
 ux.startMatch.startButton.onclick = function startTimer(){
