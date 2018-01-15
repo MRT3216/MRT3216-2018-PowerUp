@@ -25,8 +25,8 @@ public class RobotMap {
 	public static final int PWM_RIGHT_MOTOR = 1;
 	
 	/** Drivetrain Settings ***************************************************/
-	public static final boolean REVERSE_LEFT_MOTOR = false;
-	public static final boolean REVERSE_RIGHT_MOTOR = false;
+	public static final boolean REVERSE_LEFT_MOTOR = true;
+	public static final boolean REVERSE_RIGHT_MOTOR = true;
 	public static final double ACCELERATION_MAX = 1.5;
 		
 	/** Logger Settings *******************************************************/
