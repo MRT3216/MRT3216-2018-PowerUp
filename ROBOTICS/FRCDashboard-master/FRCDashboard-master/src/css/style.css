@@ -52,6 +52,16 @@ body > * {
 #timer {
     font-family: monospace;
     display: block;
+    height: 10vh;
+    width: 20vw;
+    top: 0;
+    left: 0;
+    font-size: 10vh;
+    line-height: .8;
+}
+#name {
+    font-family: monospace;
+    display: block;
     height: 20vh;
     width: 30vw;
     top: 0;
