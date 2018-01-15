@@ -46,7 +46,7 @@ public class RobotMap {
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
 	
-	public static double JOYSTICK_DEAD_ZONE = 0.05;
+	public static double JOYSTICK_DEADZONE = 0.05;
 	public static final double JOYSTICK_DRIVE_SCALE = 1.0;
 	
 	/** Network Tables **/
@@ -57,6 +57,6 @@ public class RobotMap {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
 		
-		JOYSTICK_DEAD_ZONE = settings.getEntry(ntDeadzone);	
+		JOYSTICK_DEADZONE = settings.getEntry(ntDeadzone).getDouble(JOYSTICK_DEADZONE);	
 	}
 }
