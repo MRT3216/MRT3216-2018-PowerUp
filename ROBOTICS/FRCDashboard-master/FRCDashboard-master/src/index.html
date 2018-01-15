@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="colorChangeable">
 
 <head>
     <script>
@@ -18,32 +18,32 @@
     <link rel="stylesheet" href="css/tuning.css">
 </head>
 
-<body>
+<body class="canChange">
     <!-- Clock that shows up in top left -->
     <div id= "name">3216</div>
-    <header>
+    <header class="canChange">
         <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
-        <button id="tuning-button">tuning</button>
+        <button id="tuning-button"><p>tuning</p></button>
         <br>
         <!-- MY Changes -->
         <!-- FOR SPEED -->
-        <label for="fader">Speed:</label>
-        <input type="range" min="0" max="100" value="0" id="fader" 
+        <label for="speed">Speed:</label>
+        <input  type="range" min="0" max="100" value="0" id="fader" 
         step="2" oninput="outputUpdate(value)">
-        <output for="fader" id="speed">0</output>
+        <output for="speed" id="speed">0</output>
         <br>
-        <!-- FOR SENSITIVITY -->
+        <!-- FOR sensitivity -->
         <label for="sensitivity">Sensitivity:</label>
-        <input type="range" min="0" max="1" value="0" id="fader" 
+        <input  type="range" min="0" max="1" value="0" id="fader" 
         step="0.01" oninput="outputUpdate2(value)">
-        <output for="fader" id="sensitivity">0</output>
-        <!-- FOR deadzone SPACE -->
+        <output for="sensitivity" id="sensitivity">0</output>
+        <!-- FOR deadzone -->
         <br> 
-        <label for="deadzone">Deadzone:</label>
+        <label  for="deadzone">Deadzone:</label>
         <input type="range" min="0" max="1" value="0" id="fader" 
         step="0.01" oninput="outputUpdate3(value)">
-        <output for="fader" id="deadzone">0</output>
+        <output for="deadzone" id="deadzone">0</output>
 
 
         <!-- GREYBOX -->
@@ -82,11 +82,11 @@
         <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
             The <p> below then says the value. -->
         <div id="example-section">
-            <button id="example-button">Change example value</button>
+            <button id="example-button"><p id="noChange">Change example value</p></button>
             <p id="example-readout">Value is undefined</p>
         </div>
         <!-- Autonomous selector -->
-        <div class="select-container">
+        <div class="select-container" class="canChange">
             <select id="auto-select">
                 <option>No auto modes found</option>
                 <!-- This gets populated by JS -->
@@ -107,6 +107,10 @@
             <br>
             <br>
             <span id="timer">2:30</span>
+            <br>
+            <button id="blueButton">Blue</button>
+            <button id="redButton">Red</button>
+            <br>
             <br>
             <br>
             <br>

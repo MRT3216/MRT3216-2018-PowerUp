@@ -226,3 +226,14 @@ body.login-close >:not(.greybox) {
     display: none;
     text-align: left;
 }
+
+body {
+    color: red;
+}
+
+.canChange {
+    color: red;
+}
+#noChange{
+    color: white;
+}
