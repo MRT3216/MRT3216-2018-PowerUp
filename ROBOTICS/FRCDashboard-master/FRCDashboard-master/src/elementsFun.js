@@ -15,6 +15,19 @@ var middleArrow = document.getElementById("speedArrowsMiddle");
 middleArrow.setAttribute("style", "display: none;");
 var bottomArrow = document.getElementById("speedArrowsBottom");
 bottomArrow.setAttribute("style", "display: none;");
+var single = document.getElementById("expRect1");
+single.setAttribute("style", "display: none;");
+var local1 = document.getElementById("expect1");
+local1.setAttribute("style", "display: none;");
+var local2 = document.getElementById("expect2");
+local3.setAttribute("style", "display: none;");
+var local3 = document.getElementById("expect3");
+local3.setAttribute("style", "display: none;");
+var secon = document.getElementById("expRect2");
+secon.setAttribute("style", "display: none;");
+var tres = document.getElementById("expRect3");
+tres.setAttribute("style", "display: none;");
+
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
 //     console.log(event); 
@@ -51,7 +64,6 @@ function outputUpdate(speed) {
     else{
       bottomArrow.setAttribute("style", "display: none;");
     }
-
 }
 
 // function for sensitivity change
@@ -68,6 +80,29 @@ function outputUpdate3(deadzone) {
 function outputUpdate4(armHeight) {
     console.log(armHeight)
     document.querySelector('#armHeight').value = armHeight;
+	if(armHeight > 25){
+		single.setAttribute("style", "display: inline;");
+		local1.setAttribute("style", "display: inline;");
+	}
+	else{
+		single.setAttribute("style", "display: none;");
+		local1.setAttribute("style", "display: none;");
+	if(armHeight > 50 {
+		secon.setAttribute("style", "display: inline;");
+		local2.setAttribute("style", "display: inline;");
+	}
+	else{
+		secon.setAttribute("style", "display: none;");
+		local2.setAttribute("style", "display: none;");
+	}
+	if(armHeight > 75){
+		tres.setAttribute("style", "display: inline;");
+		local3.setAttribute("style", "display: inline;");
+	}
+	else{
+		tres.setAttribute("style", "display: none;");
+		local3.setAttribute("style", "display: none;");
+	}
 }
 
 
