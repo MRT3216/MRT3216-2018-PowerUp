@@ -28,15 +28,15 @@ function outputUpdate(speed) {
 }
 
 // function for sensitivity change
-function outputUpdate2(sense) {
-    console.log(sense)
-    document.querySelector('#sense').value = sense;
+function outputUpdate2(sensitivity) {
+    console.log(sensitivity)
+    document.querySelector('#sensitivity').value = sensitivity;
 }
 
-// function for deadspace change
-function outputUpdate3(dead) {
-    console.log(dead)
-    document.querySelector('#dead').value = dead;
+// function for deadzone change
+function outputUpdate3(deadzone) {
+    console.log(deadzone)
+    document.querySelector('#deadzone').value = deadzone;
 }
 
 
