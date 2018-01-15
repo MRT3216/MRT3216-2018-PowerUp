@@ -21,22 +21,22 @@ public class OI {
 	
 	public double getDriveLeft() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
-		log.add("getDriveLeft", Logger.Level.TRACE);
 		joystickValue = scaleJoystick(joystickValue);
+		log.add("getDriveLeft (" + joystickValue + ")", Logger.Level.TRACE);
 		return joystickValue;
 	}
 	
 	public double getDriveRight() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_Y_AXIS);
-		log.add("getDriveRight", Logger.Level.TRACE);
 		joystickValue = scaleJoystick(joystickValue);
+		log.add("getDriveRight (" + joystickValue + ")", Logger.Level.TRACE);
 		return joystickValue;		
 	}
 	
 	private double scaleJoystick(double joystickValue) {
 		joystickValue = checkDeadZone(joystickValue);
-		//joystickValue *= JOYSTICK_DRIVE_SCALE;
-		//joystickValue *= -1.0;
+		joystickValue *= RobotMap.JOYSTICK_DRIVE_SCALE;
+		joystickValue *= -1.0;
 		return joystickValue;
 	}
 	
