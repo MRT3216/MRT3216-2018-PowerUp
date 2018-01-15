@@ -93,8 +93,13 @@
             </select>
         </div>
         <div>
-            <p>Adjust arm height</p>
-            <input id="arm-position" type="range" min="0" max="1200" value="770">
+            <label for="fader">Adjust arm height</label>
+            <br>
+            <label for="deadzone">Arm height</label>
+            <br>
+            <input type="range" min="0" max="1200" value="0" id="fader" 
+            step="2" oninput="outputUpdate4(value)">
+            <output for="fader" id="armHeight">0</output>
             <br>
             <button id="startTimer">Start Match</button>
             <br>
@@ -103,6 +108,14 @@
             <br>
             <span id="timer">2:30</span>
             <br>
+            <br>
+            <br>
+            <img src="upArrow.png"  id="speedArrowsTop" height="45" width="38"></img>
+            <br>
+            <img src="upArrow.png"  id="speedArrowsMiddle" height="45" width="38"></img>
+            <br>
+            <img src="upArrow.png"  id="speedArrowsBottom" height="45" width="38"></img>
+
         </div>
     </aside>
     <div class="greybox">

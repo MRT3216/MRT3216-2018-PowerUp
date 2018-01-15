@@ -213,3 +213,16 @@ body.login-close >:not(.greybox) {
     }
 }
 */
+
+.speedArrowsMiddle{
+    display: none;
+    text-align: left;
+}
+.speedArrowsBottom{
+    display: none;
+    text-align: left;
+}
+.speedArrowsTop{
+    display: none;
+    text-align: left;
+}

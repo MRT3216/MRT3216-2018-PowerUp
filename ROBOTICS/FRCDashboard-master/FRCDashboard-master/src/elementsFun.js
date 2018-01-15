@@ -9,8 +9,12 @@ let ux = {
       resetButton: document.getElementById('resetTimer')
     }
 }
-var elem = document.getElementById("speedRect");
-elem.setAttribute("style", "display: none;");
+var topArrow = document.getElementById("speedArrowsTop");
+topArrow.setAttribute("style", "display: none;");
+var middleArrow = document.getElementById("speedArrowsMiddle");
+middleArrow.setAttribute("style", "display: none;");
+var bottomArrow = document.getElementById("speedArrowsBottom");
+bottomArrow.setAttribute("style", "display: none;");
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
 //     console.log(event); 
@@ -29,9 +33,25 @@ elem.setAttribute("style", "display: none;");
 function outputUpdate(speed) {
     console.log(speed)
     document.querySelector('#speed').value = speed;
-    if(speed > 25){
-      elem.setAttribute("style", "display: inline;");
+    if(speed > 75){
+      topArrow.setAttribute("style", "display: inline;");
     }
+    else{
+      topArrow.setAttribute("style", "display: none;");
+    }
+    if(speed > 50){
+      middleArrow.setAttribute("style", "display: inline;");
+    }
+    else{
+      middleArrow.setAttribute("style", "display: none;");
+    }
+    if(speed > 25){
+      bottomArrow.setAttribute("style", "display: inline;");
+    }
+    else{
+      bottomArrow.setAttribute("style", "display: none;");
+    }
+
 }
 
 // function for sensitivity change
@@ -44,6 +64,10 @@ function outputUpdate2(sensitivity) {
 function outputUpdate3(deadzone) {
     console.log(deadzone)
     document.querySelector('#deadzone').value = deadzone;
+}
+function outputUpdate4(armHeight) {
+    console.log(armHeight)
+    document.querySelector('#armHeight').value = armHeight;
 }
 
 
