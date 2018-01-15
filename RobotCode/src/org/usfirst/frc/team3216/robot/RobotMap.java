@@ -2,6 +2,11 @@ package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -11,7 +16,7 @@ import org.usfirst.frc.team3216.lib.Logger;
 public class RobotMap {
 	public static enum Bot {BLUEFISH, MAINBOT;}
 	public static Bot currentBot = Bot.BLUEFISH;
-	
+
 	/** USB ports *************************************************************/
 	public static final int USB_GAMEPAD = 0;
 	
@@ -36,10 +41,22 @@ public class RobotMap {
 	public static final Logger.Level	LOG_OI 					= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_AXIS_TRIGGER 		= Logger.Level.ERROR;
 	public static final Logger.Level	LOG_POV_BUTTON			= Logger.Level.ERROR;
+	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
 	
-	public static final double JOYSTICK_DEAD_ZONE = 0.05;
+	public static double JOYSTICK_DEAD_ZONE = 0.05;
 	public static final double JOYSTICK_DRIVE_SCALE = 1.0;
+	
+	/** Network Tables **/
+	public static final String networkTableName = "RobotSettings";
+	public static final String ntDeadzone  = "deadzone";
+	
+	public void syncWithNetworkTables() {
+		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
+		NetworkTable settings = defaultTable.getTable(networkTableName);
+		
+		JOYSTICK_DEAD_ZONE = settings.getEntry(ntDeadzone);	
+	}
 }
