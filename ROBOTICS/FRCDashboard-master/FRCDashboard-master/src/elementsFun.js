@@ -7,7 +7,13 @@ let ux = {
     },
     resetMatch: {
       resetButton: document.getElementById('resetTimer')
-    }
+    },
+    colorRed: {
+      red: document.getElementById('redButton')
+    },
+    colorBlue:{
+      blue: document.getElementById('blueButton')
+    },
 }
 var topArrow = document.getElementById("speedArrowsTop");
 topArrow.setAttribute("style", "display: none;");
@@ -99,7 +105,16 @@ function checkSecond(sec) {
   return sec;
 }
 
+ux.colorRed.red.onclick = function changeColor(){
+  var red1 = document.getElementById("canChange");
+  var red2 = document.getElementById("canChange2");
+  red1.setAttribute("style", "color: red;");
+  red2.setAttribute("style", "color: red;");
 
-
-
-
+}
+ux.colorBlue.blue.onclick = function changeColor(){
+  var blue1 = document.getElementById("canChange");
+  var blue2 = document.getElementById("canChange2");
+  blue1.setAttribute("style", "color: blue;");
+  blue2.setAttribute("style", "color: blue;");
+}

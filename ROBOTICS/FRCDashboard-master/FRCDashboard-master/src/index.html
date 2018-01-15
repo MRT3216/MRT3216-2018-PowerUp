@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="colorChangeable">
+<html>
 
 <head>
     <script>
@@ -18,17 +18,17 @@
     <link rel="stylesheet" href="css/tuning.css">
 </head>
 
-<body class="canChange">
+<body id="canChange">
     <!-- Clock that shows up in top left -->
     <div id= "name">3216</div>
-    <header class="canChange">
+    <header id="canChange2">
         <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
         <button id="tuning-button"><p>tuning</p></button>
         <br>
         <!-- MY Changes -->
         <!-- FOR SPEED -->
-        <label for="speed">Speed:</label>
+        <label for="speed">Speed: </label>
         <input  type="range" min="0" max="100" value="0" id="fader" 
         step="2" oninput="outputUpdate(value)">
         <output for="speed" id="speed">0</output>
@@ -40,7 +40,7 @@
         <output for="sensitivity" id="sensitivity">0</output>
         <!-- FOR deadzone -->
         <br> 
-        <label  for="deadzone">Deadzone:</label>
+        <label for="deadzone">Deadzone:</label>
         <input type="range" min="0" max="1" value="0" id="fader" 
         step="0.01" oninput="outputUpdate3(value)">
         <output for="deadzone" id="deadzone">0</output>
@@ -86,7 +86,7 @@
             <p id="example-readout">Value is undefined</p>
         </div>
         <!-- Autonomous selector -->
-        <div class="select-container" class="canChange">
+        <div class="select-container" id="canChange">
             <select id="auto-select">
                 <option>No auto modes found</option>
                 <!-- This gets populated by JS -->

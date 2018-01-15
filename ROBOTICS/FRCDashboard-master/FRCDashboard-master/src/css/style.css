@@ -231,9 +231,12 @@ body {
     color: red;
 }
 
-.canChange {
+#canChange {
     color: red;
 }
 #noChange{
     color: white;
+}
+#canChange2 {
+    color: red;
 }
