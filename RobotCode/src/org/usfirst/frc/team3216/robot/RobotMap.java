@@ -45,18 +45,24 @@ public class RobotMap {
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
-	
-	public static double JOYSTICK_DEADZONE = 0.05;
-	public static final double JOYSTICK_DRIVE_SCALE = 1.0;
-	
-	/** Network Tables **/
+		
+	/** Network Table Names **/
 	public static final String networkTableName = "RobotSettings";
 	public static final String ntDeadzone  = "deadzone";
+	public static final String ntSensitivity = "sensitivity";
+	public static final String ntSpeed = "speed";
+	
+	/** Network Table Values **/
+	public static double JOYSTICK_DEADZONE = 0.05;
+	public static double JOYSTICK_SENSITIVITY = 1.0;
+	public static double SPEED = 1.0;
 	
 	public void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
 		
-		JOYSTICK_DEADZONE = settings.getEntry(ntDeadzone).getDouble(JOYSTICK_DEADZONE);	
+		JOYSTICK_DEADZONE = settings.getEntry(ntDeadzone).getDouble(JOYSTICK_DEADZONE);
+		JOYSTICK_SENSITIVITY = settings.getEntry(ntSensitivity).getDouble(JOYSTICK_SENSITIVITY);
+		SPEED = settings.getEntry(ntSpeed).getDouble(SPEED);
 	}
 }

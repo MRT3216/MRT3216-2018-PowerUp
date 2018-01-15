@@ -35,13 +35,13 @@ public class OI {
 	
 	private double scaleJoystick(double joystickValue) {
 		joystickValue = checkDeadZone(joystickValue);
-		joystickValue *= RobotMap.JOYSTICK_DRIVE_SCALE;
+		joystickValue *= RobotMap.SPEED;
 		joystickValue *= -1.0;
 		return joystickValue;
 	}
 	
 	private double checkDeadZone(double joystickValue) {
-		if (Math.abs(joystickValue) < RobotMap.JOYSTICK_DEAD_ZONE) joystickValue = 0.0;
+		if (Math.abs(joystickValue) < RobotMap.JOYSTICK_DEADZONE) joystickValue = 0.0;
 		return joystickValue;
 	}
 }
