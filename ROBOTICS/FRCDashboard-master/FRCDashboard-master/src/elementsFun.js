@@ -4,7 +4,9 @@ let ux = {
     },
     startMatch: {
     	startButton: document.getElementById('startTimer')
-    	//stopButton: document.getElementById('stopTimer')
+    },
+    resetMatch: {
+      resetButton: document.getElementById('resetTimer')
     }
 }
 // My event handler
@@ -42,7 +44,7 @@ function outputUpdate3(deadzone) {
 
 // JS code for timer
 document.getElementById('timer').innerHTML =
-  02 + ":" + 30;
+  00 + ":" + 03;
 
 // JS Code for match start
 ux.startMatch.startButton.onclick = function startTimer(){
@@ -52,7 +54,10 @@ ux.startMatch.startButton.onclick = function startTimer(){
   var s = checkSecond((timeArray[1] - 1));
   if(s==59){m=m-1}
   //if(m<0){alert('timer completed')}
-  
+  if(m<1 && s<1){alert("times up!")};
+  document.getElementById('timer').innerHTML =
+  00 + ":" + 00;
+  if(m<1 && s<1){return};
   document.getElementById('timer').innerHTML =
     m + ":" + s;
   setTimeout(startTimer, 1000);
