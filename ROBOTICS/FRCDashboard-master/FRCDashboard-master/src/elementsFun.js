@@ -9,9 +9,11 @@ let ux = {
       resetButton: document.getElementById('resetTimer')
     }
 }
+var elem = document.getElementById("speedRect");
+elem.setAttribute("style", "display: none;");
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
-//     console.log(event);
+//     console.log(event); 
 //     console.log(event.target);
 // }
 
@@ -27,6 +29,9 @@ let ux = {
 function outputUpdate(speed) {
     console.log(speed)
     document.querySelector('#speed').value = speed;
+    if(speed > 25){
+      elem.setAttribute("style", "display: inline;");
+    }
 }
 
 // function for sensitivity change
@@ -57,6 +62,7 @@ ux.startMatch.startButton.onclick = function startTimer(){
   if(m<1 && s<1){alert("times up!")};
   document.getElementById('timer').innerHTML =
   00 + ":" + 00;
+  if(m<1 && s<1){document.getElementById('timer').innerHTML = 02 + ":" + 30;};
   if(m<1 && s<1){return};
   document.getElementById('timer').innerHTML =
     m + ":" + s;
@@ -68,5 +74,8 @@ function checkSecond(sec) {
   if (sec < 0) {sec = "59"};
   return sec;
 }
+
+
+
 
 
