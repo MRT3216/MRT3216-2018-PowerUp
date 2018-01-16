@@ -1,18 +1,16 @@
 let ux = {
-    slider: {
-        button: document.getElementById('foo')
-    },
     startMatch: {
-    	startButton: document.getElementById('startTimer')
+    	startButton: document.getElementById('startTimer'), // ux.startMatch.startButton
+    	isRunning: false,
     },
     resetMatch: {
-      resetButton: document.getElementById('resetTimer')
+      resetButton: document.getElementById('resetTimer'),
     },
     colorRed: {
-      red: document.getElementById('redButton')
+      red: document.getElementById('redButton'),
     },
     colorBlue:{
-      blue: document.getElementById('blueButton')
+      blue: document.getElementById('blueButton'),
     },
 }
 var topArrow = document.getElementById("speedArrowsTop");
@@ -78,23 +76,37 @@ function outputUpdate4(armHeight) {
 
 // JS code for timer
 document.getElementById('timer').innerHTML =
-  02 + ":" + 30;
+  00 + ":" + 03;
 // JS Code for match start
-ux.startMatch.startButton.onclick = function startTimer(){
-  var presentTime = document.getElementById('timer').innerHTML;
-  var timeArray = presentTime.split(/[:]+/);
-  var m = timeArray[0];
-  var s = checkSecond((timeArray[1] - 1));
-  if(s==59){m=m-1}
-  //if(m<0){alert('timer completed')}
-  if(m<1 && s<1){alert("times up!")};
-  document.getElementById('timer').innerHTML =
-  00 + ":" + 00;
-  if(m<1 && s<1){document.getElementById('timer').innerHTML = 02 + ":" + 30;};
-  if(m<1 && s<1){return};
-  document.getElementById('timer').innerHTML =
-    m + ":" + s;
-  setTimeout(startTimer, 1000);
+ux.startMatch.startButton.onclick = onStartClickHandler;
+
+function onStartClickHandler() {
+	if( ux.startMatch.isRunning ) {
+		return;
+	}
+
+	startTimer();
+}
+
+function startTimer(){
+	var presentTime = document.getElementById('timer').innerHTML;
+  	var timeArray = presentTime.split(/[:]+/);
+  	var m = timeArray[0];
+  	var s = checkSecond((timeArray[1] - 1));
+  	if(s==59){m=m-1}
+  	//if(m<0){alert('timer completed')}
+  	if(m<1 && s<1){alert("times up!")}
+  	if(m<1 && s<1){document.getElementById('timer').innerHTML = 00 + ":" + 03;};
+  	if(m<1 && s<1){ux.startMatch.isRunning= false;}
+  	if(m<1 && s<1){return};
+
+
+  	//if(0 || 1){return};
+  	//if(m && s){return};
+  	document.getElementById('timer').innerHTML =
+    	m + ":" + s;
+  	setTimeout(startTimer, 1000);
+  	ux.startMatch.isRunning=true;
 }
 
 function checkSecond(sec) {

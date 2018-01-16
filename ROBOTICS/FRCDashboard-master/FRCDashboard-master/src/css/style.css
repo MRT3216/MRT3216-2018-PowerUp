@@ -240,4 +240,6 @@ body {
 #canChange2 {
     color: red;
 }
-
+#center {
+    text-align: center;
+}
