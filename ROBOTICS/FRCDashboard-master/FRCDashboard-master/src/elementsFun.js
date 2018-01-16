@@ -12,6 +12,9 @@ let ux = {
     colorBlue:{
       blue: document.getElementById('blueButton'),
     },
+    colors:{
+    	all: document.getElementById('center'),
+    }
 }
 var topArrow = document.getElementById("speedArrowsTop");
 topArrow.setAttribute("style", "display: none;");
@@ -76,7 +79,7 @@ function outputUpdate4(armHeight) {
 
 // JS code for timer
 document.getElementById('timer').innerHTML =
-  00 + ":" + 03;
+  02 + ":" + 30;
 // JS Code for match start
 ux.startMatch.startButton.onclick = onStartClickHandler;
 
@@ -96,7 +99,7 @@ function startTimer(){
   	if(s==59){m=m-1}
   	//if(m<0){alert('timer completed')}
   	if(m<1 && s<1){alert("times up!")}
-  	if(m<1 && s<1){document.getElementById('timer').innerHTML = 00 + ":" + 03;};
+  	if(m<1 && s<1){document.getElementById('timer').innerHTML = 02 + ":" + 30;};
   	if(m<1 && s<1){ux.startMatch.isRunning= false;}
   	if(m<1 && s<1){return};
 
@@ -127,4 +130,15 @@ ux.colorBlue.blue.onclick = function changeColor(){
   var blue2 = document.getElementById("canChange2");
   blue1.setAttribute("style", "color: blue;");
   blue2.setAttribute("style", "color: blue;");
+}
+
+ux.colors.all.onchange = function changeColors(){
+  // var elements = document.getElementById("canChange");
+  // var elements2 = document.getElementById("canChange2");
+  // color1 = document.getElementById("canChange").value;
+  // color2 = document.getElementById("canChange2").value;
+  // elements.setAttribute("style", "color: " + color1 +" ;");
+  // elements2.setAttribute("style", "color: " + color2+" ;");
+  console.log("lol")
+
 }
