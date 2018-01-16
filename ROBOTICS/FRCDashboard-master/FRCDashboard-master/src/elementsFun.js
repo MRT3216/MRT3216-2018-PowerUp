@@ -22,6 +22,12 @@ var middleArrow = document.getElementById("speedArrowsMiddle");
 middleArrow.setAttribute("style", "display: none;");
 var bottomArrow = document.getElementById("speedArrowsBottom");
 bottomArrow.setAttribute("style", "display: none;");
+var thefirst = document.getElementById("1");
+thefirst.setAttribute("style", "display: none;");
+var second = document.getElementById("2");
+second.setAttribute("style", "display: none;");
+var thethird = document.getElementById("3");
+thethird.setAttribute("style", "display: none;");
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
 //     console.log(event); 
@@ -75,6 +81,24 @@ function outputUpdate3(deadzone) {
 function outputUpdate4(armHeight) {
     console.log(armHeight)
     document.querySelector('#armHeight').value = armHeight;
+	if(armHeight > 25){
+		thefirst.setAttribute("style", "display: inline;");
+	}
+	else{
+		thefirst.setAttribute("style", "display: none;");
+	}
+	if(armHeight > 50){
+		second.setAttribute("style", "display: inline;");
+	}
+	else{
+		second.setAttribute("style", "display: none;");
+	}
+	if(armHeight > 75){
+		thethird.setAttribute("style", "display: inline;");
+	}
+	else{
+		thethird.setAttribute("style", "display: none;");
+	}
 }
 
 // JS code for timer
