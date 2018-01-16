@@ -76,11 +76,9 @@ function outputUpdate4(armHeight) {
     document.querySelector('#armHeight').value = armHeight;
 }
 
-
 // JS code for timer
 document.getElementById('timer').innerHTML =
   02 + ":" + 30;
-
 // JS Code for match start
 ux.startMatch.startButton.onclick = function startTimer(){
   var presentTime = document.getElementById('timer').innerHTML;
