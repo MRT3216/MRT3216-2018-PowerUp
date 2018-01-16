@@ -159,7 +159,7 @@ aside > * {
     margin-bottom: 20px;
 }
 .greybox {
-    display: none !important;
+    display: none;
     position: fixed;
     bottom: 0;
     top: 0;
@@ -242,6 +242,11 @@ body {
 }
 #center {
     text-align: center;
+}
+#sensitivityPic {
+	display:none;
+	width:200px;
+	height:240px;
 }
 
 

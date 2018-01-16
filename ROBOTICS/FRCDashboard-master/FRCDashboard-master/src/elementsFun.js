@@ -12,9 +12,6 @@ let ux = {
     colorBlue:{
       blue: document.getElementById('blueButton'),
     },
-    colors:{
-    	all: document.getElementById('center'),
-    }
 }
 var topArrow = document.getElementById("speedArrowsTop");
 topArrow.setAttribute("style", "display: none;");
@@ -28,6 +25,8 @@ var second = document.getElementById("2");
 second.setAttribute("style", "display: none;");
 var thethird = document.getElementById("3");
 thethird.setAttribute("style", "display: none;");
+var pic = document.getElementById("sensitivityPic");
+pic.setAttribute("style", "display: none;");
 // My event handler
 // ux.foo.button.onclick = function foo(event) {
 //     console.log(event); 
@@ -71,6 +70,12 @@ function outputUpdate(speed) {
 function outputUpdate2(sensitivity) {
     console.log(sensitivity)
     document.querySelector('#sensitivity').value = sensitivity;
+    if(sensitivity > 0.8){
+        pic.setAttribute("style", "display: inline;");
+    }
+    else{
+        pic.setAttribute("style", "display: none;");
+    }
 }
 
 // function for deadzone change
@@ -78,10 +83,11 @@ function outputUpdate3(deadzone) {
     console.log(deadzone)
     document.querySelector('#deadzone').value = deadzone;
 }
+// function for showing the arm when value is changed
 function outputUpdate4(armHeight) {
     console.log(armHeight)
     document.querySelector('#armHeight').value = armHeight;
-	if(armHeight > 25){
+	if(armHeight > 0.8){
 		thefirst.setAttribute("style", "display: inline;");
 	}
 	else{
@@ -142,6 +148,7 @@ function checkSecond(sec) {
   return sec;
 }
 
+// Changing the color w/ button click (red)
 ux.colorRed.red.onclick = function changeColor(){
   var red1 = document.getElementById("canChange");
   var red2 = document.getElementById("canChange2");
@@ -149,20 +156,10 @@ ux.colorRed.red.onclick = function changeColor(){
   red2.setAttribute("style", "color: red;");
 
 }
+// Changing the color w/ button click (blue)
 ux.colorBlue.blue.onclick = function changeColor(){
   var blue1 = document.getElementById("canChange");
   var blue2 = document.getElementById("canChange2");
   blue1.setAttribute("style", "color: skyblue;");
   blue2.setAttribute("style", "color: skyblue;");
-}
-
-ux.colors.all.onchange = function changeColors(){
-  // var elements = document.getElementById("canChange");
-  // var elements2 = document.getElementById("canChange2");
-  // color1 = document.getElementById("canChange").value;
-  // color2 = document.getElementById("canChange2").value;
-  // elements.setAttribute("style", "color: " + color1 +" ;");
-  // elements2.setAttribute("style", "color: " + color2+" ;");
-  console.log("lol")
-
 }
