@@ -152,8 +152,8 @@ ux.colorRed.red.onclick = function changeColor(){
 ux.colorBlue.blue.onclick = function changeColor(){
   var blue1 = document.getElementById("canChange");
   var blue2 = document.getElementById("canChange2");
-  blue1.setAttribute("style", "color: blue;");
-  blue2.setAttribute("style", "color: blue;");
+  blue1.setAttribute("style", "color: skyblue;");
+  blue2.setAttribute("style", "color: skyblue;");
 }
 
 ux.colors.all.onchange = function changeColors(){
