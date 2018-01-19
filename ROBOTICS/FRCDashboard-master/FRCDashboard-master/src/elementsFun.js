@@ -13,6 +13,7 @@ let ux = {
       blue: document.getElementById('blueButton'),
     },
 }
+var audio = new Audio('Danger Alarm Sound Effect.mp3');
 var topArrow = document.getElementById("speedArrowsTop");
 topArrow.setAttribute("style", "display: none;");
 var middleArrow = document.getElementById("speedArrowsMiddle");
@@ -128,7 +129,8 @@ function startTimer(){
   	var s = checkSecond((timeArray[1] - 1));
   	if(s==59){m=m-1}
   	//if(m<0){alert('timer completed')}
-  	if(m<1 && s<1){alert("times up!")}
+    if(m<1 && s<1){audio.play();}
+  	if(m<1 && s<1){alert("Times Up!")}
   	if(m<1 && s<1){document.getElementById('timer').innerHTML = 02 + ":" + 30;};
   	if(m<1 && s<1){ux.startMatch.isRunning= false;}
   	if(m<1 && s<1){return};

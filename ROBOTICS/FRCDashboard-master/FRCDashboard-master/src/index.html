@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -30,19 +30,19 @@
         <!-- MY Changes -->
         <!-- FOR SPEED -->
         <label for="speed">Speed: </label>
-        <input  type="range" min="0" max="100" value="0" id="fader" 
+        <input class="slider"  type="range" min="0" max="100" value="0" id="fader" 
         step="2" oninput="outputUpdate(value)">
         <output for="speed" id="speed">0</output>
         <br>
         <!-- FOR sensitivity -->
         <label for="sensitivity">Sensitivity:</label>
-        <input  type="range" min="0" max="1" value="0" id="fader" 
+        <input class="slider" type="range" min="0" max="1" value="0" id="fader" 
         step="0.01" oninput="outputUpdate2(value)">
         <output for="sensitivity" id="sensitivity">0</output>
         <!-- FOR deadzone -->
         <br> 
         <label for="deadzone">Deadzone:</label>
-        <input type="range" min="0" max="1" value="0" id="fader" 
+        <input class="slider" type="range" min="0" max="1" value="0" id="fader" 
         step="0.01" oninput="outputUpdate3(value)">
         <output for="deadzone" id="deadzone">0</output>
 
@@ -100,7 +100,7 @@
             <br>
             <label for="deadzone">Arm height</label>
             <br>
-            <input type="range" min="0" max="100" value="0" id="fader" 
+            <input class="slider" type="range" min="0" max="100" value="0" id="fader" 
             step="1" oninput="outputUpdate4(value)">
             <output for="fader" id="armHeight">0</output>
             <br>
