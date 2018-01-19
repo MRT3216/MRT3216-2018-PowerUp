@@ -127,9 +127,9 @@ function startTimer(){
   	var timeArray = presentTime.split(/[:]+/);
   	var m = timeArray[0];
   	var s = checkSecond((timeArray[1] - 1));
+    if(m<1 && s<1){audio.play();}
   	if(s==59){m=m-1}
   	//if(m<0){alert('timer completed')}
-    if(m<1 && s<1){audio.play();}
   	if(m<1 && s<1){alert("Times Up!")}
   	if(m<1 && s<1){document.getElementById('timer').innerHTML = 02 + ":" + 30;};
   	if(m<1 && s<1){ux.startMatch.isRunning= false;}

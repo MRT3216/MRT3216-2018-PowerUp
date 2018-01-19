@@ -63,10 +63,10 @@ body > * {
     font-family: monospace;
     display: block;
     height: 20vh;
-    width: 30vw;
+    width: 80vw;
     top: 0;
     left: 0;
-    font-size: 20vh;
+    font-size: 15vh;
     line-height: .8;
 }
 header {
