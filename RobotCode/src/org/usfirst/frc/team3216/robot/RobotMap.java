@@ -74,6 +74,6 @@ public class RobotMap {
 		
 		/** Write to NetworkTable **/		
 		settings.getEntry(ntRangeFinderDistance).setDouble(RangeFinder.getDistance());
-		settings.getEntry(ntRangeFinderAverageDistance).setDouble(RangeFinder.getAverageVoltage());
+		settings.getEntry(ntRangeFinderAverageDistance).setDouble(RangeFinder.getAverageDistance());
 	}
 }

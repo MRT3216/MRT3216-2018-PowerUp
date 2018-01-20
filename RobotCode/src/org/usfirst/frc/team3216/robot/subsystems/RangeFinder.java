@@ -42,7 +42,7 @@ public class RangeFinder extends Subsystem {
 	    return getVoltage() * VOLTS_TO_DIST;
 	}
 	
-	public static double getAveragedISTANCE() {
+	public static double getAverageDistance() {
 		return getAverageVoltage() * VOLTS_TO_DIST;
 	}
 }
