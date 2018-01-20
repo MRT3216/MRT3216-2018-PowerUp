@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team3216.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static OI oi;
 	private ADIS16448_IMU imu;
-
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -101,7 +103,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		RobotMap.syncWithNetworkTables();
+		this.syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
 
@@ -125,7 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		RobotMap.syncWithNetworkTables();
+		this.syncWithNetworkTables();
 		Scheduler.getInstance().run();
 		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
 	}
@@ -136,5 +138,22 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	public static void syncWithNetworkTables() {
+		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
+		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
+		
+		/** Read from NetworkTable **/
+		RobotMap.JOYSTICK_DEADZONE = 
+				settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
+		RobotMap.JOYSTICK_SENSITIVITY = 
+				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
+		RobotMap.SPEED = 
+				settings.getEntry(RobotMap.ntSpeed).getDouble(RobotMap.SPEED);
+		
+		/** Write to NetworkTable **/		
+		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistance());
+		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistance());
 	}
 }
