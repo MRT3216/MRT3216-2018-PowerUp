@@ -66,6 +66,7 @@ public class RobotMap {
 	public static void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
+		RangeFinder rangeFinder = new RangeFinder();
 		
 		/** Read from NetworkTable **/
 		JOYSTICK_DEADZONE = settings.getEntry(ntDeadzone).getDouble(JOYSTICK_DEADZONE);
@@ -73,7 +74,7 @@ public class RobotMap {
 		SPEED = settings.getEntry(ntSpeed).getDouble(SPEED);
 		
 		/** Write to NetworkTable **/		
-		settings.getEntry(ntRangeFinderDistance).setDouble(RangeFinder.getDistance());
-		settings.getEntry(ntRangeFinderAverageDistance).setDouble(RangeFinder.getAverageDistance());
+		settings.getEntry(ntRangeFinderDistance).setDouble(rangeFinder.getDistance());
+		settings.getEntry(ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistance());
 	}
 }

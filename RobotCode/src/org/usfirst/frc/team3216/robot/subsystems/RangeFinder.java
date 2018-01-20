@@ -22,7 +22,7 @@ public class RangeFinder extends Subsystem {
 	private static final int OVERSAMPLED_BITS = 3;
 	
 	public RangeFinder() {
-		log.add("Rangefinder Constructor", LOG_LEVEL);
+		log.add("Constructor", LOG_LEVEL);
 		MB1013.setOversampleBits(OVERSAMPLED_BITS);
 	}
 	
@@ -41,7 +41,7 @@ public class RangeFinder extends Subsystem {
 	public double getDistance() {
 		double dist = getVoltage() * VOLTS_TO_DIST;
 		
-		log.add("RangeFinder - dist: " + dist, LOG_LEVEL);
+		log.add("dist: " + dist, LOG_LEVEL);
 		
 	    return dist;
 	}
@@ -49,7 +49,7 @@ public class RangeFinder extends Subsystem {
 	public double getAverageDistance() {		
 		double aveDist = getAverageVoltage() * VOLTS_TO_DIST;
 		
-		log.add("RangeFinder - ave dist: " + aveDist, LOG_LEVEL);
+		log.add("ave dist: " + aveDist, LOG_LEVEL);
 		
 		return aveDist;
 	}
