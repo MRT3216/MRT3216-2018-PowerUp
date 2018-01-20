@@ -30,19 +30,27 @@ public class RangeFinder extends Subsystem {
 
     }
     
-	public static double getVoltage() {
+	public double getVoltage() {
 	    return MB1013.getVoltage();
 	}
 	
-	public static double getAverageVoltage() {
+	public double getAverageVoltage() {
 	    return MB1013.getAverageVoltage();
 	}
 		  
-	public static double getDistance() {
-	    return getVoltage() * VOLTS_TO_DIST;
+	public double getDistance() {
+		double dist = getVoltage() * VOLTS_TO_DIST;
+		
+		log.add("RangeFinder - dist: " + dist, LOG_LEVEL);
+		
+	    return dist;
 	}
 	
-	public static double getAverageDistance() {
-		return getAverageVoltage() * VOLTS_TO_DIST;
+	public double getAverageDistance() {		
+		double aveDist = getAverageVoltage() * VOLTS_TO_DIST;
+		
+		log.add("RangeFinder - ave dist: " + aveDist, LOG_LEVEL);
+		
+		return aveDist;
 	}
 }
