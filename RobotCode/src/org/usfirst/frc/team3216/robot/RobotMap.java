@@ -63,7 +63,7 @@ public class RobotMap {
 	public static double SPEED = 1.0;
 	public static double RANGEFINDER_DISTANCE = 0.0;
 	
-	public void syncWithNetworkTables() {
+	public static void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
 		
