@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static OI oi;
-	ADIS16448_IMU imu;
+	private ADIS16448_IMU imu;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
