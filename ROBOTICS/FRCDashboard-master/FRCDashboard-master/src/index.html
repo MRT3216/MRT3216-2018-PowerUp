@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <script src="connection.js"></script>
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
@@ -43,7 +42,7 @@
         More explanation in that CSS rule. -->
     <img id="camera" style="-webkit-user-select: none;" src="http://10.32.16.11/mjpg/video.mjpg">
     <!--<div id="camera"></div>-->
-    <div id="tuning">
+    <div id="tuning" style="display: none;">
         <input id="name" type="text" placeholder="Property">
         <input id="value" type="text" placeholder="Value">
         <button id="set">Set</button>
@@ -89,6 +88,11 @@
         </div>
         <div>
             <br>
+            <div id="example-section">
+                <button id="example-button">Change example value</button>
+                <p id="example-readout">Value is undefined</p>
+            </div>
+            <br>
             <label for="deadzone">Arm height</label>
             <br>
             <input class="slider" type="range" min="0" max="100" value="0" id="fader" 
@@ -126,8 +130,11 @@
         </div>
     </div>
     <script src="networktables/networktables.js"></script>
+    <script src="connection.js"></script>
     <script src="ui.js"></script>
     <script src="elementsFun.js"></script>
+    
+
 </body>
 
 </html>
