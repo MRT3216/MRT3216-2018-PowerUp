@@ -24,8 +24,11 @@ public class RobotMap {
 	public static final int PWM_LEFT_MOTOR 	= 0;
 	public static final int PWM_RIGHT_MOTOR = 1;
 	
+	/** Analog Input ports ****************************************************/
+	public static final int RANGEFINDER = 0;
+	
 	/** Drivetrain Settings ***************************************************/
-	public static final boolean REVERSE_LEFT_MOTOR = true;
+	public static final boolean REVERSE_LEFT_MOTOR = false;
 	public static final boolean REVERSE_RIGHT_MOTOR = true;
 	public static final double ACCELERATION_MAX = 1.5;
 		
@@ -47,7 +50,7 @@ public class RobotMap {
 	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
 		
 	/** Network Table Names **/
-	public static final String networkTableName = "RobotSettings";
+	public static final String networkTableName = "SmartDashboard";
 	public static final String ntDeadzone  = "deadzone";
 	public static final String ntSensitivity = "sensitivity";
 	public static final String ntSpeed = "speed";
