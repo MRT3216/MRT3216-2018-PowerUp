@@ -12,19 +12,19 @@ public class RangeFinder extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_RANGEFINDER;
 	private Logger log = new Logger(LOG_LEVEL, getName());
+	private final double mmToInches = 0.03937007874;
 	
 	/** Instance Variables ****************************************************
 	    A MB1013 distance sensor - http://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
 	    (pins 3, 6 and 7 from sensor to analog input 0)
 	**/
 	private static final AnalogInput MB1013 = new AnalogInput(0);
-	private static final double Vi = 9.766;
-	private static final double Vcc = 512;
+	private static final double V5mm = .004885;
 	private static final double VOLTS_TO_DIST = 1.0;
 	private static final int OVERSAMPLED_BITS = 3;
-	
+
 	public RangeFinder() {
-		//log.add("Constructor", LOG_LEVEL);
+		log.add("Constructor", LOG_LEVEL);
 		MB1013.setOversampleBits(OVERSAMPLED_BITS);
 	}
 	
@@ -40,23 +40,41 @@ public class RangeFinder extends Subsystem {
 	    return MB1013.getAverageVoltage();
 	}
 		  
-	public double getDistance() {
-		double Vm = getVoltage();
+	public double getDistanceInMM() {
+		double distInMM = this.voltageToDistance(getVoltage());
 		
-		double dist = Vm/Vi;
+		log.add("dist in mm: " + distInMM, LOG_LEVEL);
 		
-		log.add("dist: " + dist, LOG_LEVEL);
-		
-	    return dist;
+	    return distInMM;
 	}
 	
-	public double getAverageDistance() {		
-		double Vm = getVoltage();
+	public double getAverageDistanceInMM() {		
+		double aveDistInMM = this.voltageToDistance(getAverageVoltage());
 		
-		double aveDist = Vm/Vi;
+		log.add("ave dist in mm: " + aveDistInMM, LOG_LEVEL);
 		
-		log.add("ave dist: " + aveDist, LOG_LEVEL);
+		return aveDistInMM;
+	}
+	
+	public double getDistanceInInches() {
+		double distInInches = this.getDistanceInMM() * this.mmToInches;
 		
-		return aveDist;
+		log.add("dist in mm: " + distInInches, LOG_LEVEL);
+		
+	    return distInInches;
+	}
+	
+	public double getAverageDistanceInInches() {		
+		double aveDistInInches = this.getAverageDistanceInMM() * this.mmToInches;
+		
+		log.add("ave dist in mm: " + aveDistInInches, LOG_LEVEL);
+		
+		return aveDistInInches;
+	}
+	
+	private double voltageToDistance(double voltageMeasured) {
+		// Divide the voltage measured by the volts per 5mm and then 
+		// multiple by 5 to get the distance in mm
+		return (voltageMeasured/V5mm) * 5;	
 	}
 }
