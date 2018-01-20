@@ -2,21 +2,10 @@
 <html>
 
 <head>
-    <script src="jscolor.js"></script>
-    <script>
-    document.addEventListener("keydown", function (e) {
-        if (e.which === 123) {
-            require('remote').getCurrentWindow().toggleDevTools();
-        } else if (e.which === 116) {
-            location.reload();
-        }
-    });
-    </script>
+    <script src="connection.js"></script>
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
-    <script src="components/tuning.js"></script>
-    <link rel="stylesheet" href="css/tuning.css">
 </head>
 
 <body id="canChange">
@@ -138,9 +127,7 @@
     </div>
     <script src="networktables/networktables.js"></script>
     <script src="ui.js"></script>
-    <script src="jscolor.js"></script>
     <script src="elementsFun.js"></script>
-    <script src="components/tuning.js"></script>
 </body>
 
 </html>
