@@ -110,7 +110,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		imu.calibrate();
 		imu.reset();
-		log.add("Teleop Init", Logger.Level.TRACE);
+		log.add("Teleop Init", Logger.Level.TRACE); 
 		
 		
 		// This makes sure that the autonomous stops running when
