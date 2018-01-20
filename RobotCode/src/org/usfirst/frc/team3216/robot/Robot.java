@@ -153,7 +153,7 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntSpeed).getDouble(RobotMap.SPEED);
 		
 		/** Write to NetworkTable **/		
-		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistance());
-		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistance());
+		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
+		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
 	}
 }
