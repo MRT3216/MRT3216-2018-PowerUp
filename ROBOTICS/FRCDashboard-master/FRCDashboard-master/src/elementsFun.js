@@ -156,6 +156,10 @@ ux.colorRed.red.onclick = function changeColor(){
   var red2 = document.getElementById("canChange2");
   red1.setAttribute("style", "color: red;");
   red2.setAttribute("style", "color: red;");
+  NetworkTables.addKeyListener('/SmartDashboard/rangeFinderDistance'), (key, value) => {
+    console.log(value)
+
+  }
 
 }
 // Changing the color w/ button click (blue)

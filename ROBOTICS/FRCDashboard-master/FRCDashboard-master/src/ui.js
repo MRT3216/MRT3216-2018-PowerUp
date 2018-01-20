@@ -1,15 +1,5 @@
-// remeber to change css greybox!
-
-
-// Import ipc
-ipc = require('electron').ipcRenderer;
-
 // Define UI elements
 let ui = {
-    foo: {
-        button: document.getElementById('foo')
-    },
-
     timer: document.getElementById('timer'),
     robotState: document.getElementById('robot-state').firstChild,
     gyro: {
@@ -39,72 +29,7 @@ let ui = {
     armPosition: document.getElementById('arm-position')
 };
 
-let address = document.getElementById('connect-address'),
-    connect = document.getElementById('connect');
-
-// Set function to be called on NetworkTables connect. Usually not necessary.
-//NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
-
-// Set function to be called when robot dis/connects
-NetworkTables.addRobotConnectionListener(onRobotConnection, false);
-
-// Sets function to be called when any NetworkTables key/value changes
-NetworkTables.addGlobalListener(onValueChanged, true);
-
-// Function for hiding the connect box
-let escCount = 0;
-onkeydown = key => {
-    if (key.key === 'Escape') {
-        setTimeout(() => { escCount = 0; }, 400);
-        escCount++;
-        if (escCount === 2) document.body.classList.toggle('login-close', true);
-    }
-    else console.log(key.key);
-};
-
-/**
- * Function to be called when robot connects
- * @param {boolean} connected
- */
-function onRobotConnection(connected) {
-    var state = connected ? 'Robot connected!' : 'Robot disconnected.';
-    console.log(state);
-    ui.robotState.data = state;
-    if (connected) {
-        // On connect hide the connect popup
-        document.body.classList.toggle('login-close', true);
-    }
-    else {
-        // On disconnect show the connect popup
-        document.body.classList.toggle('login-close', false);
-        // Add Enter key handler
-        address.onkeydown = ev => {
-            if (ev.key === 'Enter') {
-                connect.click();
-            }
-        };
-        // Enable the input and the button
-        address.disabled = false;
-        connect.disabled = false;
-        connect.firstChild.data = 'Connect';
-        // Add the default address and select xxxx
-        address.value = 'roborio-3216.local';
-        address.focus();
-        address.setSelectionRange(8, 12);
-        // On click try to connect and disable the input and the button
-        connect.onclick = () => {
-            ipc.send('connect', address.value);
-            address.disabled = true;
-            connect.disabled = true;
-            connect.firstChild.data = 'Connecting';
-        };
-    }
-}
-
-/**** KEY Listeners ****/
-
-
-
+// Key Listeners
 
 // Gyro rotation
 let updateGyro = (key, value) => {
@@ -135,13 +60,9 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
 
 // This button is just an example of triggering an event on the robot by clicking a button.
 NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    // TODO: We shouldn't have to do this for every variable that can be a boolean.
-    if (typeof value === 'string')
-        value = value === 'true';
     // Set class active if value is true and unset it if it is false
     ui.example.button.classList.toggle('active', value);
-    ui.example.readout.data = 'Value is ' + (value ? 'true' : 'false');
+    ui.example.readout.data = 'Value is ' + value;
 });
 
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
@@ -178,13 +99,6 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value)
  * @param {boolean} isNew
  */
 function onValueChanged(key, value, isNew) {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    if (value === 'true') {
-        value = true;
-    }
-    else if (value === 'false') {
-        value = false;
-    }
     // The following code manages tuning section of the interface.
     // This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
     var propName = key.substring(16, key.length);
@@ -280,9 +194,3 @@ ui.autoSelect.onchange = function() {
 ui.armPosition.oninput = function() {
     NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
-
-// My event handler
-ui.foo.button.onclick = function foo() {
-    console.log("foo");
-}
-console.log(ui.foo.button)
