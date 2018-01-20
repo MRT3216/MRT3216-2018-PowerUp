@@ -43,19 +43,18 @@ public class RobotMap {
 	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.ALL;
 	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_OI 					= Logger.Level.TRACE;
-	public static final Logger.Level	LOG_AXIS_TRIGGER 		= Logger.Level.ERROR;
-	public static final Logger.Level	LOG_POV_BUTTON			= Logger.Level.ERROR;
 	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
-	public static final Logger.Level	LOG_DRIVETRAIN_FOLLOWERS= Logger.Level.TRACE;
+	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.TRACE;
 		
 	/** Network Table Names **/
 	public static final String networkTableName = "SmartDashboard";
 	public static final String ntDeadzone  = "deadzone";
 	public static final String ntSensitivity = "sensitivity";
 	public static final String ntSpeed = "speed";
-	public static final String ntRangefinderDistance = "rangefinderDistance";
+	public static final String ntRangeFinderDistance = "rangeFinderDistance";
+	public static final String ntRangeFinderAverageDistance = "rangeFinderDistance";
 	
 	/** Network Table Values **/
 	public static double JOYSTICK_DEADZONE = 0.05;
@@ -63,6 +62,7 @@ public class RobotMap {
 	public static double SPEED = 1.0;
 	public static double RANGEFINDER_DISTANCE = 0.0;
 	
+
 	public static void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
@@ -72,8 +72,8 @@ public class RobotMap {
 		JOYSTICK_SENSITIVITY = settings.getEntry(ntSensitivity).getDouble(JOYSTICK_SENSITIVITY);
 		SPEED = settings.getEntry(ntSpeed).getDouble(SPEED);
 		
-		/** Write to NetworkTable **/
-		
-		settings.getEntry(ntRangefinderDistance).setDouble(RangeFinder.getDistance());
+		/** Write to NetworkTable **/		
+		settings.getEntry(ntRangeFinderDistance).setDouble(RangeFinder.getDistance());
+		settings.getEntry(ntRangeFinderAverageDistance).setDouble(RangeFinder.getAverageVoltage());
 	}
 }

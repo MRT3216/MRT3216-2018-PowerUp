@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain = new Drivetrain();
+	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static OI oi;
 
 	Command autonomousCommand;
