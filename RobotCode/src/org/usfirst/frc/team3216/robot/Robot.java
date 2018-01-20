@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
@@ -85,7 +83,6 @@ public class Robot extends IterativeRobot {
 		log.add("Autonomous Init", Logger.Level.TRACE);
 		
 		autonomousCommand = chooser.getSelected();
-		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
