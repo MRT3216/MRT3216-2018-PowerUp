@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static OI oi;
+	ADIS16448_IMU imu;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -47,6 +48,8 @@ public class Robot extends IterativeRobot {
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		imu = new ADIS16448_IMU();
 	}
 
 	/**
@@ -105,6 +108,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		imu.calibrate();
+		imu.reset();
 		log.add("Teleop Init", Logger.Level.TRACE);
 		
 		
@@ -123,6 +128,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		RobotMap.syncWithNetworkTables();
 		Scheduler.getInstance().run();
+		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
 	}
 
 	/**

@@ -19,12 +19,12 @@ public class Gamepad extends Joystick{
 	public static final int BUTTON_RIGHT_JOY = 10;
 	
 	/** Axis Mapping for a single joystick ************************************/
-	public static final int LEFT_JOY_X_AXIS = 0;
-	public static final int LEFT_JOY_Y_AXIS = 1;
-	public static final int LEFT_TRIGGER = 2;
-	public static final int RIGHT_TRIGGER = 3;
-	public static final int RIGHT_JOY_X_AXIS = 4;
-	public static final int RIGHT_JOY_Y_AXIS = 5;
+	public static final int RIGHT_JOY_X_AXIS = 0;
+	public static final int RIGHT_JOY_Y_AXIS = 1;
+	public static final int RIGHT_TRIGGER = 2;
+	public static final int LEFT_TRIGGER = 3;
+	public static final int LEFT_JOY_X_AXIS = 4;
+	public static final int LEFT_JOY_Y_AXIS = 5;
 	
 	/** Button Declarations ***************************************************/
 	Button A = new JoystickButton(this, BUTTON_A);

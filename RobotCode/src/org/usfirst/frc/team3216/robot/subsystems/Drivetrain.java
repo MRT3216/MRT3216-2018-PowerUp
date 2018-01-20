@@ -61,6 +61,13 @@ public class Drivetrain extends Subsystem {
 		leftMotors.set(leftPower);
 		rightMotors.set(rightPower);	
 	}
+	
+	public void driveStraight(double power) {
+		power = safetyCheck(power);
+		
+		leftMotors.set(power);
+		rightMotors.set(power);		
+	}
 
 	public void stop() {
 		setPower(0.0, 0.0);
