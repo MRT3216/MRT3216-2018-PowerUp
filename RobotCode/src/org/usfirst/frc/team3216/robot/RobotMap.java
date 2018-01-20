@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -54,18 +55,25 @@ public class RobotMap {
 	public static final String ntDeadzone  = "deadzone";
 	public static final String ntSensitivity = "sensitivity";
 	public static final String ntSpeed = "speed";
+	public static final String ntRangefinderDistance = "rangefinderDistance";
 	
 	/** Network Table Values **/
 	public static double JOYSTICK_DEADZONE = 0.05;
 	public static double JOYSTICK_SENSITIVITY = 1.0;
 	public static double SPEED = 1.0;
+	public static double RANGEFINDER_DISTANCE = 0.0;
 	
 	public void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(networkTableName);
 		
+		/** Read from NetworkTable **/
 		JOYSTICK_DEADZONE = settings.getEntry(ntDeadzone).getDouble(JOYSTICK_DEADZONE);
 		JOYSTICK_SENSITIVITY = settings.getEntry(ntSensitivity).getDouble(JOYSTICK_SENSITIVITY);
 		SPEED = settings.getEntry(ntSpeed).getDouble(SPEED);
+		
+		/** Write to NetworkTable **/
+		
+		settings.getEntry(ntRangefinderDistance).setDouble(RangeFinder.getDistance());
 	}
 }
