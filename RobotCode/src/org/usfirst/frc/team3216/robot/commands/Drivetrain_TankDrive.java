@@ -39,9 +39,21 @@ public class Drivetrain_TankDrive extends Command {
 		timer.start();
 		timer.reset();
     }
+    
+    
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+		double leftPower = oi.getDriveLeft();
+		double rightPower = oi.getDriveRight();
+		
+		leftPower = scaleSensitivity(leftPower);
+		rightPower = scaleSensitivity(rightPower);
+		
+		execute(leftPower, rightPower);
+    }
+    
+    protected void execute(double left, double right) {
 		double leftPower = oi.getDriveLeft();
 		double rightPower = oi.getDriveRight();
 		
