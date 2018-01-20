@@ -1,5 +1,3 @@
-NetworkTables.addRobotConnectionListener(onRobotConnection, false);
-NetworkTables.addGlobalListener(onValueChanged, true);
 let ux = {
     startMatch: {
     	startButton: document.getElementById('startTimer'), // ux.startMatch.startButton
@@ -158,7 +156,6 @@ ux.colorRed.red.onclick = function changeColor(){
   var red2 = document.getElementById("canChange2");
   red1.setAttribute("style", "color: red;");
   red2.setAttribute("style", "color: red;");
-  NetworkTables.putValue("deadzone", 0.6);
 
 }
 // Changing the color w/ button click (blue)
