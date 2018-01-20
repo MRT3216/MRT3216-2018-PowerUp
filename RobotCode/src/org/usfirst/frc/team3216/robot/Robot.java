@@ -1,12 +1,14 @@
 
 package org.usfirst.frc.team3216.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
@@ -37,6 +39,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		log.add("Robot Init", Logger.Level.TRACE);
+		
+		//Start Camera
+		CameraServer.getInstance().startAutomaticCapture();
 		
 		oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
@@ -75,6 +80,7 @@ public class Robot extends IterativeRobot {
 		log.add("Autonomous Init", Logger.Level.TRACE);
 		
 		autonomousCommand = chooser.getSelected();
+		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -93,12 +99,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		RobotMap.syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
 		log.add("Teleop Init", Logger.Level.TRACE);
+		
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -113,6 +121,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		RobotMap.syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
 

@@ -23,6 +23,7 @@ public class OI {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = scaleJoystick(joystickValue);
 		log.add("getDriveLeft (" + joystickValue + ")", Logger.Level.TRACE);
+		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		return joystickValue;
 	}
 	
@@ -30,6 +31,7 @@ public class OI {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_Y_AXIS);
 		joystickValue = scaleJoystick(joystickValue);
 		log.add("getDriveRight (" + joystickValue + ")", Logger.Level.TRACE);
+		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		return joystickValue;		
 	}
 	
