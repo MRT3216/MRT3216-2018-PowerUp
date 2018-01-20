@@ -11,6 +11,8 @@ import java.nio.ByteOrder;
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.usfirst.frc.team3216.lib.Logger;
+
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,25 +26,29 @@ import edu.wpi.first.wpilibj.Timer;
  * This class is for the ADIS16448 IMU that connects to the RoboRIO MXP port.
  */
 public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource {
-  private static final double kTimeout = 0.1;
-  private static final double kCalibrationSampleTime = 2.0;
-  private static final double kDegreePerSecondPerLSB = 1.0/25.0;
-  private static final double kGPerLSB = 1.0/1200.0;
-  private static final double kMilligaussPerLSB = 1.0/7.0;
-  private static final double kMillibarPerLSB = 0.02;
-  private static final double kDegCPerLSB = 0.07386;
-  private static final double kDegCOffset = 31;
+	
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_IMU;
+	private Logger log = new Logger(LOG_LEVEL, "IMU");
+	
+    private static final double kTimeout = 0.1;
+    private static final double kCalibrationSampleTime = 2.0;
+    private static final double kDegreePerSecondPerLSB = 1.0/25.0;
+    private static final double kGPerLSB = 1.0/1200.0;
+    private static final double kMilligaussPerLSB = 1.0/7.0;
+    private static final double kMillibarPerLSB = 0.02;
+    private static final double kDegCPerLSB = 0.07386;
+    private static final double kDegCOffset = 31;
 
-  private static final int kGLOB_CMD = 0x3E;
-  private static final int kRegSMPL_PRD = 0x36;
-  private static final int kRegSENS_AVG = 0x38;
-  private static final int kRegMSC_CTRL = 0x34;
-  private static final int kRegPROD_ID = 0x56;
+    private static final int kGLOB_CMD = 0x3E;
+    private static final int kRegSMPL_PRD = 0x36;
+    private static final int kRegSENS_AVG = 0x38;
+    private static final int kRegMSC_CTRL = 0x34;
+    private static final int kRegPROD_ID = 0x56;
 
   // gyro center
-  private double m_gyro_center_x = 0.0;
-  private double m_gyro_center_y = 0.0;
-  private double m_gyro_center_z = 0.0;
+    private double m_gyro_center_x = 0.0;
+    private double m_gyro_center_y = 0.0;
+    private double m_gyro_center_z = 0.0;
 
   // last read values (post-scaling)
   private double m_gyro_x = 0.0;
@@ -455,7 +461,10 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource {
    * {@inheritDoc}
    */
   public double getAngle() {
-    if (m_spi == null) return 0.0;
+    if (m_spi == null) {
+    	log.add("m_spi = null)", Logger.Level.TRACE);
+    	return 0.0;
+    }
     return getYaw();
   }
 

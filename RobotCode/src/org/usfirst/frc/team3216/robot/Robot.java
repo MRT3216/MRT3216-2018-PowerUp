@@ -103,7 +103,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		this.syncWithNetworkTables();
+		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
 
@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		this.syncWithNetworkTables();
+		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
 	}
