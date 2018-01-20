@@ -13,6 +13,7 @@ let ux = {
       blue: document.getElementById('blueButton'),
     },
 }
+var gummi = new Audio('GummiBears.mp3')
 var audio = new Audio('Danger Alarm Sound Effect.mp3');
 var topArrow = document.getElementById("speedArrowsTop");
 topArrow.setAttribute("style", "display: none;");
@@ -127,7 +128,9 @@ function startTimer(){
   	var timeArray = presentTime.split(/[:]+/);
   	var m = timeArray[0];
   	var s = checkSecond((timeArray[1] - 1));
-    if(m<1 && s<1){audio.play();}
+    if(m<1 && s<31){gummi.play();}
+    if(m<1 && s<20){gummi.pause()}
+    if(m<1 && s<2){audio.play();}
   	if(s==59){m=m-1}
   	//if(m<0){alert('timer completed')}
   	if(m<1 && s<1){alert("Times Up!")}
