@@ -22,7 +22,7 @@ public class RangeFinder extends Subsystem {
 	private static final int OVERSAMPLED_BITS = 3;
 	
 	public RangeFinder() {
-		log.add("Constructor", LOG_LEVEL);
+		//log.add("Constructor", LOG_LEVEL);
 		MB1013.setOversampleBits(OVERSAMPLED_BITS);
 	}
 	

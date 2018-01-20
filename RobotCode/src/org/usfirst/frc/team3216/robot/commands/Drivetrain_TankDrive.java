@@ -45,6 +45,9 @@ public class Drivetrain_TankDrive extends Command {
 		double leftPower = oi.getDriveLeft();
 		double rightPower = oi.getDriveRight();
 		
+		leftPower = scaleSensitivity(leftPower);
+		rightPower = scaleSensitivity(rightPower);
+		
 		double dt = timer.get();
 		timer.reset();
 		leftPower = restrictAcceleration(leftPower, leftPowerOld, dt);
@@ -69,6 +72,15 @@ public class Drivetrain_TankDrive extends Command {
 		return goalPower;
 	}
 
+    //Scale Joystick Sensitivity 
+	//a = sensitivity, and x is the power parameter
+    //y = a(x^3) + (1-a)x
+    private double scaleSensitivity(double x) {
+    	double a = RobotMap.JOYSTICK_SENSITIVITY;
+    	return a * (Math.pow(x, 3)) + (a-1) * x;	
+    }
+	
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
@@ -79,6 +91,7 @@ public class Drivetrain_TankDrive extends Command {
     	log.add("End", Logger.Level.TRACE);
     	terminate();
     }
+    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
