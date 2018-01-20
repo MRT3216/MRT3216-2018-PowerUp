@@ -53,13 +53,7 @@ public class Drivetrain_TankDrive extends Command {
 		execute(leftPower, rightPower);
     }
     
-    protected void execute(double left, double right) {
-		double leftPower = oi.getDriveLeft();
-		double rightPower = oi.getDriveRight();
-		
-		leftPower = scaleSensitivity(leftPower);
-		rightPower = scaleSensitivity(rightPower);
-		
+    protected void execute(double leftPower, double rightPower) {
 		double dt = timer.get();
 		timer.reset();
 		leftPower = restrictAcceleration(leftPower, leftPowerOld, dt);
