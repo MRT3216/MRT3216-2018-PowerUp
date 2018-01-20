@@ -18,6 +18,8 @@ public class RangeFinder extends Subsystem {
 	    (pins 3, 6 and 7 from sensor to analog input 0)
 	**/
 	private static final AnalogInput MB1013 = new AnalogInput(0);
+	private static final double Vi = 9.766;
+	private static final double Vcc = 512;
 	private static final double VOLTS_TO_DIST = 1.0;
 	private static final int OVERSAMPLED_BITS = 3;
 	
@@ -39,7 +41,9 @@ public class RangeFinder extends Subsystem {
 	}
 		  
 	public double getDistance() {
-		double dist = getVoltage() * VOLTS_TO_DIST;
+		double Vm = getVoltage();
+		
+		double dist = Vm/Vi;
 		
 		log.add("dist: " + dist, LOG_LEVEL);
 		
@@ -47,7 +51,9 @@ public class RangeFinder extends Subsystem {
 	}
 	
 	public double getAverageDistance() {		
-		double aveDist = getAverageVoltage() * VOLTS_TO_DIST;
+		double Vm = getVoltage();
+		
+		double aveDist = Vm/Vi;
 		
 		log.add("ave dist: " + aveDist, LOG_LEVEL);
 		
