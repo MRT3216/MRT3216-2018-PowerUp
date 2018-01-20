@@ -16,7 +16,6 @@
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
     <script src="components/tuning.js"></script>
-    <link rel="stylesheet" href="css/tuning.css">
 </head>
 
 <body id="canChange">
@@ -54,7 +53,7 @@
         More explanation in that CSS rule. -->
     <img id="camera" style="-webkit-user-select: none;" src="http://10.32.16.11/mjpg/video.mjpg">
     <!--<div id="camera"></div>-->
-    <div id="tuning" style="display: none;">
+    <div id="tuning" id="networktablesSetGet">
         <input id="name" type="text" placeholder="Property">
         <input id="value" type="text" placeholder="Value">
         <button id="set">Set</button>
