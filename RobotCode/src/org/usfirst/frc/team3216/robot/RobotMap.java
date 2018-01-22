@@ -41,7 +41,7 @@ public class RobotMap {
 	public static final boolean 	LOG_TO_CONSOLE 				= true;
 	public static final boolean 	LOG_TO_FILE 				= false;
 	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.ALL;
-	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.OFF;
+	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
 	public static final Logger.Level	LOG_OI 					= Logger.Level.OFF;
 	
 	/** Subsystems **/                                                   
@@ -60,10 +60,12 @@ public class RobotMap {
 	public static final String ntSpeed = "speed";
 	public static final String ntRangeFinderDistance = "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance = "rangeFinderAverageDistance";
+	public static final String ntExampleVariable = "example_variable";
 	
 	/** Network Table Values **/
 	public static double JOYSTICK_DEADZONE = 0.05;
 	public static double JOYSTICK_SENSITIVITY = 1.0;
 	public static double SPEED = 1.0;
 	public static double RANGEFINDER_DISTANCE = 0.0;
+	public static boolean EXAMPLE = false;
 }

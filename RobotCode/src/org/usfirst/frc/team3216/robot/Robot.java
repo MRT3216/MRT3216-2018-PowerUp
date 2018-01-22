@@ -54,6 +54,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		imu = new ADIS16448_IMU();
+		imu.calibrate();
+		imu.reset();
 	}
 
 	/**
@@ -111,8 +113,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		imu.calibrate();
-		imu.reset();
+
 		log.add("Teleop Init", Logger.Level.TRACE); 
 		
 		
@@ -129,7 +130,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
+		//log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
+		log.add("Example: " + RobotMap.EXAMPLE, Logger.Level.TRACE);
+		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
@@ -153,6 +156,8 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
 		RobotMap.SPEED = 
 				settings.getEntry(RobotMap.ntSpeed).getDouble(RobotMap.SPEED);
+		RobotMap.EXAMPLE = 
+				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);
 		
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
