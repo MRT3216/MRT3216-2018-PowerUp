@@ -129,9 +129,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
-		log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ(), Logger.Level.TRACE);
 	}
 
 	/**
