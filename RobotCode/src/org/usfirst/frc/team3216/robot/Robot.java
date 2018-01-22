@@ -32,8 +32,8 @@ public class Robot extends IterativeRobot {
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static final Encoder leftEncoder = new Encoder();
-	public static final Encoder rightEncoder = new Encoder();
+	//public static final Encoder leftEncoder = new Encoder();
+	//public static final Encoder rightEncoder = new Encoder();
 	public static OI oi;
 	public static ADIS16448_IMU imu;
 	

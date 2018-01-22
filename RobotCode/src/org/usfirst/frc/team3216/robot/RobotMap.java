@@ -42,6 +42,7 @@ public class RobotMap {
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.TRACE;	
+	public static final Logger.Level    LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.TRACE;
 	
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD			= Logger.Level.OFF;
@@ -60,8 +61,9 @@ public class RobotMap {
 	/** Network Table Values **/
 	public static double JOYSTICK_DEADZONE 						= 0.05;
 	public static double JOYSTICK_SENSITIVITY 					= 1.0;
+	public static double JOYSTICK_EQUALITY_THRESHHOLD			= 0.05;
 	public static double SPEED 									= 1.0;
 	public static double RANGEFINDER_DISTANCE 					= 0.0;
-	public static double KP 									= 0.0;
+	public static double KP 									= 0.03;
 	public static boolean EXAMPLE 								= false;
 }

@@ -1,12 +1,17 @@
 package org.usfirst.frc.team3216.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import javax.management.ImmutableDescriptor;
+
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -18,6 +23,10 @@ public class Drivetrain extends Subsystem {
 	/** Instance Variables ****************************************************/
 	private SpeedController leftMotors, rightMotors;
 	private Logger log = new Logger(LOG_LEVEL, getName());
+	private double heading = 0.0;
+	private boolean holdHeading = false;
+	double leftPowerOld, rightPowerOld;
+	Timer timer = new Timer();
 
 	public Drivetrain() {
 		log.add("Drivetrain Constructor", LOG_LEVEL);
@@ -51,20 +60,38 @@ public class Drivetrain extends Subsystem {
 
 	/** Methods for setting the motors *************************************/
 	public void setPower(double leftPower, double rightPower) {
+		this.setPower(leftPower, rightPower, false);	
+	}    
+    
+	public void setPower(double leftPower, double rightPower, boolean driveStraight) {
 		leftPower = safetyCheck(leftPower);
 		rightPower = safetyCheck(rightPower);				
 
+		if(Math.abs(rightPower - leftPower) < RobotMap.JOYSTICK_EQUALITY_THRESHHOLD || driveStraight) {
+			if(!holdHeading) {
+				holdHeading = true;
+				heading = Robot.imu.getAngleZ();
+			} else {
+				double magnitude = (rightPower + leftPower) / 2;
+				
+				rightPower = magnitude + heading * RobotMap.KP; 
+				leftPower = magnitude - heading * RobotMap.KP;
+			}			
+		} else {
+			holdHeading = false;
+		}	
+		
 		leftMotors.set(leftPower);
-		rightMotors.set(rightPower);	
+		rightMotors.set(rightPower);
+				
+		leftPowerOld = leftPower;
+		rightPowerOld = rightPower;
 	}
 	
 	public void driveStraight(double power) {
-		power = safetyCheck(power);
-		
-		leftMotors.set(power);
-		rightMotors.set(power);		
+	
 	}
-
+	
 	public void stop() {
 		setPower(0.0, 0.0);
 	}
