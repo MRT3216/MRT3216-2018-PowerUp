@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.commands.DriveForward;
+import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
@@ -30,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static OI oi;
-	private ADIS16448_IMU imu;
+	public static ADIS16448_IMU imu;
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -84,7 +86,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", Logger.Level.TRACE);
 		
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = new DriveForward();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
