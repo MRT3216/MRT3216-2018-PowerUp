@@ -19,8 +19,8 @@ public class RangeFinder extends Subsystem {
 	    (pins 3, 6 and 7 from sensor to analog input 0)
 	**/
 	private static final AnalogInput MB1013 = new AnalogInput(0);
+	// Volts per 5mm
 	private static final double V5mm = .004885;
-	private static final double VOLTS_TO_DIST = 1.0;
 	private static final int OVERSAMPLED_BITS = 3;
 
 	public RangeFinder() {

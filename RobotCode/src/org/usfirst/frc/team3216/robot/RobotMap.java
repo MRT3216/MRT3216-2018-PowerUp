@@ -1,12 +1,6 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
-
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
-
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
