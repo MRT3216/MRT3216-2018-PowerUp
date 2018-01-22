@@ -54,18 +54,20 @@ public class RobotMap {
 	
 	
 	/** Network Table Names **/
-	public static final String networkTableName = "SmartDashboard";
-	public static final String ntDeadzone  = "deadzone";
-	public static final String ntSensitivity = "sensitivity";
-	public static final String ntSpeed = "speed";
-	public static final String ntRangeFinderDistance = "rangeFinderDistance";
-	public static final String ntRangeFinderAverageDistance = "rangeFinderAverageDistance";
-	public static final String ntExampleVariable = "example_variable";
+	public static final String networkTableName 				= "SmartDashboard";
+	public static final String ntDeadzone  						= "deadzone";
+	public static final String ntSensitivity 					= "sensitivity";
+	public static final String ntSpeed 							= "speed";
+	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
+	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
+	public static final String ntKP 							=  "kp";
+	public static final String ntExampleVariable 				= "example_variable";
 	
 	/** Network Table Values **/
-	public static double JOYSTICK_DEADZONE = 0.05;
-	public static double JOYSTICK_SENSITIVITY = 1.0;
-	public static double SPEED = 1.0;
-	public static double RANGEFINDER_DISTANCE = 0.0;
-	public static boolean EXAMPLE = false;
+	public static double JOYSTICK_DEADZONE 						= 0.05;
+	public static double JOYSTICK_SENSITIVITY 					= 1.0;
+	public static double SPEED 									= 1.0;
+	public static double RANGEFINDER_DISTANCE 					= 0.0;
+	public static double KP 									= 0.0;
+	public static boolean EXAMPLE 								= false;
 }

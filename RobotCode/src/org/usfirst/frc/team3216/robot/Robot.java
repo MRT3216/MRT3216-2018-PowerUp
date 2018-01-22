@@ -156,8 +156,11 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
 		RobotMap.SPEED = 
 				settings.getEntry(RobotMap.ntSpeed).getDouble(RobotMap.SPEED);
+		RobotMap.KP = 
+				settings.getEntry(RobotMap.ntKP).getDouble(RobotMap.KP);
 		RobotMap.EXAMPLE = 
 				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);
+		
 		
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
