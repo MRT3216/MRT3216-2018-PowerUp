@@ -1,7 +1,7 @@
 Many errors can occur when doing the LED programming, and the camera work. Here is a list of some common ones I have found:
 #define errors. Solutions to this error are going into sketch, then include library, manage library, and searching the item you want to define. From there, install it. 
-Arduino Code won't upload. Solution to this may be that you do not have your port set correctly. Make sure that it is set to comm 3 to upload code.
-Video in grip won't display from the camera. Make sure you have your arduino editor open, with the comm set to 5. Make sure the serial montior is also open. It is located in the tools menu.
+Arduino Code won't upload. Solution to this may be that you do not have your port set correctly. Make sure that it is set to comm 5 to upload code.
+Video in grip won't display from the camera. Make sure you have your arduino editor open, with the comm set to 3. Make sure the serial montior is also open. It is located in the tools menu.
 In order to tell the proper pins find the white wire that connects the arduino to your LED and find the number of the pin it is in.
 In grip, the jevios camera is of the webcam source 1. Make sure you connect the Imput button from blur to the webcam image button by clicking and dragging them together.
 When you upload code from arduino, it may warn you in the compiler, but this isn't actually an error. You are fine. 
