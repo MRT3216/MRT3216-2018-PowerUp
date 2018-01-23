@@ -17,13 +17,15 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class Drivetrain extends Subsystem {
+	
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	
 	/** Instance Variables ****************************************************/
 	private SpeedController leftMotors, rightMotors;
 	private Logger log = new Logger(LOG_LEVEL, getName());
-	private double heading = 0.0;
+	private double headingGoal = 0.0;
+//	private double currentHeading = Robot.imu.getAngle();
 	private boolean holdHeading = false;
 	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();
@@ -70,17 +72,17 @@ public class Drivetrain extends Subsystem {
 		if(Math.abs(rightPower - leftPower) < RobotMap.JOYSTICK_EQUALITY_THRESHHOLD || driveStraight) {
 			if(!holdHeading) {
 				holdHeading = true;
-				heading = Robot.imu.getAngleZ();
+				headingGoal = Robot.imu.getAngle();
 			} else {
 				double magnitude = (rightPower + leftPower) / 2;
-				
-				rightPower = magnitude + heading * RobotMap.KP; 
-				leftPower = magnitude - heading * RobotMap.KP;
+//				currentHeading = Robot.imu.getAngle();
+//				rightPower = magnitude + currentHeading * RobotMap.KP; 
+//				leftPower = magnitude - currentHeading * RobotMap.KP;
 			}			
 		} else {
 			holdHeading = false;
 		}	
-		
+	
 		leftMotors.set(leftPower);
 		rightMotors.set(rightPower);
 				
