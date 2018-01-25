@@ -1,0 +1,1 @@
+The JeVois cam port(cam0, cam1, cam2) can be found if you plug the JeVois into the Roborio and look up the roborio configuration. It should be listed. 
