@@ -39,13 +39,13 @@ public class RobotMap {
 	public static final boolean 	LOG_TO_CONSOLE 				= true;
 	public static final boolean 	LOG_TO_FILE 				= false;
 	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.ALL;
-	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
+	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.OFF;
 	public static final Logger.Level	LOG_OI 					= Logger.Level.OFF;
 	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
-	public static final Logger.Level    LOG_IMU					= Logger.Level.TRACE;	
+	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
 	public static final Logger.Level    LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.TRACE;
 	
 	/** Commands **/
@@ -68,6 +68,6 @@ public class RobotMap {
 	public static double JOYSTICK_EQUALITY_THRESHHOLD			= 0.05;
 	public static double SPEED 									= 1.0;
 	public static double RANGEFINDER_DISTANCE 					= 0.0;
-	public static double KP 									= 0.03;
+	public static double KP 									= 0.003;
 	public static boolean EXAMPLE 								= false;
 }
