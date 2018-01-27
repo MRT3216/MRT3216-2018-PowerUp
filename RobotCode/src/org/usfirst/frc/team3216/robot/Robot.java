@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.commands.DriveForward;
+import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
