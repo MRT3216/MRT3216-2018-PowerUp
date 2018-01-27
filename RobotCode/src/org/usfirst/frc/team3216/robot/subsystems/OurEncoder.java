@@ -40,12 +40,20 @@ public class OurEncoder extends Subsystem {
 
     }
     
-    public double getDistance() {
-    	return encoder.getDistance();	
+    public double getDistance() {    	
+    	double distance = encoder.getDistance();
+    	
+    	log.add("Encoder distance: " + distance, LOG_LEVEL);
+    	
+    	return distance;	
     }
     
     public double getRate() {
-    	return encoder.getRate();
+    	double rate = encoder.getRate();
+    	
+    	log.add("Encoder rate: " + rate, LOG_LEVEL);
+    	
+    	return rate;
     }
 }
 
