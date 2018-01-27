@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveForward extends Command {
+public class Autonomous_DriveForward extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_DRIVEFORWARD;
 	
 	Logger log = new Logger(LOG_LEVEL, getName());
@@ -23,7 +23,7 @@ public class DriveForward extends Command {
 	Timer timer = new Timer();
 	RangeFinder rangeFinder = Robot.rangeFinder;
 	
-    public DriveForward() {    	
+    public Autonomous_DriveForward() {    	
     	requires(drivetrain);
     }
 

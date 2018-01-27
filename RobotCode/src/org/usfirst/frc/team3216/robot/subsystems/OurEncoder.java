@@ -2,7 +2,6 @@ package org.usfirst.frc.team3216.robot.subsystems;
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,19 +24,11 @@ public class OurEncoder extends Subsystem {
 	}
     
     public void initDefaultCommand() {
-   	
     	encoder = new Encoder(channelA, channelB, false, EncodingType.k4X);
+    	encoder.reset();
     	encoder.setSamplesToAverage(5);
     	encoder.setReverseDirection(true);
-    	encoder.setDistancePerPulse(1/1513.0);
-        
-        int count = encoder.get();
-        double rawDistance = encoder.getRaw();
-        double distance = encoder.getDistance();
-        double rate = encoder.getRate();
-        boolean direction = encoder.getDirection();
-        boolean stopped = encoder.getStopped();
-
+    	encoder.setDistancePerPulse(1/360);
     }
     
     public double getDistance() {    	
