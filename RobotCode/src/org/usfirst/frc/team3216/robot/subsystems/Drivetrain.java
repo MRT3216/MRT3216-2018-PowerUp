@@ -7,6 +7,7 @@ import javax.management.ImmutableDescriptor;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_ArcadeDrive;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -55,7 +56,11 @@ public class Drivetrain extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new Drivetrain_TankDrive());
+    	if(RobotMap.DriveMode.TANK == RobotMap.currentDriveMode) {
+    		setDefaultCommand(new Drivetrain_TankDrive());
+    	} else {
+    		setDefaultCommand(new Drivetrain_ArcadeDrive());
+    	}
     }    
 
 	/** Methods for setting the motors *************************************/

@@ -22,6 +22,10 @@ public class RobotMap {
 	/** Analog Input ports ****************************************************/
 	public static final int RANGEFINDER = 0;
 	
+	/** Drive Mode Settings ***************************************************/
+	public static enum DriveMode {TANK, ARCADE;}
+	public static DriveMode currentDriveMode = DriveMode.ARCADE;
+	
 	/** Drivetrain Settings ***************************************************/
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;

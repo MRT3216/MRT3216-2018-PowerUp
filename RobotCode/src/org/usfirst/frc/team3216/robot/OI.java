@@ -38,6 +38,19 @@ public class OI {
 		return joystickValue;		
 	}
 	
+	public double getLeftY() {
+		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
+		
+		return joystickValue;	
+	}
+	
+	public double getRightX() {
+		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
+		
+		return joystickValue;	
+	}
+	
+	
 	private double scaleJoystick(double joystickValue) {
 		joystickValue = checkDeadZone(joystickValue);
 		joystickValue = scaleSensitivity(joystickValue);
