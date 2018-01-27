@@ -22,6 +22,12 @@ public class RobotMap {
 	/** Analog Input ports ****************************************************/
 	public static final int RANGEFINDER = 0;
 	
+	/** Digital Input ports ***************************************************/
+	public static final int LEFT_ENCODER_CHANNEL_A = 0;
+	public static final int LEFT_ENCODER_CHANNEL_B = 1;
+	public static final int RIGHT_ENCODER_CHANNEL_A = 2;
+	public static final int RIGHT_ENCODER_CHANNEL_B = 3;
+	
 	/** Drive Mode Settings ***************************************************/
 	public static enum DriveMode {TANK, ARCADE;}
 	public static DriveMode currentDriveMode = DriveMode.ARCADE;
@@ -46,7 +52,8 @@ public class RobotMap {
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
-	public static final Logger.Level    LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.TRACE;
+	public static final Logger.Level    LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
+	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;
 	
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD			= Logger.Level.OFF;
@@ -59,8 +66,10 @@ public class RobotMap {
 	public static final String ntSpeed 							= "speed";
 	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
-	public static final String ntKP 							=  "kp";
+	public static final String ntKP 							= "kp";
 	public static final String ntExampleVariable 				= "example_variable";
+	public static final String ntEncoderDistance				= "encoderDistance";
+	public static final String ntEncoderRate					= "encoderRate";
 	
 	/** Network Table Values **/
 	public static double JOYSTICK_DEADZONE 						= 0.05;
