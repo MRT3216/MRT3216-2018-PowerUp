@@ -25,7 +25,7 @@ public class Drivetrain extends Subsystem {
 	private SpeedController leftMotors, rightMotors;
 	private Logger log = new Logger(LOG_LEVEL, getName());
 	private double headingGoal = 0.0;
-//	private double currentHeading = Robot.imu.getAngle();
+	//private double currentHeading = Robot.imu.getAngle();
 	private boolean holdHeading = false;
 	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();

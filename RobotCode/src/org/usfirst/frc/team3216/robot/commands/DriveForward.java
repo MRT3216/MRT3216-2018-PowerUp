@@ -4,6 +4,7 @@ import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.OI;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
+import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
@@ -21,6 +22,7 @@ public class DriveForward extends Command {
 	OI oi = Robot.oi;
 	Timer timer = new Timer();
 	RangeFinder rangeFinder = Robot.rangeFinder;
+	ADIS16448_IMU imu = Robot.imu;
 	
     public DriveForward() {    	
     	requires(drivetrain);
