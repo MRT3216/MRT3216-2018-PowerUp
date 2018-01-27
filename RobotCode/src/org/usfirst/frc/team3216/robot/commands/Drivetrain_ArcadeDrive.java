@@ -22,9 +22,12 @@ public class Drivetrain_ArcadeDrive extends Command {
 	OI oi = Robot.oi;
 	ADIS16448_IMU imu = Robot.imu;
 	double throttleOld;
+	double angleOld;
 	Timer timer = new Timer();
 	double currentAngle;
 	double angleAdjustment;
+	double heading;
+	boolean hasHeading;
 	
     public Drivetrain_ArcadeDrive() {
     	log.add("Constructor", Logger.Level.TRACE);
@@ -38,6 +41,10 @@ public class Drivetrain_ArcadeDrive extends Command {
     	
     	drivetrain.stop();
 		throttleOld = 0.0;
+		angleOld = 0.0;
+		hasHeading = false;
+		
+		
 
 		
 		timer.start();
@@ -49,12 +56,23 @@ public class Drivetrain_ArcadeDrive extends Command {
     protected void execute() {
 		double throttle = oi.getLeftY();
 		double turn = oi.getRightX();
-		if(turn == 0) {
-			driveStraight(throttle, imu.getAngleZ());
+		log.add("turning: " + turn, Logger.Level.TRACE);
+		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < .5) {
+			hasHeading = true;
+			heading = imu.getAngleZ();
+		}
+		angleOld = imu.getAngleZ();
+
+		if(turn == 0 && throttle != 0) {
+			driveStraight(throttle, heading);
 			
 		}
-		execute(throttle, turn);
-		
+		else {
+			hasHeading = false;
+			execute(throttle, turn);
+		}
+		//execute(throttle, tuadrn);
+
     }
     
     protected void execute(double throttle, double turn) {
@@ -70,9 +88,14 @@ public class Drivetrain_ArcadeDrive extends Command {
     }
     
     protected void driveStraight(double throttle, double heading) {
-    	currentAngle = imu.getAccelZ();
+    	currentAngle = imu.getAngleZ();
     	angleAdjustment = heading - currentAngle;
+		log.add("Heading: " + heading, Logger.Level.TRACE);
+		log.add("Current: " + currentAngle, Logger.Level.TRACE);
+		log.add("Adjustment: " + angleAdjustment, Logger.Level.TRACE);
+
     	double turn = angleAdjustment * RobotMap.KP;
+    	log.add("Turn: " + turn, Logger.Level.TRACE);
     	execute(throttle, turn);
     	
     }
