@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.commands.DriveForward;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
@@ -36,9 +35,7 @@ public class Robot extends IterativeRobot {
 	//public static final Encoder leftEncoder = new Encoder();
 	//public static final Encoder rightEncoder = new Encoder();
 	public static OI oi;
-	public static ADIS16448_IMU staticIMU;
-	public static ADIS16448_IMU updatedIMU;
-	
+	public static ADIS16448_IMU imu;
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -59,9 +56,9 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
-		staticIMU = new ADIS16448_IMU();
-		staticIMU.calibrate();
-		staticIMU.reset();
+		imu = new ADIS16448_IMU();
+		imu.calibrate();
+		imu.reset();
 	}
 
 	/**
@@ -94,7 +91,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", Logger.Level.TRACE);
 		
-		autonomousCommand = new Drivetrain_DriveStraight();
+		autonomousCommand = new DriveForward();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -119,9 +116,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-
-		log.add("Teleop Init", Logger.Level.TRACE); 
-		
+		log.add("Teleop Init", Logger.Level.TRACE); 		
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -137,9 +132,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		//log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
-		//log.add("Example: " + RobotMap.EXAMPLE, Logger.Level.TRACE);
-		//log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
-		//log.add("IMU Z: " + staticIMU.getAngleZ(), Logger.Level.TRACE);
+		log.add("Example: " + RobotMap.EXAMPLE, Logger.Level.TRACE);
+		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
