@@ -32,7 +32,7 @@ public class Drivetrain extends Subsystem {
 	Timer timer = new Timer();
 
 	public Drivetrain() {
-		log.add("Drivetrain Constructor", LOG_LEVEL);
+		log.add("Constructor", LOG_LEVEL);
 		
     	if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
     		leftMotors = new VictorSP(RobotMap.PWM_LEFT_MOTOR);
