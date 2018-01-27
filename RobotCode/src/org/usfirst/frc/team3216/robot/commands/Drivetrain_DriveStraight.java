@@ -23,8 +23,6 @@ public class Drivetrain_DriveStraight extends Command {
 	OI oi = Robot.oi;
 	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();
-	ADIS16448_IMU staticIMU = Robot.staticIMU;
-	
 	
     public Drivetrain_DriveStraight() {
     	log.add("Constructor", Logger.Level.TRACE);

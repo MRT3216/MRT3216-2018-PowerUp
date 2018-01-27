@@ -22,7 +22,6 @@ public class DriveForward extends Command {
 	OI oi = Robot.oi;
 	Timer timer = new Timer();
 	RangeFinder rangeFinder = Robot.rangeFinder;
-	ADIS16448_IMU imu = Robot.staticIMU;
 	
     public DriveForward() {    	
     	requires(drivetrain);
