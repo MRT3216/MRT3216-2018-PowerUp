@@ -72,7 +72,7 @@ public class Drivetrain extends Subsystem {
 		if(Math.abs(rightPower - leftPower) < RobotMap.JOYSTICK_EQUALITY_THRESHHOLD || driveStraight) {
 			if(!holdHeading) {
 				holdHeading = true;
-				headingGoal = Robot.imu.getAngle();
+				headingGoal = Robot.staticIMU.getAngle();
 			} else {
 				double magnitude = (rightPower + leftPower) / 2;
 //				currentHeading = Robot.imu.getAngle();

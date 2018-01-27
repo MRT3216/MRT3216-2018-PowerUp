@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.commands.DriveForward;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
@@ -35,7 +36,9 @@ public class Robot extends IterativeRobot {
 	//public static final Encoder leftEncoder = new Encoder();
 	//public static final Encoder rightEncoder = new Encoder();
 	public static OI oi;
-	public static ADIS16448_IMU imu;
+	public static ADIS16448_IMU staticIMU;
+	public static ADIS16448_IMU updatedIMU;
+	
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -56,9 +59,9 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
-		imu = new ADIS16448_IMU();
-		imu.calibrate();
-		imu.reset();
+		staticIMU = new ADIS16448_IMU();
+		staticIMU.calibrate();
+		staticIMU.reset();
 	}
 
 	/**
@@ -91,7 +94,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", Logger.Level.TRACE);
 		
-		autonomousCommand = new DriveForward();
+		autonomousCommand = new Drivetrain_DriveStraight();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -136,7 +139,7 @@ public class Robot extends IterativeRobot {
 		//log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
 		//log.add("Example: " + RobotMap.EXAMPLE, Logger.Level.TRACE);
 		//log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
-		log.add("IMU Z: " + imu.getAngleZ(), Logger.Level.TRACE);
+		//log.add("IMU Z: " + staticIMU.getAngleZ(), Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 	}
