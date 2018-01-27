@@ -21,8 +21,10 @@ public class Drivetrain_ArcadeDrive extends Command {
 	Drivetrain drivetrain = Robot.drivetrain;
 	OI oi = Robot.oi;
 	ADIS16448_IMU imu = Robot.imu;
-	double leftPowerOld, rightPowerOld;
+	double throttleOld;
 	Timer timer = new Timer();
+	double currentAngle;
+	double angleAdjustment;
 	
     public Drivetrain_ArcadeDrive() {
     	log.add("Constructor", Logger.Level.TRACE);
@@ -35,8 +37,8 @@ public class Drivetrain_ArcadeDrive extends Command {
     	log.add("Initialize", Logger.Level.TRACE);
     	
     	drivetrain.stop();
-		leftPowerOld = 0.0;
-		rightPowerOld = 0.0;
+		throttleOld = 0.0;
+
 		
 		timer.start();
 		timer.reset();
@@ -47,20 +49,32 @@ public class Drivetrain_ArcadeDrive extends Command {
     protected void execute() {
 		double throttle = oi.getLeftY();
 		double turn = oi.getRightX();
-		
+		if(turn == 0) {
+			driveStraight(throttle, imu.getAngleZ());
+			
+		}
 		execute(throttle, turn);
+		
     }
     
     protected void execute(double throttle, double turn) {
+    	throttle *= -1;
 		double dt = timer.get();
 		timer.reset();
-		//leftPower = restrictAcceleration(leftPower, leftPowerOld, dt);
-		//rightPower = restrictAcceleration(rightPower, rightPowerOld, dt);	
+		throttle = restrictAcceleration(throttle, throttleOld, dt);
+	
 		
-		drivetrain.setPower(throttle-turn, throttle+turn);
+		drivetrain.setPower((throttle-turn)/2, (throttle+turn)/2);
 		
-		//leftPowerOld = leftPower;
-		//rightPowerOld = rightPower;
+		throttleOld = throttle;
+    }
+    
+    protected void driveStraight(double throttle, double heading) {
+    	currentAngle = imu.getAccelZ();
+    	angleAdjustment = heading - currentAngle;
+    	double turn = angleAdjustment * RobotMap.KP;
+    	execute(throttle, turn);
+    	
     }
     
 	/** restrictAcceleration **************************************************/
@@ -81,7 +95,8 @@ public class Drivetrain_ArcadeDrive extends Command {
     protected boolean isFinished() {
         return false;
     }
-
+    
+   
     // Called once after isFinished returns true
     protected void end() {
     	log.add("End", Logger.Level.TRACE);

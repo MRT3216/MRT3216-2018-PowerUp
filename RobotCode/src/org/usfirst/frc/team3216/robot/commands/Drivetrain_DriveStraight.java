@@ -21,8 +21,14 @@ public class Drivetrain_DriveStraight extends Command {
 	Logger log = new Logger(LOG_LEVEL, getName());
 	Drivetrain drivetrain = Robot.drivetrain;
 	OI oi = Robot.oi;
-	double leftPowerOld, rightPowerOld;
+	double throttleOld;
+	double turn;
 	Timer timer = new Timer();
+	ADIS16448_IMU imu = Robot.imu;
+	boolean hasHeading;
+	double heading;
+	double angle;
+	
 	
     public Drivetrain_DriveStraight() {
     	log.add("Constructor", Logger.Level.TRACE);
@@ -35,8 +41,11 @@ public class Drivetrain_DriveStraight extends Command {
     	log.add("Initialize", Logger.Level.TRACE);
     	
     	drivetrain.stop();
-		leftPowerOld = 0.0;
-		rightPowerOld = 0.0;
+    	throttleOld = 0.0;
+    	hasHeading = false;
+    	heading = 0.0;
+    	angle = 0.0;
+
 		
 		timer.start();
 		timer.reset();
@@ -50,22 +59,34 @@ public class Drivetrain_DriveStraight extends Command {
 		
 		//Just for testing purposes 
 		//execute(leftPower, rightPower);
-		execute(0.1, 0.1);
+		execute(0.5);
     }
     
-    protected void execute(double leftPower, double rightPower) {
+    protected void execute(double throttle) {
+    	if(!hasHeading) {
+    		heading = imu.getAngleZ();
+    		hasHeading = true;
+    	}
+    	else {
+    		//do stuff with heading
+    		
+    	}
 		double dt = timer.get();
 		timer.reset();
-		double angle = staticIMU.getAngleZ();
+		angle = imu.getAngleZ();
 		angle = adjustAngle(angle);
-		leftPower = Drivetrain_TankDrive.restrictAcceleration(leftPower, leftPowerOld, dt);
-		rightPower = Drivetrain_TankDrive.restrictAcceleration(rightPower, rightPowerOld, dt);	
+		throttle *= -1;
+		throttle = Drivetrain_ArcadeDrive.restrictAcceleration(throttle, throttleOld, dt);
+		turn = angle * RobotMap.KP;
 		
+		drivetrain.setPower(throttle-turn, throttle+turn);
 		
-		drivetrain.setPower(leftPower, angle*RobotMap.KP*rightPower, true);
-		
-		leftPowerOld = leftPower;
-		rightPowerOld = rightPower;
+		throttleOld = throttle;
+    }
+    
+    protected void reset() {
+    	//hasHeading = false;
+    	heading = angle % 360;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -76,11 +97,12 @@ public class Drivetrain_DriveStraight extends Command {
     //adjusts angle to be on interval [-180, 180]
     protected double adjustAngle(double angle) {
     	angle = angle % 360;
+    	angle = angle - heading;
     	log.add("Input Angle: " + angle, Logger.Level.TRACE);
     	if(angle >= 180) 	{angle = angle - 360;}
     	else if(angle < -180) {angle = 360 + angle;}
     	log.add("Output Angle: " + angle, Logger.Level.TRACE);
-    	return angle;
+    	return angle;//-180
     }
 
     // Called once after isFinished returns true

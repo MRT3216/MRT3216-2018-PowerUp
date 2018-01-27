@@ -43,13 +43,13 @@ public class OI {
 	
 	public double getLeftY() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
-		
+		joystickValue = checkDeadZone(joystickValue);
 		return joystickValue;	
 	}
 	
 	public double getRightX() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
-		
+		joystickValue = checkDeadZone(joystickValue);
 		return joystickValue;	
 	}
 	
