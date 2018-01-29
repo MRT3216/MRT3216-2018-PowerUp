@@ -51,10 +51,10 @@ public class RobotMap {
 	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
-	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
+	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.TRACE;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
-	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;
-	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.TRACE;
+	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
+	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
 	
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD			= Logger.Level.OFF;

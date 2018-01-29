@@ -59,7 +59,7 @@ public class RangeFinder extends Subsystem {
 	public double getDistanceInInches() {
 		double distInInches = this.getDistanceInMM() * this.mmToInches;
 		
-		log.add("dist in mm: " + distInInches, LOG_LEVEL);
+		log.add("dist: " + distInInches, LOG_LEVEL);
 		
 	    return distInInches;
 	}
@@ -67,7 +67,7 @@ public class RangeFinder extends Subsystem {
 	public double getAverageDistanceInInches() {		
 		double aveDistInInches = this.getAverageDistanceInMM() * this.mmToInches;
 		
-		log.add("ave dist in mm: " + aveDistInInches, LOG_LEVEL);
+		log.add("ave dist: " + aveDistInInches, LOG_LEVEL);
 		
 		return aveDistInInches;
 	}
