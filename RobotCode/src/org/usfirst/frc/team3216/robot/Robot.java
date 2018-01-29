@@ -4,6 +4,7 @@ package org.usfirst.frc.team3216.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,10 +13,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
+//import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
 /**
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static OI oi;
 	public static ADIS16448_IMU imu;
+	public static Pneumatics pneumatics = new Pneumatics();
 	
 	Command autonomousCommand;
 
@@ -52,10 +55,13 @@ public class Robot extends IterativeRobot {
 		CameraServer.getInstance().startAutomaticCapture();
 		
 		oi = new OI();
+	
 		
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
 		imu.reset();
+		
+		
 	}
 
 	/**

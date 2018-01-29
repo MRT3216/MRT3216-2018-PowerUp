@@ -13,7 +13,8 @@ public class RobotMap {
 	public static Bot currentBot = Bot.BLUEFISH;
 
 	/** USB ports *************************************************************/
-	public static final int USB_GAMEPAD = 0;
+	public static final int USB_GAMEPAD 		= 0;
+	public static final int USB_CONTROL_STICK 	= 2;
 	
 	/** PWM ID numbers ********************************************************/
 	public static final int PWM_LEFT_MOTOR 	= 0;
@@ -49,7 +50,7 @@ public class RobotMap {
 	public static final Logger.Level	LOG_OI 					= Logger.Level.OFF;
 	
 	/** Subsystems **/                                                   
-	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.TRACE;
+	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
 	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;

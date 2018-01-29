@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.commands.ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
+import org.usfirst.frc.team3216.robot.commands.OpenPincher;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -10,6 +12,7 @@ import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 public class OI {
 	/** Configuration Constants ***********************************************/
 	Gamepad gamepad;
+	ControlStick controlStick;
 	
 	/** Instance Variables ****************************************************/
 	Logger log = new Logger(RobotMap.LOG_OI, "OI");
@@ -18,10 +21,13 @@ public class OI {
 		log.add("OI Constructor", Logger.Level.TRACE);
 		
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
-		
+		controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
 		//gamepad.LeftJoy.whileHeld(new Drivetrain_DriveStraight());
+		controlStick.button4.whenPressed(new ClosePincher());
+		controlStick.button5.whenPressed(new OpenPincher());
 	}
 	
+	/** Gamepad Functions *****************************************************/
 	public double getDriveLeft() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = scaleJoystick(joystickValue);
@@ -52,6 +58,15 @@ public class OI {
 		joystickValue = checkDeadZone(joystickValue);
 		return joystickValue;	
 	}
+	
+	/** Control Stick Functions ***********************************************/
+	
+	public double getStickY() {
+		double joystickValue = gamepad.getRawAxis(ControlStick.JOYSTICK_Y_AXIS);
+		//TODO - add checkDeadZone (if needed)
+		return joystickValue;
+	}
+
 	
 	
 	private double scaleJoystick(double joystickValue) {
