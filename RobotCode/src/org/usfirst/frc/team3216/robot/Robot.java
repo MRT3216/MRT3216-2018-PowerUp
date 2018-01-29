@@ -54,14 +54,11 @@ public class Robot extends IterativeRobot {
 		//Start Camera
 		CameraServer.getInstance().startAutomaticCapture();
 		
-		oi = new OI();
-	
+		oi = new OI();	
 		
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
-		imu.reset();
-		
-		
+		imu.reset();	
 	}
 
 	/**
