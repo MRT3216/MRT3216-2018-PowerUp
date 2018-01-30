@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team3216.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -35,16 +34,10 @@ public class Robot extends IterativeRobot {
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static OI oi;
 	public static ADIS16448_IMU imu;
-	public static Pneumatics pneumatics; 
+	public final static Pneumatics pneumatics = new Pneumatics(); 
 	
 	Command autonomousCommand;
 
-	static {
-		if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
-			pneumatics = new Pneumatics();
-		}
-	}
-	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -165,8 +158,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.KP = 
 				settings.getEntry(RobotMap.ntKP).getDouble(RobotMap.KP);
 		RobotMap.EXAMPLE = 
-				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);
-		
+				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);		
 				
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());

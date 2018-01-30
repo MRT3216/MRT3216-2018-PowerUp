@@ -53,15 +53,14 @@ public class Drivetrain_ArcadeDrive extends Command {
 		double throttle = oi.getLeftY();
 		double turn = oi.getRightX();
 		log.add("turning: " + turn, Logger.Level.TRACE);
-		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < .5) {
+		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < RobotMap.TURN_RATE_THRESHOLD) {
 			hasHeading = true;
 			heading = imu.getAngleZ();
 		}
 		angleOld = imu.getAngleZ();
 
 		if(turn == 0 && throttle != 0) {
-			driveStraight(throttle, heading);
-			
+			driveStraight(throttle, heading);			
 		}
 		else {
 			hasHeading = false;
