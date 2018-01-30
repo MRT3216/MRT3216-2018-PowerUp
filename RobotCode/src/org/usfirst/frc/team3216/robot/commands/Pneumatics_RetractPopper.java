@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendPopper extends Command {
+public class Pneumatics_RetractPopper extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_PNEUMATICS;
-	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "ExtendPopper");
+	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "RetractPopper");
 
 	Pneumatics pneumatics = Robot.pneumatics;
 
-    public ExtendPopper() {
+    public Pneumatics_RetractPopper() {
     	log.add("Contructor", LOG_LEVEL);
         requires(pneumatics);
     }
@@ -29,7 +29,7 @@ public class ExtendPopper extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	log.add("Execute", LOG_LEVEL);
-    	pneumatics.openPopper();
+    	pneumatics.closePopper();
     }
 
     // Make this return true when this Command no longer needs to run execute()

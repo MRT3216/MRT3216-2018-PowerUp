@@ -1,10 +1,10 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.commands.ClosePincher;
-import org.usfirst.frc.team3216.robot.commands.ExtendPopper;
-import org.usfirst.frc.team3216.robot.commands.OpenPincher;
-import org.usfirst.frc.team3216.robot.commands.RetractPopper;
+import org.usfirst.frc.team3216.robot.commands.Pneumatics_ClosePincher;
+import org.usfirst.frc.team3216.robot.commands.Pneumatics_ExtendPopper;
+import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
+import org.usfirst.frc.team3216.robot.commands.Pneumatics_RetractPopper;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,10 +26,10 @@ public class OI {
 		
 		if(RobotMap.hasJoystick) {
 			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
-			controlStick.button4.whenPressed(new ClosePincher());
-			controlStick.button5.whenPressed(new OpenPincher());
-			controlStick.button2.whenPressed(new RetractPopper());
-			controlStick.button3.whenPressed(new ExtendPopper());
+			controlStick.button4.whenPressed(new Pneumatics_ClosePincher());
+			controlStick.button5.whenPressed(new Pneumatics_OpenPincher());
+			controlStick.button2.whenPressed(new Pneumatics_RetractPopper());
+			controlStick.button3.whenPressed(new Pneumatics_ExtendPopper());
 		}
 	}
 	
