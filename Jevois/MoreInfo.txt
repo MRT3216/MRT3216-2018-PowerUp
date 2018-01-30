@@ -9,3 +9,7 @@ params.cfg - list of parameters settings that should be applied each time a modu
 script.cfg - this is a more general script that is run after the module is loaded and initialized. The script is in the same form as you would type commands interactively in the command-line interface.
 
 Entering setpar effect (type effect here) into the serial monitor changes the paramater for video effects. 
+
+If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
+
+
