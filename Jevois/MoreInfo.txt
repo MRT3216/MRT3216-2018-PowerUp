@@ -3,3 +3,9 @@ Long list of useable commands: http://jevois.org/doc/UserCli.html
 
 Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
 Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
+
+params.cfg - list of parameters settings that should be applied each time a module is loaded. Only parameters of the module or its component algorithms can be set here. The parameters are set each time the module is loaded (e.g., the corresponding video resolution is selected by video capture software on the host computer).
+
+script.cfg - this is a more general script that is run after the module is loaded and initialized. The script is in the same form as you would type commands interactively in the command-line interface.
+
+Entering setpar effect (type effect here) into the serial monitor changes the paramater for video effects. 

@@ -167,6 +167,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
 		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());
 		settings.getEntry(RobotMap.ntEncoderRate).setDouble(leftEncoder.getRate());
-		//settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
+		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 	}
 }
