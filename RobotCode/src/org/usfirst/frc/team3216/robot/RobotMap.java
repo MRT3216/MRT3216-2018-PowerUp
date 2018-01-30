@@ -42,6 +42,8 @@ public class RobotMap {
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
 	public static final double ACCELERATION_MAX = 1.5;
+	// Determines the threshold at which the robot drives straight
+	public static final double TURN_RATE_THRESHOLD = 0.5;
 		
 	/** Logger Settings *******************************************************/
 	public static final String 		LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";

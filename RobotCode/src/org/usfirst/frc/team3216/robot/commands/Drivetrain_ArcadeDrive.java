@@ -30,57 +30,49 @@ public class Drivetrain_ArcadeDrive extends Command {
 	boolean hasHeading;
 	
     public Drivetrain_ArcadeDrive() {
-    	log.add("Constructor", Logger.Level.TRACE);
+    	log.add("Constructor", LOG_LEVEL);
     	
     	requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	log.add("Initialize", Logger.Level.TRACE);
+    	log.add("Initialize", LOG_LEVEL);
     	
     	drivetrain.stop();
 		throttleOld = 0.0;
 		angleOld = 0.0;
 		hasHeading = false;
 		
-		
-
-		
 		timer.start();
 		timer.reset();
-    }
-        
+    }        
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		double throttle = oi.getLeftY();
 		double turn = oi.getRightX();
 		log.add("turning: " + turn, Logger.Level.TRACE);
-		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < .5) {
+		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < RobotMap.TURN_RATE_THRESHOLD) {
 			hasHeading = true;
 			heading = imu.getAngleZ();
 		}
 		angleOld = imu.getAngleZ();
 
 		if(turn == 0 && throttle != 0) {
-			driveStraight(throttle, heading);
-			
+			driveStraight(throttle, heading);			
 		}
 		else {
 			hasHeading = false;
 			execute(throttle, turn);
 		}
-		//execute(throttle, tuadrn);
-
     }
     
     protected void execute(double throttle, double turn) {
     	throttle *= -1;
 		double dt = timer.get();
 		timer.reset();
-		throttle = restrictAcceleration(throttle, throttleOld, dt);
-	
+		throttle = restrictAcceleration(throttle, throttleOld, dt);	
 		
 		drivetrain.setPower((throttle-turn)/2, (throttle+turn)/2);
 		
@@ -90,14 +82,13 @@ public class Drivetrain_ArcadeDrive extends Command {
     protected void driveStraight(double throttle, double heading) {
     	currentAngle = imu.getAngleZ();
     	angleAdjustment = heading - currentAngle;
-		log.add("Heading: " + heading, Logger.Level.TRACE);
-		log.add("Current: " + currentAngle, Logger.Level.TRACE);
-		log.add("Adjustment: " + angleAdjustment, Logger.Level.TRACE);
+		log.add("Heading: " + heading, LOG_LEVEL);
+		log.add("Current: " + currentAngle, LOG_LEVEL);
+		log.add("Adjustment: " + angleAdjustment, LOG_LEVEL);
 
     	double turn = angleAdjustment * RobotMap.KP;
-    	log.add("Turn: " + turn, Logger.Level.TRACE);
-    	execute(throttle, turn);
-    	
+    	log.add("Turn: " + turn, LOG_LEVEL);
+    	execute(throttle, turn);    	
     }
     
 	/** restrictAcceleration **************************************************/
@@ -113,24 +104,21 @@ public class Drivetrain_ArcadeDrive extends Command {
 		return goalPower;
 	}
 
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
-    }
-    
+    }    
    
     // Called once after isFinished returns true
     protected void end() {
-    	log.add("End", Logger.Level.TRACE);
+    	log.add("End", LOG_LEVEL);
     	terminate();
-    }
-    
+    }    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	log.add("Interrupted", Logger.Level.TRACE);
+    	log.add("Interrupted", LOG_LEVEL);
     	terminate();
     }
     

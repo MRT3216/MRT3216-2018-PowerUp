@@ -14,13 +14,10 @@ public class Pneumatics extends Subsystem {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_PNEUMATICS;
 	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "Pneumatics");
 
-
 	private DoubleSolenoid pincher;
 	private DoubleSolenoid popper;
 	private final DoubleSolenoid.Value forward = DoubleSolenoid.Value.kForward;
 	private final DoubleSolenoid.Value reverse = DoubleSolenoid.Value.kReverse;
-	private final DoubleSolenoid.Value off = DoubleSolenoid.Value.kOff;
-	
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -41,7 +38,7 @@ public class Pneumatics extends Subsystem {
 	public void openPincher() {
 		if(pincher.get() != forward)  { 
 			pincher.set(forward);
-			log.add("OpenPincher executed", Logger.Level.TRACE);
+			log.add("OpenPincher executed", LOG_LEVEL);
 			}
 	}
 	
@@ -49,7 +46,7 @@ public class Pneumatics extends Subsystem {
 	public void closePincher() {
 		if(pincher.get() != reverse) {
 			pincher.set(reverse);
-			log.add("ClosePincher Closed", Logger.Level.TRACE);
+			log.add("ClosePincher Closed", LOG_LEVEL);
 		}
 	}
 	

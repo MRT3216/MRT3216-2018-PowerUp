@@ -45,7 +45,6 @@ public class Drivetrain_DriveStraight extends Command {
     	hasHeading = false;
     	heading = 0.0;
     	angle = 0.0;
-
 		
 		timer.start();
 		timer.reset();
@@ -54,8 +53,7 @@ public class Drivetrain_DriveStraight extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		//double leftPower = oi.getDriveLeft();
-		//double rightPower = oi.getDriveRight();
-		
+		//double rightPower = oi.getDriveRight();		
 		
 		//Just for testing purposes 
 		//execute(leftPower, rightPower);
@@ -68,8 +66,7 @@ public class Drivetrain_DriveStraight extends Command {
     		hasHeading = true;
     	}
     	else {
-    		//do stuff with heading
-    		
+    		//do stuff with heading    		
     	}
 		double dt = timer.get();
 		timer.reset();
@@ -94,27 +91,27 @@ public class Drivetrain_DriveStraight extends Command {
         return false;
     }
     
-    //adjusts angle to be on interval [-180, 180]
+    // adjusts angle to be on interval [-180, 180]
     protected double adjustAngle(double angle) {
     	angle = angle % 360;
     	angle = angle - heading;
-    	log.add("Input Angle: " + angle, Logger.Level.TRACE);
+    	log.add("Input Angle: " + angle, LOG_LEVEL);
     	if(angle >= 180) 	{angle = angle - 360;}
     	else if(angle < -180) {angle = 360 + angle;}
-    	log.add("Output Angle: " + angle, Logger.Level.TRACE);
+    	log.add("Output Angle: " + angle, LOG_LEVEL);
     	return angle;//-180
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	log.add("End", Logger.Level.TRACE);
+    	log.add("End", LOG_LEVEL);
     	terminate();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	log.add("Interrupted", Logger.Level.TRACE);
+    	log.add("Interrupted", LOG_LEVEL);
     	terminate();
     }
     
