@@ -1,11 +1,7 @@
 package org.usfirst.frc.team3216.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import javax.management.ImmutableDescriptor;
-
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_ArcadeDrive;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
@@ -25,9 +21,6 @@ public class Drivetrain extends Subsystem {
 	/** Instance Variables ****************************************************/
 	private SpeedController leftMotors, rightMotors;
 	private Logger log = new Logger(LOG_LEVEL, getName());
-	private double headingGoal = 0.0;
-	//private double currentHeading = Robot.imu.getAngle();
-	private boolean holdHeading = false;
 	double leftPowerOld, rightPowerOld;
 	Timer timer = new Timer();
 
@@ -74,19 +67,6 @@ public class Drivetrain extends Subsystem {
 		leftPower = safetyCheck(leftPower);
 		rightPower = safetyCheck(rightPower);				
 
-		if(Math.abs(rightPower - leftPower) < RobotMap.JOYSTICK_EQUALITY_THRESHHOLD || driveStraight) {
-			if(!holdHeading) {
-				holdHeading = true;
-			} else {
-				double magnitude = (rightPower + leftPower) / 2;
-//				currentHeading = Robot.imu.getAngle();
-//				rightPower = magnitude + currentHeading * RobotMap.KP; 
-//				leftPower = magnitude - currentHeading * RobotMap.KP;
-			}			
-		} else {
-			holdHeading = false;
-		}	
-	
 		leftMotors.set(leftPower);
 		rightMotors.set(rightPower);
 				

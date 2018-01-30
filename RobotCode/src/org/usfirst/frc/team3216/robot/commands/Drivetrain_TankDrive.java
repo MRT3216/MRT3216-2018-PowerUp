@@ -23,14 +23,14 @@ public class Drivetrain_TankDrive extends Command {
 	Timer timer = new Timer();
 	
     public Drivetrain_TankDrive() {
-    	log.add("Constructor", Logger.Level.TRACE);
+    	log.add("Constructor", LOG_LEVEL);
     	
     	requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	log.add("Initialize", Logger.Level.TRACE);
+    	log.add("Initialize", LOG_LEVEL);
     	
     	drivetrain.stop();
 		leftPowerOld = 0.0;
@@ -38,8 +38,7 @@ public class Drivetrain_TankDrive extends Command {
 		
 		timer.start();
 		timer.reset();
-    }
-        
+    }        
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -74,7 +73,6 @@ public class Drivetrain_TankDrive extends Command {
 		return goalPower;
 	}
 
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
@@ -82,7 +80,7 @@ public class Drivetrain_TankDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	log.add("End", Logger.Level.TRACE);
+    	log.add("End", LOG_LEVEL);
     	terminate();
     }
     
@@ -90,7 +88,7 @@ public class Drivetrain_TankDrive extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	log.add("Interrupted", Logger.Level.TRACE);
+    	log.add("Interrupted", LOG_LEVEL);
     	terminate();
     }
     

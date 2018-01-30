@@ -17,18 +17,18 @@ public class ClosePincher extends Command {
 	Pneumatics pneumatics = Robot.pneumatics;
 
     public ClosePincher() {
-    	log.add("ClosePincher Contructed", Logger.Level.TRACE);
+    	log.add("Contructor", LOG_LEVEL);
         requires(pneumatics);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	log.add("ClosePincher Initialized", Logger.Level.TRACE);
+    	log.add("Initialize", LOG_LEVEL);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	log.add("Execute", LOG_LEVEL);
     	pneumatics.closePincher();
     }
 
@@ -39,6 +39,7 @@ public class ClosePincher extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	log.add("End", LOG_LEVEL);
     }
 
     // Called when another command which requires one or more of the same

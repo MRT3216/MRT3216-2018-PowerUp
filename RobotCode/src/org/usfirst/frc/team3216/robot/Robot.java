@@ -4,16 +4,12 @@ package org.usfirst.frc.team3216.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3216.lib.Logger;
-//import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
@@ -39,7 +35,7 @@ public class Robot extends IterativeRobot {
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static OI oi;
 	public static ADIS16448_IMU imu;
-	public static Pneumatics pneumatics = null;
+	public static Pneumatics pneumatics; 
 	
 	Command autonomousCommand;
 
@@ -55,7 +51,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		log.add("Robot Init", Logger.Level.TRACE);
+		log.add("Robot Init", LOG_LEVEL);
 		
 		// Get the camera instance
 		CameraServer camServer = CameraServer.getInstance();
@@ -77,7 +73,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		log.add("Disabled Init", Logger.Level.TRACE);
+		log.add("Disabled Init", LOG_LEVEL);
 	}
 
 	@Override
@@ -98,7 +94,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		log.add("Autonomous Init", Logger.Level.TRACE);
+		log.add("Autonomous Init", LOG_LEVEL);
 		
 		autonomousCommand = new Drivetrain_DriveStraight();
 
@@ -125,7 +121,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		log.add("Teleop Init", Logger.Level.TRACE); 		
+		log.add("Teleop Init", LOG_LEVEL); 		
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
