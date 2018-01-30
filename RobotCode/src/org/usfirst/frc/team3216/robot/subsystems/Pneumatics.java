@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Pneumatics extends Subsystem {
-
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_PNEUMATICS;
 	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "Pneumatics");
 
@@ -23,6 +22,7 @@ public class Pneumatics extends Subsystem {
     // here. Call these from Commands.
 	
 	public Pneumatics() {
+		log.add("Constuctor", LOG_LEVEL);
 		pincher = new DoubleSolenoid(0,1);
 		popper = new DoubleSolenoid(2, 3);
 		
@@ -39,7 +39,7 @@ public class Pneumatics extends Subsystem {
 		if(pincher.get() != forward)  { 
 			pincher.set(forward);
 			log.add("OpenPincher executed", LOG_LEVEL);
-			}
+		}
 	}
 	
 	//closes arms to grab cube
@@ -52,11 +52,15 @@ public class Pneumatics extends Subsystem {
 	
 	//activates ejecting arm
 	public void openPopper() {
-		if(popper.get() != forward) popper.set(forward);
+		if(popper.get() != forward) {
+			popper.set(forward);
+		}
 	}
 	
 	public void closePopper() {
-		if(popper.get() != reverse) popper.set(reverse);
+		if(popper.get() != reverse) {
+			popper.set(reverse);
+		}
 	}
 
     public void initDefaultCommand() {

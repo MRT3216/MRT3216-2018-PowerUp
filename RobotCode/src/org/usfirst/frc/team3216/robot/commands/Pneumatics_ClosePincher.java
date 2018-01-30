@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Pneumatics_ClosePincher extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_PNEUMATICS;
-	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "ClosePincher");
+	private Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "ClosePincher");
 
-	Pneumatics pneumatics = Robot.pneumatics;
+	private Pneumatics pneumatics = Robot.pneumatics;
 
     public Pneumatics_ClosePincher() {
-    	log.add("Contructor", LOG_LEVEL);
+    	log.add("Pneumatics: " + pneumatics, LOG_LEVEL);
         requires(pneumatics);
     }
 

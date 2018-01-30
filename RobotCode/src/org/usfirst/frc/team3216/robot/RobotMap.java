@@ -61,7 +61,7 @@ public class RobotMap {
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.TRACE;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
 	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
-	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
+	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.TRACE;
 	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
 
 	

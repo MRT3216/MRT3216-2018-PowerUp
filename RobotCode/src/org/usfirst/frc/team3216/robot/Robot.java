@@ -34,13 +34,10 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Encoder leftEncoder = 
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
-	public static OI oi;
+	public static Pneumatics pneumatics = new Pneumatics(); 
+	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
-<<<<<<< HEAD
-	public static Pneumatics pneumatics = new Pneumatics();
-=======
-	public final static Pneumatics pneumatics = new Pneumatics(); 
->>>>>>> ff673163651aa2b42487e4aaccb022f4c2e3076e
+
 	
 	Command autonomousCommand;
 
@@ -59,7 +56,6 @@ public class Robot extends IterativeRobot {
 			camServer.startAutomaticCapture();
 		}
 		
-		oi = new OI();			
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
 		imu.reset();	
