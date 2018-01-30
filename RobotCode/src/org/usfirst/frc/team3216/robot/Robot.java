@@ -39,10 +39,16 @@ public class Robot extends IterativeRobot {
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static OI oi;
 	public static ADIS16448_IMU imu;
-	public static Pneumatics pneumatics = new Pneumatics();
+	public static Pneumatics pneumatics = null;
 	
 	Command autonomousCommand;
 
+	static {
+		if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
+			pneumatics = new Pneumatics();
+		}
+	}
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -51,11 +57,14 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		log.add("Robot Init", Logger.Level.TRACE);
 		
-		//Start Camera
-		CameraServer.getInstance().startAutomaticCapture();
+		// Get the camera instance
+		CameraServer camServer = CameraServer.getInstance();
+		// Check if the camera is actually attached
+		if(camServer != null) {
+			camServer.startAutomaticCapture();
+		}
 		
-		oi = new OI();	
-		
+		oi = new OI();			
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
 		imu.reset();	
@@ -162,11 +171,12 @@ public class Robot extends IterativeRobot {
 		RobotMap.EXAMPLE = 
 				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);
 		
-		
+				
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
 		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());
 		settings.getEntry(RobotMap.ntEncoderRate).setDouble(leftEncoder.getRate());
+		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 	}
 }

@@ -47,4 +47,3 @@ public class OurEncoder extends Subsystem {
     	return rate;
     }
 }
-

@@ -11,7 +11,11 @@ import org.usfirst.frc.team3216.lib.Logger;
 public class RobotMap {
 	public static enum Bot {BLUEFISH, MAINBOT;}
 	public static Bot currentBot = Bot.BLUEFISH;
-
+	public static boolean hasJoystick = true;
+	
+	/** Autonomous ************************************************************/
+	public static enum AutonomousModes {CROSS_LINE};
+	
 	/** USB ports *************************************************************/
 	public static final int USB_GAMEPAD 		= 0;
 	public static final int USB_CONTROL_STICK 	= 2;
@@ -72,8 +76,10 @@ public class RobotMap {
 	public static final String ntExampleVariable 				= "example_variable";
 	public static final String ntEncoderDistance				= "encoderDistance";
 	public static final String ntEncoderRate					= "encoderRate";
+	public static final String ntAutonomousMode					= "/autonomous/modes";
 	
 	/** Network Table Values **/
+	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
 	public static double JOYSTICK_DEADZONE 						= 0.05;
 	public static double JOYSTICK_SENSITIVITY 					= 1.0;
 	public static double JOYSTICK_EQUALITY_THRESHHOLD			= 0.05;

@@ -3,7 +3,9 @@ package org.usfirst.frc.team3216.robot;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.commands.ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
+import org.usfirst.frc.team3216.robot.commands.ExtendPopper;
 import org.usfirst.frc.team3216.robot.commands.OpenPincher;
+import org.usfirst.frc.team3216.robot.commands.RetractPopper;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,8 +13,8 @@ import org.usfirst.frc.team3216.robot.commands.OpenPincher;
  */
 public class OI {
 	/** Configuration Constants ***********************************************/
-	Gamepad gamepad;
-	ControlStick controlStick;
+	public Gamepad gamepad;
+	public ControlStick controlStick;
 	
 	/** Instance Variables ****************************************************/
 	Logger log = new Logger(RobotMap.LOG_OI, "OI");
@@ -21,10 +23,14 @@ public class OI {
 		log.add("OI Constructor", Logger.Level.TRACE);
 		
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
-		controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
-		//gamepad.LeftJoy.whileHeld(new Drivetrain_DriveStraight());
-		controlStick.button4.whenPressed(new ClosePincher());
-		controlStick.button5.whenPressed(new OpenPincher());
+		
+		if(RobotMap.hasJoystick) {
+			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
+			controlStick.button4.whenPressed(new ClosePincher());
+			controlStick.button5.whenPressed(new OpenPincher());
+			controlStick.button2.whenPressed(new RetractPopper());
+			controlStick.button3.whenPressed(new ExtendPopper());
+		}
 	}
 	
 	/** Gamepad Functions *****************************************************/
