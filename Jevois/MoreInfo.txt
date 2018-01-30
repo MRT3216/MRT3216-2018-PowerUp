@@ -1,1 +1,5 @@
 The JeVois cam port(cam0, cam1, cam2) can be found if you plug the JeVois into the Roborio and look up the roborio configuration. It should be listed. 
+Long list of useable commands: http://jevois.org/doc/UserCli.html
+
+Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
+Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
