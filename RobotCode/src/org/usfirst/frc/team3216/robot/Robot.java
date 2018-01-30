@@ -17,6 +17,7 @@ import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
@@ -35,11 +36,12 @@ public class Robot extends IterativeRobot {
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final RangeFinder rangeFinder = new RangeFinder();
+	public static final Elevator elevator = new Elevator();
 	public static final Encoder leftEncoder = 
 			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static OI oi;
 	public static ADIS16448_IMU imu;
-	public static Pneumatics pneumatics = null;
+	public static Pneumatics pneumatics = new Pneumatics();
 	
 	Command autonomousCommand;
 
@@ -177,6 +179,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
 		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());
 		settings.getEntry(RobotMap.ntEncoderRate).setDouble(leftEncoder.getRate());
-		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
+		//settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 	}
 }

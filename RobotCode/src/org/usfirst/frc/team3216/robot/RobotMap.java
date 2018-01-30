@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.lib.Logger.Level;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -59,6 +60,8 @@ public class RobotMap {
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
 	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
 	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
+	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
+
 	
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD			= Logger.Level.OFF;
