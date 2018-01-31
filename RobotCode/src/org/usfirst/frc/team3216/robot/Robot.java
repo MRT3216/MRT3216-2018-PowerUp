@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
@@ -48,14 +49,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		log.add("Robot Init", LOG_LEVEL);
-		
-		// Get the camera instance
-		CameraServer camServer = CameraServer.getInstance();
-		// Check if the camera is actually attached
-		if(camServer != null) {
-			camServer.startAutomaticCapture();
-		}
-		
+
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
 		imu.reset();	
@@ -91,7 +85,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 		
-		autonomousCommand = new Drivetrain_DriveStraight();
+		autonomousCommand = new Autonomous_DriveForward();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

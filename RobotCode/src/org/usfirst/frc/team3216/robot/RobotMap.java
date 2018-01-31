@@ -12,7 +12,8 @@ import org.usfirst.frc.team3216.lib.Logger.Level;
 public class RobotMap {
 	public static enum Bot {BLUEFISH, MAINBOT;}
 	public static Bot currentBot = Bot.BLUEFISH;
-	public static boolean hasJoystick = true;
+	public static boolean hasJoystick = (currentBot == Bot.MAINBOT) ? true : false;
+	public static boolean hasPneumatics = (currentBot == Bot.MAINBOT) ? true : false;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};

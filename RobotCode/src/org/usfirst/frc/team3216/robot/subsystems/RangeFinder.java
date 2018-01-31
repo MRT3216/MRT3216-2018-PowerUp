@@ -18,7 +18,8 @@ public class RangeFinder extends Subsystem {
 	    A MB1013 distance sensor - http://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
 	    (pins 3, 6 and 7 from sensor to analog input 0)
 	**/
-	private static final AnalogInput MB1013 = new AnalogInput(0);
+	private static final AnalogInput MB1013 = new AnalogInput(RobotMap.RANGEFINDER);
+	
 	// Volts per 5mm
 	private static final double V5mm = .004885;
 	private static final int OVERSAMPLED_BITS = 3;
@@ -33,6 +34,8 @@ public class RangeFinder extends Subsystem {
     }
     
 	public double getVoltage() {
+		log.add("Voltage: " + MB1013.getVoltage(), LOG_LEVEL);
+		
 	    return MB1013.getVoltage();
 	}
 	
@@ -43,7 +46,7 @@ public class RangeFinder extends Subsystem {
 	public double getDistanceInMM() {
 		double distInMM = this.voltageToDistance(getVoltage());
 		
-		log.add("dist in mm: " + distInMM, LOG_LEVEL);
+		//log.add("dist in mm: " + distInMM, LOG_LEVEL);
 		
 	    return distInMM;
 	}
@@ -51,7 +54,7 @@ public class RangeFinder extends Subsystem {
 	public double getAverageDistanceInMM() {		
 		double aveDistInMM = this.voltageToDistance(getAverageVoltage());
 		
-		log.add("ave dist in mm: " + aveDistInMM, LOG_LEVEL);
+		//log.add("ave dist in mm: " + aveDistInMM, LOG_LEVEL);
 		
 		return aveDistInMM;
 	}

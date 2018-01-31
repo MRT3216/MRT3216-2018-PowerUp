@@ -23,10 +23,13 @@ public class Pneumatics extends Subsystem {
 	
 	public Pneumatics() {
 		log.add("Constuctor", LOG_LEVEL);
-		pincher = new DoubleSolenoid(0,1);
-		popper = new DoubleSolenoid(2, 3);
 		
-		initPneumatics();
+		if(RobotMap.hasPneumatics) {
+			pincher = new DoubleSolenoid(0,1);
+			popper = new DoubleSolenoid(2, 3);
+			
+			initPneumatics();
+		}
 	}
 	
 	private void initPneumatics() {
