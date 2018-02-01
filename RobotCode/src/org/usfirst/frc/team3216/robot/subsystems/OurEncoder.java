@@ -13,22 +13,20 @@ public class OurEncoder extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ENCODER;
 	private Logger log = new Logger(LOG_LEVEL, getName());
-	private int channelA, channelB;
 	private Encoder encoder;
 	
 	public OurEncoder(int channelA, int channelB) {
 		log.add("Constructor", LOG_LEVEL);
 		
-		this.channelA = channelA;
-		this.channelB = channelB;
-	}
-    
-    public void initDefaultCommand() {
     	encoder = new Encoder(channelA, channelB, false, EncodingType.k4X);
     	encoder.reset();
     	encoder.setSamplesToAverage(5);
     	encoder.setReverseDirection(true);
-    	encoder.setDistancePerPulse(1/360);
+    	encoder.setDistancePerPulse(1/360);	
+	}
+    
+    public void initDefaultCommand() {
+
     }
     
     public double getDistance() {    	

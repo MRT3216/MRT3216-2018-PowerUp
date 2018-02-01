@@ -2,18 +2,17 @@ package org.usfirst.frc.team3216.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.commands.Autonomous_DriveForward;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_DriveStraight;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
+import org.usfirst.frc.team3216.robot.subsystems.OurEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
@@ -33,8 +32,8 @@ public class Robot extends IterativeRobot {
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
-	public static final Encoder leftEncoder = 
-			new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+	public static final OurEncoder leftEncoder = 
+			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
@@ -85,7 +84,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 		
-		autonomousCommand = new Autonomous_DriveForward();
+		autonomousCommand = new Drivetrain_AutoDriveForward();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -157,8 +156,9 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);		
 				
 		/** Write to NetworkTable **/		
-		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
-		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
+		//settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
+		//settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
+		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
 		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());
 		settings.getEntry(RobotMap.ntEncoderRate).setDouble(leftEncoder.getRate());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());

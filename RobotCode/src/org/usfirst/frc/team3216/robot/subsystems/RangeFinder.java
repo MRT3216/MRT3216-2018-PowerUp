@@ -1,6 +1,12 @@
 package org.usfirst.frc.team3216.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -13,6 +19,7 @@ public class RangeFinder extends Subsystem {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_RANGEFINDER;
 	private Logger log = new Logger(LOG_LEVEL, getName());
 	private final double mmToInches = 0.03937007874;
+	private Queue<Double> lastTenDistances;
 	
 	/** Instance Variables ****************************************************
 	    A MB1013 distance sensor - http://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
@@ -26,6 +33,9 @@ public class RangeFinder extends Subsystem {
 
 	public RangeFinder() {
 		log.add("Constructor", LOG_LEVEL);
+		
+		lastTenDistances = new LinkedList<>();
+		
 		MB1013.setOversampleBits(OVERSAMPLED_BITS);
 	}
 	
@@ -34,7 +44,7 @@ public class RangeFinder extends Subsystem {
     }
     
 	public double getVoltage() {
-		log.add("Voltage: " + MB1013.getVoltage(), LOG_LEVEL);
+		//log.add("Voltage: " + MB1013.getVoltage(), LOG_LEVEL);
 		
 	    return MB1013.getVoltage();
 	}
@@ -62,7 +72,7 @@ public class RangeFinder extends Subsystem {
 	public double getDistanceInInches() {
 		double distInInches = this.getDistanceInMM() * this.mmToInches;
 		
-		log.add("dist: " + distInInches, LOG_LEVEL);
+		//log.add("dist: " + distInInches, LOG_LEVEL);
 		
 	    return distInInches;
 	}
@@ -73,6 +83,36 @@ public class RangeFinder extends Subsystem {
 		log.add("ave dist: " + aveDistInInches, LOG_LEVEL);
 		
 		return aveDistInInches;
+	}
+	
+	public double getSmoothedDistancedInInches() {
+		if(lastTenDistances.size() > 10){
+			lastTenDistances.remove();
+		}
+		
+		lastTenDistances.add(this.getDistanceInInches());		
+	
+		return smooth(lastTenDistances);
+	}
+	
+	private double smooth(Queue<Double> distances) {
+		LinkedList<Double> linkedList = (LinkedList<Double>) distances;
+		
+		//linkedList.remove(Collections.min(linkedList));
+		//linkedList.remove(Collections.min(linkedList));
+		//linkedList.remove(Collections.max(linkedList));
+		//linkedList.remove(Collections.max(linkedList));
+		
+		double total = 0;
+		for (Double item : linkedList) {
+			total += item;
+		}		
+		
+		double smoothedDistance = total / linkedList.size();
+		
+		log.add("Smoothed Dist: " + smoothedDistance, LOG_LEVEL);
+		
+		return smoothedDistance;
 	}
 	
 	private double voltageToDistance(double voltageMeasured) {
