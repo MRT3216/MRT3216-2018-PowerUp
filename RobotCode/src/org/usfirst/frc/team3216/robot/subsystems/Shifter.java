@@ -16,37 +16,35 @@ public class Shifter extends Subsystem {
 	Logger log = new Logger(LOG_LEVEL, "Shifter");
 	private final DoubleSolenoid.Value high = DoubleSolenoid.Value.kForward;
 	private final DoubleSolenoid.Value low = DoubleSolenoid.Value.kReverse;
-	DoubleSolenoid transmition;
+	DoubleSolenoid transmission;
 	
 	public Shifter() {
 		log.add("Constuctor", LOG_LEVEL);
 		
 		if(RobotMap.hasShifter) {
-			transmition = new DoubleSolenoid(4,5);
-
-			
+			transmission = new DoubleSolenoid(4,5);			
 			initShifter();
 		}
 	}
 	
 	public void shiftUp() {
-		if(transmition.get() != high) {
-			transmition.set(high);
+		if(transmission.get() != high) {
+			transmission.set(high);
 		}
 	}
 	
 	public void shiftDown() {
-		if(transmition.get() != low) {
-			transmition.set(low);
+		if(transmission.get() != low) {
+			transmission.set(low);
 		}
 	}
 
     private void initShifter() {
-    	transmition.set(low);
+    	transmission.set(low);
 	}
     
     public Gear getGear() {
-    	if(transmition.get() == high) {
+    	if(transmission.get() == high) {
     		return Gear.HIGH;
     	}
     	else {
@@ -55,7 +53,6 @@ public class Shifter extends Subsystem {
     }
 
 	public void initDefaultCommand() {
-        setDefaultCommand(new Shifter_ShiftUp());
+        //setDefaultCommand(new Shifter_ShiftUp());
     }
 }
-
