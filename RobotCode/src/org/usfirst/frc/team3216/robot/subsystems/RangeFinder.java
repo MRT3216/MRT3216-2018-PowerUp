@@ -102,12 +102,20 @@ public class RangeFinder extends Subsystem {
 		
 		//removeHighAndLow(newQueue);
 		/*
-		double total = 0;
-		for (Double item : linkedList) {
-			total += item;
-		}		
+		//Collections.sort(linkedList);
 		
-		double smoothedDistance = total / linkedList.size();
+		int length = linkedList.size();
+
+		linkedList.remove();
+		linkedList.remove(4);
+		//linkedList.remove(length-1);
+		//linkedList.remove(length-2);
+		//linkedList.remove(0);
+		//linkedList.remove(1);
+		
+		//linkedList.remove(Collections.min(linkedList));
+		//linkedList.remove(Collections.max(linkedList));
+		//linkedList.remove(Collections.max(linkedList));
 		*/
 		
 		double smoothedDistance = 0;
