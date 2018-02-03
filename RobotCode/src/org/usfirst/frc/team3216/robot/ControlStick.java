@@ -12,6 +12,7 @@ public class ControlStick extends Joystick{
 	public static final int BUTTON_4 = 4;
 	public static final int BUTTON_5 = 5;
 	public static final int BUTTON_6 = 6;
+	public static final int BUTTON_7 = 7;
 	
 	/** Axis Mapping for a single joystick ************************************/
 	public static final int JOYSTICK_Y_AXIS = 2;
@@ -24,6 +25,7 @@ public class ControlStick extends Joystick{
 	Button button4 = new JoystickButton(this, BUTTON_4);
 	Button button5 = new JoystickButton(this, BUTTON_5);
 	Button button6 = new JoystickButton(this, BUTTON_6);
+	Button button7 = new JoystickButton(this, BUTTON_7);
 		
 	public ControlStick(int port) {
 		super(port);

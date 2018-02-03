@@ -14,8 +14,10 @@ public class RobotMap {
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
 	public static Bot currentBot = Bot.BLUEFISH;
-	public static boolean hasJoystick = (currentBot == Bot.MAINBOT) ? true : false;
-	public static boolean hasPneumatics = (currentBot == Bot.MAINBOT) ? true : false;
+	public static boolean hasIMU = false;//(currentBot == Bot.MAINBOT) ? false : true;
+	public static boolean hasJoystick = (currentBot == Bot.MAINBOT) ? false : true;
+	public static boolean hasPneumatics = (currentBot == Bot.MAINBOT) ? false : true;
+	public static boolean hasShifter = true;//(currentBot == Bot.MAINBOT) ? false : true;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
