@@ -34,6 +34,10 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final OurEncoder leftEncoder = 
 			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+	
+	public static final OurEncoder rightEncoder = 
+			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
+	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
 	public static final OI oi = new OI();
@@ -164,7 +168,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.POPPER_STATUS = 
 				RobotMap.Popper.valueOf(settings.getEntry(RobotMap.ntPopper).getString(RobotMap.POPPER_STATUS.name()));
 		RobotMap.ELEVATOR_HEIGHT = 
-				settings.getEntry(RobotMap.ntElevatorHeight).getDouble(RobotMap.SPEED);
+				settings.getEntry(RobotMap.ntElevatorHeight).getDouble(RobotMap.ELEVATOR_HEIGHT);
 		RobotMap.CURRENT_GEAR = 
 				RobotMap.Gear.valueOf(settings.getEntry(RobotMap.ntGear).getString(RobotMap.CURRENT_GEAR.name()));
 		
@@ -172,8 +176,8 @@ public class Robot extends IterativeRobot {
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
-		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());
-		settings.getEntry(RobotMap.ntEncoderRate).setDouble(leftEncoder.getRate());
+		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(rightEncoder.getDistance());
+		settings.getEntry(RobotMap.ntEncoderRate).setDouble(rightEncoder.getRate());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 		settings.getEntry(RobotMap.ntPincher).setString(RobotMap.PINCHER_STATUS.name());
 		settings.getEntry(RobotMap.ntPopper).setString(RobotMap.POPPER_STATUS.name());
