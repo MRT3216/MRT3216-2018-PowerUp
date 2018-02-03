@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3216.robot.commands;
 
 import org.usfirst.frc.team3216.robot.Robot;
+import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 //import jaci.pathfinder.Pathfinder;
 //import jaci.pathfinder.Trajectory;
@@ -51,8 +52,9 @@ public class Drivetrain_AutoDriveForward extends Drivetrain_Drive {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	log.add(Double.toString(rangeFinder.getAverageDistanceInInches()), LOG_LEVEL);
-    	if(rangeFinder.getAverageDistanceInInches() > 25) {
+    	log.add(Double.toString(rangeFinder.getSmoothedDistancedInInches()), LOG_LEVEL);
+    	
+    	if(rangeFinder.getSmoothedDistancedInInches() > RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE) {
     		driveStraight(-.5, initialHeading);
     	}
     	else {
