@@ -1,6 +1,11 @@
 The JeVois cam port(cam0, cam1, cam2) can be found if you plug the JeVois into the Roborio and look up the roborio configuration. It should be listed. 
 Long list of useable commands: http://jevois.org/doc/UserCli.html
 
+Install VirtualBox and follow the instructions listed in the link: http://jevois.org/doc/Virtualbox.html
+Follow all those direcctions, and once you get to the part that gives a link to JeVois packages an source codes, click there. 
+Once there, you should find this think: http://jevois.usc.edu
+Click on it and follow the instructions to install the JeVois packages. These instructions should be found under the header, "Getting JeVois developer software - Details." Make sure you are following the correct instructions for the version of Ubuntu you are using.
+
 Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
 Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
 
