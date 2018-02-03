@@ -45,8 +45,6 @@ public class Pneumatics extends Subsystem {
 		}
 	}
 	
-	
-	
 	//closes arms to grab cube
 	public void closePincher() {
 		if(pincher.get() != reverse) {

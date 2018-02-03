@@ -84,17 +84,23 @@ public class RangeFinder extends Subsystem {
 	}
 	
 	public double getSmoothedDistancedInInches() {
-		if(lastTenDistances.size() > 10){
+		//log.add("Getting Smoothed Distance, Count: ", lastTenDistances.size(),LOG_LEVEL);
+		
+		if(lastTenDistances.size() >= 10){
 			lastTenDistances.remove();
 		}
 		
-		lastTenDistances.add(this.getDistanceInInches());		
+		lastTenDistances.add(this.getDistanceInInches());	
+		
 	
 		return smooth(lastTenDistances);
 	}
 	
 	private double smooth(Queue<Double> distances) {
 		LinkedList<Double> linkedList = (LinkedList<Double>) distances;
+		LinkedList<Double> newQueue = (LinkedList<Double>) linkedList.clone();
+		
+		//removeHighAndLow(newQueue);
 		/*
 		//Collections.sort(linkedList);
 		
@@ -110,32 +116,61 @@ public class RangeFinder extends Subsystem {
 		//linkedList.remove(Collections.min(linkedList));
 		//linkedList.remove(Collections.max(linkedList));
 		//linkedList.remove(Collections.max(linkedList));
-		
 		*/
-		double total = 0;
-		for (Double item : linkedList) {
-			total += item;
-		}		
 		
-		//removeHighAndLow(linkedList);
-				
-		double smoothedDistance = total / linkedList.size();
+		double smoothedDistance = 0;
+		
+		if(linkedList.size() >= 10) {
+			smoothedDistance = this.medianSmoothing(newQueue);
+		} else {
+			smoothedDistance = linkedList.getLast();
+		}
 		
 		log.add("Smoothed Dist: " + smoothedDistance, LOG_LEVEL);
 		
 		return smoothedDistance;
 	}
 	
+	public double medianSmoothing(LinkedList<Double> linkedList) {
+		Collections.sort(linkedList);
+		
+		log.add("size after sorting: " + linkedList.size(), LOG_LEVEL);
+		
+		return linkedList.get(linkedList.size()/2);
+	}
+	
 	public void removeHighAndLow(LinkedList<Double> linkedList) {
 		Double min = 1000.0;
 		Double minSecond = 1000.0;
 		Double max = 0.0;
-		for(int i = 0; i < linkedList.size(); i++){
-		    if(linkedList.get(i) < min)
-		        min = linkedList.get(i);
-		}
+		Double maxSecond = 0.0;
+		for(int i = 0; i < linkedList.size(); i++){			
+			Double currentItem = linkedList.get(i);
+			
+			if(currentItem < min) {		
+				minSecond = min;
+			    min = currentItem;				
+		    } else if (currentItem < minSecond) {
+		    	minSecond = currentItem;
+		    } else if (currentItem > max) {
+		    	maxSecond = max;
+		    	max = currentItem;
+		    } else if (currentItem > maxSecond) {
+		    	maxSecond = currentItem;
+		    }
+		}	
+		
+		log.add("length before: ", linkedList.size(), LOG_LEVEL);
+		log.add("min: " + min, LOG_LEVEL);
+		log.add("min2: " + minSecond, LOG_LEVEL);
+		log.add("max: " + max, LOG_LEVEL);
+		log.add("max2: " + maxSecond, LOG_LEVEL);
+		log.add("length after: ", linkedList.size(), LOG_LEVEL);
 				
 		linkedList.remove(min);
+		linkedList.remove(minSecond);
+		linkedList.remove(max);
+		linkedList.remove(maxSecond);
 	}
 	
 	
