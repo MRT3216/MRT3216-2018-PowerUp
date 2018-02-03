@@ -95,7 +95,7 @@ public class RangeFinder extends Subsystem {
 	
 	private double smooth(Queue<Double> distances) {
 		LinkedList<Double> linkedList = (LinkedList<Double>) distances;
-		
+		/*
 		//Collections.sort(linkedList);
 		
 		int length = linkedList.size();
@@ -111,7 +111,7 @@ public class RangeFinder extends Subsystem {
 		//linkedList.remove(Collections.max(linkedList));
 		//linkedList.remove(Collections.max(linkedList));
 		
-		
+		*/
 		double total = 0;
 		for (Double item : linkedList) {
 			total += item;

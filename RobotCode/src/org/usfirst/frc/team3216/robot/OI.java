@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.commands.CGroup_ShootCube;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ExtendPopper;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
@@ -32,6 +33,7 @@ public class OI {
 			controlStick.button5.whenPressed(new Pneumatics_OpenPincher());
 			controlStick.button2.whenPressed(new Pneumatics_RetractPopper());
 			controlStick.button3.whenPressed(new Pneumatics_ExtendPopper());
+			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
 			if(RobotMap.hasShifter) {
 				controlStick.button6.whenPressed(new Shifter_ShiftUp());
 				controlStick.button7.whenPressed(new Shifter_ShiftDown());
