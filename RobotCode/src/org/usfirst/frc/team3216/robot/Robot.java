@@ -46,13 +46,13 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	@Override
-	public void robotInit() {
+	public void robotInit() {		
 		log.add("Robot Init", LOG_LEVEL);
 		
 		if(RobotMap.hasIMU) {
-		imu = new ADIS16448_IMU();
-		imu.calibrate();
-		imu.reset();	
+			imu = new ADIS16448_IMU();
+			imu.calibrate();
+			imu.reset();	
 		}
 	}
 

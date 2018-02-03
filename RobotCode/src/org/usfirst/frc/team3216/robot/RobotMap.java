@@ -9,15 +9,15 @@ import org.usfirst.frc.team3216.lib.Logger;
  * floating around.
  */
 public class RobotMap {
-	public static enum Bot {BLUEFISH, MAINBOT;}
+	public static enum Bot {TESTBOARD, BLUEFISH, MAINBOT;}
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
 	public static Bot currentBot = Bot.BLUEFISH;
-	public static boolean hasIMU = false;//(currentBot == Bot.MAINBOT) ? false : true;
-	public static boolean hasJoystick = (currentBot == Bot.MAINBOT) ? false : true;
-	public static boolean hasPneumatics = (currentBot == Bot.MAINBOT) ? false : true;
-	public static boolean hasShifter = true;//(currentBot == Bot.MAINBOT) ? false : true;
+	public static boolean hasIMU = (currentBot == Bot.TESTBOARD) ? false : true;
+	public static boolean hasJoystick = (currentBot == Bot.BLUEFISH) ? false : true;
+	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
+	public static boolean hasShifter = (currentBot == Bot.BLUEFISH) ? false : true;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
@@ -92,6 +92,7 @@ public class RobotMap {
 	public static final String ntPopper							= "popper";
 	public static final String ntElevatorHeight					= "elevatorHeight";
 	public static final String ntGear							= "gear";
+	public static final String ntShootCubeDelay					= "shootCubeDelay";
 	
 
 	/** Network Table Values **/
@@ -103,4 +104,5 @@ public class RobotMap {
 	public static double RANGEFINDER_DISTANCE 					= 0.0;
 	public static double KP 									= 0.01;
 	public static boolean EXAMPLE 								= false;
+	public static double SHOOT_CUBE_DELAY						= 0.1;
 }
