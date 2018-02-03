@@ -6,6 +6,8 @@ Follow all those direcctions, and once you get to the part that gives a link to 
 Once there, you should find this think: http://jevois.usc.edu
 Click on it and follow the instructions to install the JeVois packages. These instructions should be found under the header, "Getting JeVois developer software - Details." Make sure you are following the correct instructions for the version of Ubuntu you are using.
 
+If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
+
 Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
 Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
 
@@ -15,6 +17,5 @@ script.cfg - this is a more general script that is run after the module is loade
 
 Entering setpar effect (type effect here) into the serial monitor changes the paramater for video effects. 
 
-If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
 
 
