@@ -8,6 +8,8 @@ Click on it and follow the instructions to install the JeVois packages. These in
 
 If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
 
+In order to acess the JeVois on a virtual machine, make sure you add it the the usable usb ports, by going in the virtual machine settings, going to the usb tab, selecting the radio button labeled 3, and click the plus icon, and select the JeVois.
+
 Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
 Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
 
