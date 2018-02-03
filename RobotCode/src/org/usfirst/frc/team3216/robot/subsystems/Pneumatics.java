@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Pneumatics extends Subsystem {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_PNEUMATICS;
-	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "Pneumatics");
+	Logger log = new Logger(LOG_LEVEL, "Pneumatics");
 
 	private DoubleSolenoid pincher;
 	private DoubleSolenoid popper;
@@ -44,6 +44,8 @@ public class Pneumatics extends Subsystem {
 			log.add("OpenPincher executed", LOG_LEVEL);
 		}
 	}
+	
+	
 	
 	//closes arms to grab cube
 	public void closePincher() {

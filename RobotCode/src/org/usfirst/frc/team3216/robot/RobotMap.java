@@ -63,6 +63,7 @@ public class RobotMap {
 	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;
 	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
 	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
+	public static final Logger.Level 	LOG_SHIFTER				= Logger.Level.OFF;
 
 	
 	/** Commands **/
