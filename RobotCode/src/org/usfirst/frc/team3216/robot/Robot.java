@@ -2,7 +2,6 @@ package org.usfirst.frc.team3216.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -129,6 +128,8 @@ public class Robot extends IterativeRobot {
 		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
+		
+		log.add("Speed: " + RobotMap.SPEED, LOG_LEVEL);
 	}
 
 	/**
@@ -156,7 +157,7 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntExampleVariable).getBoolean(RobotMap.EXAMPLE);		
 				
 		/** Write to NetworkTable **/		
-		//settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
+		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		//settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getAverageDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
 		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(leftEncoder.getDistance());

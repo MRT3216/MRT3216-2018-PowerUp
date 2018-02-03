@@ -14,7 +14,7 @@ public class OI {
 	/** Configuration Constants ***********************************************/
 	public Gamepad gamepad;
 	public ControlStick controlStick;
-	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_DRIVEFORWARD;
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_OI;
 	
 	/** Instance Variables ****************************************************/
 	Logger log = new Logger(RobotMap.LOG_OI, "OI");
@@ -58,12 +58,14 @@ public class OI {
 	public double getLeftY() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
+		log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
 		return joystickValue;	
 	}
 	
 	public double getRightX() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
+		log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
 		return joystickValue;	
 	}
 	
