@@ -2,6 +2,8 @@ package org.usfirst.frc.team3216.robot.subsystems;
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
+import org.usfirst.frc.team3216.robot.RobotMap.Gear;
+import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftUp;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,47 +16,46 @@ public class Shifter extends Subsystem {
 	Logger log = new Logger(LOG_LEVEL, "Shifter");
 	private final DoubleSolenoid.Value high = DoubleSolenoid.Value.kForward;
 	private final DoubleSolenoid.Value low = DoubleSolenoid.Value.kReverse;
-	DoubleSolenoid left;
-	DoubleSolenoid right;
+	DoubleSolenoid transmition;
 	
 	public Shifter() {
 		log.add("Constuctor", LOG_LEVEL);
 		
-		if(RobotMap.hasPneumatics) {
-			left = new DoubleSolenoid(0,1);
-			right = new DoubleSolenoid(2, 3);
+		if(RobotMap.hasShifter) {
+			transmition = new DoubleSolenoid(4,5);
+
 			
 			initShifter();
 		}
 	}
 	
 	public void shiftUp() {
-		if(left.get() != high) {
-			left.set(high);
-		}
-		if(right.get() != high) {
-			right.set(high);
+		if(transmition.get() != high) {
+			transmition.set(high);
 		}
 	}
 	
 	public void shiftDown() {
-		if(left.get() != low) {
-			left.set(low);
-		}
-		if(right.get() != low) {
-			right.set(low);
+		if(transmition.get() != low) {
+			transmition.set(low);
 		}
 	}
 
     private void initShifter() {
-    	left.set(low);
-    	right.set(low);
+    	transmition.set(low);
 	}
     
-    getGear()
+    public Gear getGear() {
+    	if(transmition.get() == high) {
+    		return Gear.HIGH;
+    	}
+    	else {
+    		return Gear.LOW;
+    	}
+    }
 
 	public void initDefaultCommand() {
-        setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new Shifter_ShiftUp());
     }
 }
 

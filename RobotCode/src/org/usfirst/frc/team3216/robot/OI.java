@@ -5,6 +5,8 @@ import org.usfirst.frc.team3216.robot.commands.Pneumatics_ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ExtendPopper;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_RetractPopper;
+import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftDown;
+import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,7 +32,12 @@ public class OI {
 			controlStick.button5.whenPressed(new Pneumatics_OpenPincher());
 			controlStick.button2.whenPressed(new Pneumatics_RetractPopper());
 			controlStick.button3.whenPressed(new Pneumatics_ExtendPopper());
+			if(RobotMap.hasShifter) {
+				controlStick.button6.whenPressed(new Shifter_ShiftUp());
+				controlStick.button7.whenPressed(new Shifter_ShiftDown());
+			}
 		}
+		
 	}
 	
 	/** Gamepad Functions *****************************************************/

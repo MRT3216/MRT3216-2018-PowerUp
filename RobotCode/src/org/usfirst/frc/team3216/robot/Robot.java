@@ -14,6 +14,7 @@ import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 import org.usfirst.frc.team3216.robot.subsystems.OurEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
+import org.usfirst.frc.team3216.robot.subsystems.Shifter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,9 +35,9 @@ public class Robot extends IterativeRobot {
 	public static final OurEncoder leftEncoder = 
 			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
 	public static Pneumatics pneumatics = new Pneumatics(); 
+	public static Shifter shifter = new Shifter();
 	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
-
 	
 	Command autonomousCommand;
 
@@ -47,10 +48,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		log.add("Robot Init", LOG_LEVEL);
-
+		
+		if(RobotMap.hasIMU) {
 		imu = new ADIS16448_IMU();
 		imu.calibrate();
 		imu.reset();	
+		}
 	}
 
 	/**
