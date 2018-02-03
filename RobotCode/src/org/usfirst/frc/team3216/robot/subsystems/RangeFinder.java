@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -98,22 +96,48 @@ public class RangeFinder extends Subsystem {
 	private double smooth(Queue<Double> distances) {
 		LinkedList<Double> linkedList = (LinkedList<Double>) distances;
 		
-		//linkedList.remove(Collections.min(linkedList));
+		//Collections.sort(linkedList);
+		
+		int length = linkedList.size();
+
+		linkedList.remove();
+		linkedList.remove(4);
+		//linkedList.remove(length-1);
+		//linkedList.remove(length-2);
+		//linkedList.remove(0);
+		//linkedList.remove(1);
+		
 		//linkedList.remove(Collections.min(linkedList));
 		//linkedList.remove(Collections.max(linkedList));
 		//linkedList.remove(Collections.max(linkedList));
+		
 		
 		double total = 0;
 		for (Double item : linkedList) {
 			total += item;
 		}		
 		
+		//removeHighAndLow(linkedList);
+				
 		double smoothedDistance = total / linkedList.size();
 		
 		log.add("Smoothed Dist: " + smoothedDistance, LOG_LEVEL);
 		
 		return smoothedDistance;
 	}
+	
+	public void removeHighAndLow(LinkedList<Double> linkedList) {
+		Double min = 1000.0;
+		Double minSecond = 1000.0;
+		Double max = 0.0;
+		for(int i = 0; i < linkedList.size(); i++){
+		    if(linkedList.get(i) < min)
+		        min = linkedList.get(i);
+		}
+				
+		linkedList.remove(min);
+	}
+	
 	
 	private double voltageToDistance(double voltageMeasured) {
 		// Divide the voltage measured by the volts per 5mm and then 
