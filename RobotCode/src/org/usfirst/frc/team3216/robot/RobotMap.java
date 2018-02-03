@@ -90,6 +90,7 @@ public class RobotMap {
 	public static final String ntPopper							= "popper";
 	public static final String ntElevatorHeight					= "elevatorHeight";
 	public static final String ntGear							= "gear";
+	public static final String ntShootCubeDelay					= "shootCubeDelay";
 	
 
 	/** Network Table Values **/
@@ -101,4 +102,5 @@ public class RobotMap {
 	public static double RANGEFINDER_DISTANCE 					= 0.0;
 	public static double KP 									= 0.01;
 	public static boolean EXAMPLE 								= false;
+	public static double SHOOT_CUBE_DELAY						= 0.1;
 }
