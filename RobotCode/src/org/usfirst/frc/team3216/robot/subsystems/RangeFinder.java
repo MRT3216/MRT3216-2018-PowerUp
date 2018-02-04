@@ -17,22 +17,21 @@ public class RangeFinder extends Subsystem {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_RANGEFINDER;
 	private Logger log = new Logger(LOG_LEVEL, getName());
 	private final double mmToInches = 0.03937007874;
-	private Queue<Double> lastTenDistances;
+	// Volts per 5mm
+	private static final double V5mm = .004885;
+	private static final int OVERSAMPLED_BITS = 3;
+	private Queue<Double> previousDistances;
 	
-	/** Instance Variables ****************************************************
+	/** MB1013 Settings ********************************************************
 	    A MB1013 distance sensor - http://www.maxbotix.com/documents/HRLV-MaxSonar-EZ_Datasheet.pdf
 	    (pins 3, 6 and 7 from sensor to analog input 0)
 	**/
 	private static final AnalogInput MB1013 = new AnalogInput(RobotMap.RANGEFINDER);
 	
-	// Volts per 5mm
-	private static final double V5mm = .004885;
-	private static final int OVERSAMPLED_BITS = 3;
-
 	public RangeFinder() {
 		log.add("Constructor", LOG_LEVEL);
 		
-		lastTenDistances = new LinkedList<>();
+		previousDistances = new LinkedList<>();
 		
 		MB1013.setOversampleBits(OVERSAMPLED_BITS);
 	}
@@ -78,49 +77,28 @@ public class RangeFinder extends Subsystem {
 	public double getAverageDistanceInInches() {		
 		double aveDistInInches = this.getAverageDistanceInMM() * this.mmToInches;
 		
-		log.add("ave dist: " + aveDistInInches, LOG_LEVEL);
+		//log.add("ave dist: " + aveDistInInches, LOG_LEVEL);
 		
 		return aveDistInInches;
 	}
 	
 	public double getSmoothedDistancedInInches() {
-		//log.add("Getting Smoothed Distance, Count: ", lastTenDistances.size(),LOG_LEVEL);
-		
-		if(lastTenDistances.size() >= 10){
-			lastTenDistances.remove();
+		if(previousDistances.size() >= RobotMap.MEDIAN_SMOOTHING_READINGS){
+			previousDistances.remove();
 		}
 		
-		lastTenDistances.add(this.getDistanceInInches());	
-		
-	
-		return smooth(lastTenDistances);
+		previousDistances.add(this.getAverageDistanceInInches());	
+			
+		return smooth(previousDistances);
 	}
 	
 	private double smooth(Queue<Double> distances) {
 		LinkedList<Double> linkedList = (LinkedList<Double>) distances;
 		LinkedList<Double> newQueue = (LinkedList<Double>) linkedList.clone();
-		
-		//removeHighAndLow(newQueue);
-		/*
-		//Collections.sort(linkedList);
-		
-		int length = linkedList.size();
-
-		linkedList.remove();
-		linkedList.remove(4);
-		//linkedList.remove(length-1);
-		//linkedList.remove(length-2);
-		//linkedList.remove(0);
-		//linkedList.remove(1);
-		
-		//linkedList.remove(Collections.min(linkedList));
-		//linkedList.remove(Collections.max(linkedList));
-		//linkedList.remove(Collections.max(linkedList));
-		*/
-		
+	
 		double smoothedDistance = 0;
 		
-		if(linkedList.size() >= 10) {
+		if(linkedList.size() >= RobotMap.MEDIAN_SMOOTHING_READINGS) {
 			smoothedDistance = this.medianSmoothing(newQueue);
 		} else {
 			smoothedDistance = linkedList.getLast();
@@ -133,8 +111,6 @@ public class RangeFinder extends Subsystem {
 	
 	public double medianSmoothing(LinkedList<Double> linkedList) {
 		Collections.sort(linkedList);
-		
-		log.add("size after sorting: " + linkedList.size(), LOG_LEVEL);
 		
 		return linkedList.get(linkedList.size()/2);
 	}
@@ -172,8 +148,7 @@ public class RangeFinder extends Subsystem {
 		linkedList.remove(max);
 		linkedList.remove(maxSecond);
 	}
-	
-	
+		
 	private double voltageToDistance(double voltageMeasured) {
 		// Divide the voltage measured by the volts per 5mm and then 
 		// multiple by 5 to get the distance in mm

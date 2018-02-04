@@ -34,10 +34,10 @@ public class RobotMap {
 	public static final int RANGEFINDER = 0;
 	
 	/** Digital Input ports ***************************************************/
-	public static final int LEFT_ENCODER_CHANNEL_A = 0;
-	public static final int LEFT_ENCODER_CHANNEL_B = 1;
-	public static final int RIGHT_ENCODER_CHANNEL_A = 2;
-	public static final int RIGHT_ENCODER_CHANNEL_B = 3;
+	public static final int LEFT_ENCODER_CHANNEL_A = 8;
+	public static final int LEFT_ENCODER_CHANNEL_B = 9;
+	public static final int RIGHT_ENCODER_CHANNEL_A = 6;
+	public static final int RIGHT_ENCODER_CHANNEL_B = 7;
 	
 	/** Drive Mode Settings ***************************************************/
 	public static enum DriveMode {TANK, ARCADE;}
@@ -63,9 +63,9 @@ public class RobotMap {
 	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
-	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.TRACE;
+	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
-	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
+	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;
 	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
 	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
 	public static final Logger.Level 	LOG_SHIFTER				= Logger.Level.OFF;
@@ -84,7 +84,6 @@ public class RobotMap {
 	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
 	public static final String ntKP 							= "kp";
-	public static final String ntExampleVariable 				= "example_variable";
 	public static final String ntEncoderDistance				= "encoderDistance";
 	public static final String ntEncoderRate					= "encoderRate";
 	public static final String ntAutonomousMode					= "/autonomous/modes";
@@ -93,7 +92,8 @@ public class RobotMap {
 	public static final String ntElevatorHeight					= "elevatorHeight";
 	public static final String ntGear							= "gear";
 	public static final String ntShootCubeDelay					= "shootCubeDelay";
-	
+	public static final String ntMedianSmoothingReadings		= "medianSmoothingReadings";
+	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
 
 	/** Network Table Values **/
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
@@ -101,8 +101,12 @@ public class RobotMap {
 	public static double JOYSTICK_SENSITIVITY 					= 1.0;
 	public static double JOYSTICK_EQUALITY_THRESHHOLD			= 0.05;
 	public static double SPEED 									= 1.0;
-	public static double RANGEFINDER_DISTANCE 					= 0.0;
+	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
 	public static double KP 									= 0.01;
-	public static boolean EXAMPLE 								= false;
+	public static int MEDIAN_SMOOTHING_READINGS					= 9;
+	public static Pincher PINCHER_STATUS						= RobotMap.Pincher.CLOSED;
+	public static Popper POPPER_STATUS							= RobotMap.Popper.RETRACTED;
+	public static double ELEVATOR_HEIGHT						= 0.0;
+	public static Gear CURRENT_GEAR                             = Gear.LOW;
 	public static double SHOOT_CUBE_DELAY						= 0.1;
 }
