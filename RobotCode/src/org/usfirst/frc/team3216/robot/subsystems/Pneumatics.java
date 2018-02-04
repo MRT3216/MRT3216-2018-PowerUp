@@ -34,7 +34,7 @@ public class Pneumatics extends Subsystem {
 	
 	private void initPneumatics() {
 		openPincher();
-		openPopper();
+		closePopper();
 	}
 	
 	//opens arms to release cube

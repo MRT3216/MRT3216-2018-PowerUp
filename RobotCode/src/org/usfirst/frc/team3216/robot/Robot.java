@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static final Drivetrain drivetrain = new Drivetrain();
+	public static Drivetrain drivetrain;
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
 	public static final OurEncoder leftEncoder = 
@@ -48,6 +48,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {		
 		log.add("Robot Init", LOG_LEVEL);
+		
+		if(RobotMap.hasDrivetrain) {
+			drivetrain = new Drivetrain();
+			
+		}
 		
 		if(RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();
