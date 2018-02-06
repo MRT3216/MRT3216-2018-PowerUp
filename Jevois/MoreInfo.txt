@@ -21,5 +21,8 @@ script.cfg - this is a more general script that is run after the module is loade
 
 Entering setpar effect (type effect here) into the serial monitor changes the paramater for video effects. 
 
+FIXING ERRORS:
+The JeVois seems to have many issues when it comes to working properly, so if you are following the tutorials exactly and the JeVois does not do what the tutorials say it should do, retrace your steps, and if it still doesn't work, reimage the JeVois.
+
 
 
