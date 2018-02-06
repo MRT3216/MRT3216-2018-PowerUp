@@ -18,6 +18,7 @@ public class RobotMap {
 	public static boolean hasJoystick = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasShifter = (currentBot == Bot.BLUEFISH) ? false : true;
+	public static boolean hasDrivetrain = (currentBot == Bot.TESTBOARD) ? false : true;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
