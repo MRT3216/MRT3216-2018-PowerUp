@@ -27,7 +27,7 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		log.add("Constructor", LOG_LEVEL);
 		
-    	if(RobotMap.currentBot == RobotMap.Bot.MAINBOT) {
+    	if(RobotMap.currentBot == RobotMap.Bot.MAINBOT || RobotMap.currentBot == RobotMap.Bot.TESTBOARD ) {
     		leftMotors = new VictorSP(RobotMap.PWM_LEFT_MOTOR);
     		rightMotors = new VictorSP(RobotMap.PWM_RIGHT_MOTOR);
     		

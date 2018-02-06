@@ -29,8 +29,8 @@ public class OI {
 		
 		if(RobotMap.hasJoystick) {
 			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
-			controlStick.button4.whenPressed(new Pneumatics_ClosePincher());
-			controlStick.button5.whenPressed(new Pneumatics_OpenPincher());
+			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
+			controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
 			controlStick.button2.whenPressed(new Pneumatics_RetractPopper());
 			controlStick.button3.whenPressed(new Pneumatics_ExtendPopper());
 			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
