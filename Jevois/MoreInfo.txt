@@ -23,6 +23,6 @@ Entering setpar effect (type effect here) into the serial monitor changes the pa
 
 FIXING ERRORS:
 The JeVois seems to have many issues when it comes to working properly, so if you are following the tutorials exactly and the JeVois does not do what the tutorials say it should do, retrace your steps, and if it still doesn't work, reimage the JeVois.
-
+I have found that if the JeVois has a fit when you enter a command, a common solution is unplugging it an plugging it back in. You then have to wait for the start up process of the JeVois to finish, which you can tell has finished when the light on the JeVois is solid orange.
 
 
