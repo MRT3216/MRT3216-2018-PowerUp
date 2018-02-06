@@ -84,8 +84,10 @@ public class RobotMap {
 	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
 	public static final String ntKP 							= "kp";
-	public static final String ntEncoderDistance				= "encoderDistance";
-	public static final String ntEncoderRate					= "encoderRate";
+	public static final String ntRightDriveEncoderDistance		= "rightDriveEncoderDistance";
+	public static final String ntRightDriveEncoderRate			= "rightDriveEncoderRate";
+	public static final String ntLeftDriveEncoderDistance		= "leftDriveEncoderDistance";
+	public static final String ntLeftDriveEncoderRate			= "leftDriveEncoderRate";
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntPincher						= "pincher";
 	public static final String ntPopper							= "popper";
