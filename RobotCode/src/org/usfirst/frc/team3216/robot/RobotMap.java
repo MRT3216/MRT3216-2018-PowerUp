@@ -106,7 +106,7 @@ public class RobotMap {
 	public static double SPEED 									= 1.0;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
 	public static double KP 									= 0.01;
-	public static int MEDIAN_SMOOTHING_READINGS					= 9;
+	public static int MEDIAN_SMOOTHING_READINGS					= 15;
 	public static Pincher PINCHER_STATUS						= RobotMap.Pincher.CLOSED;
 	public static Popper POPPER_STATUS							= RobotMap.Popper.RETRACTED;
 	public static double ELEVATOR_HEIGHT						= 0.0;

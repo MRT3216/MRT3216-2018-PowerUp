@@ -33,10 +33,10 @@ public class Robot extends IterativeRobot {
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
 	public static final OurEncoder leftEncoder = 
-			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder");
+			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
 	public static final OurEncoder rightEncoder = 
-			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder");
+			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
 	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
@@ -143,7 +143,7 @@ public class Robot extends IterativeRobot {
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 		
-		log.add("Speed: " + RobotMap.SPEED, LOG_LEVEL);
+		log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
 	}
 
 	/**

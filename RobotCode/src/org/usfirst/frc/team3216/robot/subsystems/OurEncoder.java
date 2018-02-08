@@ -19,10 +19,10 @@ public class OurEncoder extends Subsystem {
 	
 	private static final double WHEEL_DIAMETER = 4;
 	private static final double PULSE_PER_REVOLUTION = 360;
-	private static final double GEAR_RATIO = 12/13;
+	private static final double GEAR_RATIO = 12/13.0;
 	private static final double FUDGE_FACTOR = 1.0;
 	
-	public OurEncoder(int channelA, int channelB, String encoderName) {
+	public OurEncoder(int channelA, int channelB, String encoderName, boolean reversed) {
 		log.add("Constructor", LOG_LEVEL);
 		this.encoderName = encoderName;
 		
@@ -31,13 +31,13 @@ public class OurEncoder extends Subsystem {
     	
     	/*
     	encoder.setMaxPeriod(.1);
-    	encoder.setMinRate(10);
-    	encoder.setReverseDirection(true);    	
+    	encoder.setMinRate(10);   	    	
 		*/
     	
     	double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION
     			/ GEAR_RATIO * FUDGE_FACTOR;
     	
+    	encoder.setReverseDirection(true);
     	encoder.setSamplesToAverage(7);
     	encoder.setDistancePerPulse(distancePerPulse);
 	}
