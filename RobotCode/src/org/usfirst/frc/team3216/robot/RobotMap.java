@@ -18,6 +18,7 @@ public class RobotMap {
 	public static boolean hasJoystick = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasShifter = (currentBot == Bot.BLUEFISH) ? false : true;
+	public static boolean hasDrivetrain = (currentBot == Bot.TESTBOARD) ? false : true;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
@@ -84,8 +85,10 @@ public class RobotMap {
 	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
 	public static final String ntKP 							= "kp";
-	public static final String ntEncoderDistance				= "encoderDistance";
-	public static final String ntEncoderRate					= "encoderRate";
+	public static final String ntRightDriveEncoderDistance		= "rightDriveEncoderDistance";
+	public static final String ntRightDriveEncoderRate			= "rightDriveEncoderRate";
+	public static final String ntLeftDriveEncoderDistance		= "leftDriveEncoderDistance";
+	public static final String ntLeftDriveEncoderRate			= "leftDriveEncoderRate";
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntPincher						= "pincher";
 	public static final String ntPopper							= "popper";
@@ -103,7 +106,7 @@ public class RobotMap {
 	public static double SPEED 									= 1.0;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
 	public static double KP 									= 0.01;
-	public static int MEDIAN_SMOOTHING_READINGS					= 9;
+	public static int MEDIAN_SMOOTHING_READINGS					= 15;
 	public static Pincher PINCHER_STATUS						= RobotMap.Pincher.CLOSED;
 	public static Popper POPPER_STATUS							= RobotMap.Popper.RETRACTED;
 	public static double ELEVATOR_HEIGHT						= 0.0;

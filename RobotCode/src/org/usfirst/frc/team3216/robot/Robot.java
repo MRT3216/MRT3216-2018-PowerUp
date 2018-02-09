@@ -33,10 +33,11 @@ public class Robot extends IterativeRobot {
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
 	public static final OurEncoder leftEncoder = 
-			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
 	public static final OurEncoder rightEncoder = 
-			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
+			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
@@ -53,15 +54,21 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {		
 		log.add("Robot Init", LOG_LEVEL);
 		
+<<<<<<< HEAD
 
 		drivetrain = new Drivetrain();
 			
+=======
+		if(RobotMap.hasDrivetrain) {
+			drivetrain = new Drivetrain();			
+		}
+>>>>>>> cc74e59d21781cf2ad29d7218d2b85f1e504c878
 		
 		if(RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();
 			imu.calibrate();
 			imu.reset();	
-		}
+		}	
 	}
 
 	/**
@@ -127,6 +134,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		leftEncoder.initEncoder();
+		rightEncoder.initEncoder();
 	}
 
 	/**
@@ -139,7 +149,7 @@ public class Robot extends IterativeRobot {
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 		
-		log.add("Speed: " + RobotMap.SPEED, LOG_LEVEL);
+		log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
 	}
 
 	/**
@@ -180,8 +190,10 @@ public class Robot extends IterativeRobot {
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
-		settings.getEntry(RobotMap.ntEncoderDistance).setDouble(rightEncoder.getDistance());
-		settings.getEntry(RobotMap.ntEncoderRate).setDouble(rightEncoder.getRate());
+		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistance());
+		settings.getEntry(RobotMap.ntLeftDriveEncoderRate).setDouble(leftEncoder.getRate());
+		settings.getEntry(RobotMap.ntRightDriveEncoderDistance).setDouble(rightEncoder.getDistance());
+		settings.getEntry(RobotMap.ntRightDriveEncoderRate).setDouble(rightEncoder.getRate());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 		settings.getEntry(RobotMap.ntPincher).setString(RobotMap.PINCHER_STATUS.name());
 		settings.getEntry(RobotMap.ntPopper).setString(RobotMap.POPPER_STATUS.name());
