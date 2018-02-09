@@ -53,10 +53,9 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {		
 		log.add("Robot Init", LOG_LEVEL);
 		
-		if(RobotMap.hasDrivetrain) {
-			drivetrain = new Drivetrain();
+
+		drivetrain = new Drivetrain();
 			
-		}
 		
 		if(RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();

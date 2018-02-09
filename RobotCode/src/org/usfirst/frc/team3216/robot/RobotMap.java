@@ -13,7 +13,7 @@ public class RobotMap {
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
-	public static Bot currentBot = Bot.BLUEFISH;
+	public static Bot currentBot = Bot.TESTBOARD;
 	public static boolean hasIMU = (currentBot == Bot.TESTBOARD) ? false : true;
 	public static boolean hasJoystick = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
@@ -65,9 +65,9 @@ public class RobotMap {
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;
 	public static final Logger.Level	LOG_RANGEFINDER  	    = Logger.Level.OFF;
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
-	public static final Logger.Level    LOG_ENCODER             = Logger.Level.TRACE;
+	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
 	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
-	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
+	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.TRACE;
 	public static final Logger.Level 	LOG_SHIFTER				= Logger.Level.OFF;
 
 	
