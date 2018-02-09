@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
 	public static final OurEncoder rightEncoder = 
-			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);
 	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 

@@ -37,7 +37,7 @@ public class OurEncoder extends Subsystem {
     	double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION
     			/ GEAR_RATIO * FUDGE_FACTOR;
     	
-    	encoder.setReverseDirection(true);
+    	encoder.setReverseDirection(reversed);
     	encoder.setSamplesToAverage(7);
     	encoder.setDistancePerPulse(distancePerPulse);
 	}
