@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3216.robot.commands;
 
+import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.OI;
 import org.usfirst.frc.team3216.robot.Robot;
+import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Elevator_Move extends Command {
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ELEVATOR;
+	
+	Logger log = new Logger(LOG_LEVEL, getName());
 	Elevator elevator = Robot.elevator;
 	OI oi = Robot.oi;
 
@@ -26,6 +31,7 @@ public class Elevator_Move extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double power = oi.getStickY();
+    	log.add("Joystick Power: " + power, LOG_LEVEL);
     	elevator.setPower(power);
     }
 

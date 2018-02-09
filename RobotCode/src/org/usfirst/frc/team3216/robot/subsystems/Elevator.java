@@ -7,6 +7,7 @@ import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Elevator_Move;
 
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,15 +21,18 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	OI oi = Robot.oi;
-	private Talon motor;
+	private VictorSP motor;
 	
 	public Elevator() {
-		motor = new Talon(2);
+		motor = new VictorSP(2);
 	}
 	
 	public void setPower(double power) {
-		power = safetyCheck(power);
-		motor.set(power);				
+		if(canGo()) {
+			log.add("Elevator Power: " + power, LOG_LEVEL);
+			power = safetyCheck(power);
+			motor.set(power);	
+		}
 	}
 	
 	public void stop() {
@@ -39,6 +43,12 @@ public class Elevator extends Subsystem {
 		power = Math.min(1.0, power);
 		power = Math.max(-1.0, power);
 		return power;
+	}
+	
+	private boolean canGo() {
+		//TODO: Insert Code to check if it is within encoder range
+		//may need separate methods for up and down.
+		return true;
 	}
 	
 

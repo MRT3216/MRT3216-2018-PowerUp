@@ -15,7 +15,7 @@ public class ControlStick extends Joystick{
 	public static final int BUTTON_7 = 7;
 	
 	/** Axis Mapping for a single joystick ************************************/
-	public static final int JOYSTICK_Y_AXIS = 2;
+	public static final int JOYSTICK_Y_AXIS = 1;
 
 	
 	/** Button Declarations ***************************************************/

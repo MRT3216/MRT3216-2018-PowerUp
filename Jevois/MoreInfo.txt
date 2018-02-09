@@ -1,19 +1,25 @@
-The JeVois cam port(cam0, cam1, cam2) can be found if you plug the JeVois into the Roborio and look up the roborio configuration. It should be listed. 
-Long list of useable commands: http://jevois.org/doc/UserCli.html
+Go through this long list of JeVois setup and information before you do anything. If you don't, you won't be able to do anything with the JeVois. It can be found here: http://jevois.org/doc/index.html
 
+It is best to work on the JeVois from a fresh operating systm, so follow the instruction that are shown bellow:
 Install VirtualBox and follow the instructions listed in the link: http://jevois.org/doc/Virtualbox.html
+Linux is the best operating system to use while using the JeVois, so make sure you install a Linux virtual machine. 
+
 Follow all those directions, and once you get to the part that gives a link to JeVois packages an source codes, click there. 
 Once there, you should find this think: http://jevois.usc.edu
-Click on it and follow the instructions to install the JeVois packages. These instructions should be found under the header, "Getting JeVois developer software - Details." Make sure you are following the correct instructions for the version of Ubuntu you are using. However, before you do this, make sure to go to the software and updates, which you can find by searching up in the activities in the top left of the desktop. Once there, make sure that the machine will allow anything to be downloaded. 
 
-If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
+Once you get to the section that prompts you to install the JeVois packages, make sure you go to the software and updates pannel in the virtual machine, which you can find by searching up in the activities in the top left of the desktop. Once there, make sure that the machine will allow anything to be downloaded. 
+
+Click on it and follow the instructions to install the JeVois packages. These instructions should be found under the header, "Getting JeVois developer software - Details." Make sure you are following the correct instructions for the version of Ubuntu you are using(version 17.10, for example). 
 
 In order to access the JeVois on a virtual machine, make sure you add it the the usable usb ports, by going in the virtual machine settings, going to the usb tab, selecting the radio button labeled 3, and click the plus icon, and select the JeVois.
 
 Install Guvcview. This is a video software that we found to be the greatest for using the JeVois. You can install it by entering sudo apt-get install guvcview into the terminal. Also enter guvcview -ao none -f YUYV -x 640x360 into the terminal. This will install Guvcview, and make it to where it doesn't look for an audio device upon startup. 
 
+Long list of useable commands: http://jevois.org/doc/UserCli.html
+Guide to programming, BEFORE you start the programming tutorials: http://jevois.org/doc/Programmer.html
 Tutorial for JeVois set up: http://jevois.org/tutorials/UserTutorials.html (Many sublists of tutorials in this link)
 Tutorial for JeVois programming: http://jevois.org/tutorials/ProgrammerTutorials.html (Many sublists of tutorials, current JeVois programming in 2018 was in the Python programming language)
+Organization details of the JeVois: http://jevois.org/doc/ProgrammerOrganization.html
 
 params.cfg - list of parameters settings that should be applied each time a module is loaded. Only parameters of the module or its component algorithms can be set here. The parameters are set each time the module is loaded (e.g., the corresponding video resolution is selected by video capture software on the host computer).
 
