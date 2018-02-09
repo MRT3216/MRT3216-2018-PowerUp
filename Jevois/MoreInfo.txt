@@ -13,8 +13,6 @@ Click on it and follow the instructions to install the JeVois packages. These in
 
 In order to access the JeVois on a virtual machine, make sure you add it the the usable usb ports, by going in the virtual machine settings, going to the usb tab, selecting the radio button labeled 3, and click the plus icon, and select the JeVois.
 
-If JeVois tutorials have not already been installed, install them from github here: https://github.com/jevois/jevois-tutorials (download them)
-
 Install Guvcview. This is a video software that we found to be the greatest for using the JeVois. You can install it by entering sudo apt-get install guvcview into the terminal. Also enter guvcview -ao none -f YUYV -x 640x360 into the terminal. This will install Guvcview, and make it to where it doesn't look for an audio device upon startup. 
 
 Long list of useable commands: http://jevois.org/doc/UserCli.html
