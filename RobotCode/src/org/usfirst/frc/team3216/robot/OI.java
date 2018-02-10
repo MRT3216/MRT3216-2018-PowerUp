@@ -8,6 +8,9 @@ import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_RetractPopper;
 import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftDown;
 import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftUp;
+import org.usfirst.frc.team3216.robot.commands.Winch_GoDown;
+import org.usfirst.frc.team3216.robot.commands.Winch_GoUp;
+import org.usfirst.frc.team3216.robot.commands.Winch_Stop;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,17 +29,21 @@ public class OI {
 		log.add("OI Constructor", LOG_LEVEL);
 		
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
-		
 		if(RobotMap.hasJoystick) {
+			log.add("Joystick Contructed", LOG_LEVEL);
 			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
 			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
 			controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
-			controlStick.button2.whenPressed(new Pneumatics_RetractPopper());
-			controlStick.button3.whenPressed(new Pneumatics_ExtendPopper());
 			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
 			if(RobotMap.hasShifter) {
-				controlStick.button6.whenPressed(new Shifter_ShiftUp());
-				controlStick.button7.whenPressed(new Shifter_ShiftDown());
+				controlStick.button2.whenPressed(new Shifter_ShiftUp());
+				controlStick.button3.whenPressed(new Shifter_ShiftDown());
+			}
+			if(RobotMap.hasWinch) {
+				controlStick.button6.whenPressed(new Winch_GoUp());
+				controlStick.button6.whenReleased(new Winch_Stop());
+				controlStick.button7.whenPressed(new Winch_GoDown());
+				controlStick.button7.whenReleased(new Winch_Stop());
 			}
 		}
 		
@@ -48,8 +55,8 @@ public class OI {
 		joystickValue = scaleJoystick(joystickValue);
 		joystickValue *= -.5;
 		
-		log.add("getDriveLeft (" + joystickValue + ")", LOG_LEVEL);
-		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
+		//log.add("getDriveLeft (" + joystickValue + ")", LOG_LEVEL);
+		//log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		
 		return joystickValue;
 	}
@@ -59,29 +66,30 @@ public class OI {
 		joystickValue = scaleJoystick(joystickValue);
 		joystickValue *= -.5;
 
-		log.add("getDriveRight (" + joystickValue + ")", LOG_LEVEL);
-		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
+		//log.add("getDriveRight (" + joystickValue + ")", LOG_LEVEL);
+		//log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		return joystickValue;		
 	}
 	
 	public double getLeftY() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
-		log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
+		//log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
 		return joystickValue;	
 	}
 	
 	public double getRightX() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
-		log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
+		//log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
 		return joystickValue;	
 	}
 	
 	/** Control Stick Functions ***********************************************/	
 	public double getStickY() {
-		double joystickValue = gamepad.getRawAxis(ControlStick.JOYSTICK_Y_AXIS);
+		double joystickValue = controlStick.getRawAxis(ControlStick.JOYSTICK_Y_AXIS);
 		//TODO - add checkDeadZone (if needed)
+		log.add("StickY: " + joystickValue, LOG_LEVEL);
 		return joystickValue;
 	}	
 	

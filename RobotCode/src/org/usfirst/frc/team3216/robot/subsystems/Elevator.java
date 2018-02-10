@@ -21,16 +21,16 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	OI oi = Robot.oi;
-	private VictorSP motor;
+	private Talon motor;
 	
 	public Elevator() {
-		motor = new VictorSP(2);
+		motor = new Talon(RobotMap.PWM_ELEVATOR_MOTOR);
 	}
 	
 	public void setPower(double power) {
 		if(canGo()) {
-			log.add("Elevator Power: " + power, LOG_LEVEL);
 			power = safetyCheck(power);
+			log.add("Elevator Power: " + power, LOG_LEVEL);
 			motor.set(power);	
 		}
 	}

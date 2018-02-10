@@ -1,42 +1,42 @@
 package org.usfirst.frc.team3216.robot.commands;
 
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.OI;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
-import org.usfirst.frc.team3216.robot.subsystems.Elevator;
+import org.usfirst.frc.team3216.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Elevator_Move extends Command {
-	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ELEVATOR;
+public class Winch_Stop extends Command {
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_WINCH;
 	
 	Logger log = new Logger(LOG_LEVEL, getName());
-	Elevator elevator = Robot.elevator;
-	OI oi = Robot.oi;
+	
+	Winch winch = Robot.winch;
 
-    public Elevator_Move() {
-        requires(elevator);
+    public Winch_Stop() {
+        // Use requires() here to declare subsystem dependencies
+    	requires(winch);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	elevator.stop();
+    	winch.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double power = oi.getStickY();
-    	//log.add("Joystick Power: " + power, LOG_LEVEL);
-    	elevator.setPower(power);
+    	log.add("Winch Stopped", LOG_LEVEL);
+    	winch.stop();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

@@ -16,17 +16,23 @@ public class Drivetrain_ArcadeDrive extends Drivetrain_Drive {
 		double throttle = oi.getLeftY();
 		double turn = oi.getRightX();
 		log.add("turning: " + turn, Logger.Level.TRACE);
-		if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < RobotMap.TURN_RATE_THRESHOLD) {
-			hasHeading = true;
-			heading = imu.getAngleZ();
-		}
-		angleOld = imu.getAngleZ();
-
-		if(turn == 0 && throttle != 0) {
-			driveStraight(throttle, heading);			
+		
+		if(imu != null) {
+			if(turn == 0 && !hasHeading && Math.abs(imu.getAngleZ()-angleOld) < RobotMap.TURN_RATE_THRESHOLD) {
+				hasHeading = true;
+				heading = imu.getAngleZ();
+			}
+			angleOld = imu.getAngleZ();
+	
+			if(turn == 0 && throttle != 0) {
+				driveStraight(throttle, heading);			
+			}
+			else {
+				hasHeading = false;
+				execute(throttle, turn);
+			}
 		}
 		else {
-			hasHeading = false;
 			execute(throttle, turn);
 		}
     }

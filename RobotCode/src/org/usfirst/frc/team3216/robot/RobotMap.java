@@ -19,6 +19,7 @@ public class RobotMap {
 	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasShifter = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasDrivetrain = (currentBot == Bot.TESTBOARD) ? false : true;
+	public static boolean hasWinch = (currentBot == Bot.MAINBOT) ? true : false;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
@@ -30,6 +31,9 @@ public class RobotMap {
 	/** PWM ID numbers ********************************************************/
 	public static final int PWM_LEFT_MOTOR 	= 0;
 	public static final int PWM_RIGHT_MOTOR = 1;
+	public static final int PWM_ELEVATOR_MOTOR = 2;
+	public static final int PWM_WINCH_MOTOR = 3;
+	public static final int PWM_CLIMB_ARM_MOTOR = 4;
 	
 	/** Analog Input ports ****************************************************/
 	public static final int RANGEFINDER = 0;
@@ -68,8 +72,10 @@ public class RobotMap {
 	public static final Logger.Level    LOG_IMU					= Logger.Level.OFF;	
 	public static final Logger.Level    LOG_ENCODER             = Logger.Level.OFF;
 	public static final Logger.Level	LOG_PNEUMATICS			= Logger.Level.OFF;
-	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.TRACE;
+	public static final Logger.Level 	LOG_ELEVATOR 			= Logger.Level.OFF;
 	public static final Logger.Level 	LOG_SHIFTER				= Logger.Level.OFF;
+	public static final Logger.Level	LOG_WINCH				= Logger.Level.TRACE;
+	public static final Logger.Level 	LOG_CLIMB_ARM			= Logger.Level.OFF;
 
 	
 	/** Commands **/
@@ -97,6 +103,7 @@ public class RobotMap {
 	public static final String ntShootCubeDelay					= "shootCubeDelay";
 	public static final String ntMedianSmoothingReadings		= "medianSmoothingReadings";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
+	public static final String ntClimbArmSpeed					= "climbArmSpeed";
 
 	/** Network Table Values **/
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
@@ -112,4 +119,6 @@ public class RobotMap {
 	public static double ELEVATOR_HEIGHT						= 0.0;
 	public static Gear CURRENT_GEAR                             = Gear.LOW;
 	public static double SHOOT_CUBE_DELAY						= 0.1;
+	public static double CLIMB_ARM_SPEED						= 0.1;
+
 }

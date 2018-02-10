@@ -11,10 +11,12 @@ import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
-import org.usfirst.frc.team3216.robot.subsystems.OurEncoder;
+import org.usfirst.frc.team3216.robot.subsystems.BaseEncoder;
+import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team3216.robot.subsystems.Shifter;
+import org.usfirst.frc.team3216.robot.subsystems.Winch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,17 +34,19 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain;
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
-	public static final OurEncoder leftEncoder = 
-			new OurEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
+	public static final BaseEncoder leftEncoder = 
+			new BaseEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
-	public static final OurEncoder rightEncoder = 
-			new OurEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+	public static final BaseEncoder rightEncoder = 
+			new BaseEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
 	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
 	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
+	public static final Winch winch = new Winch();
+	public static final ClimbArm climbArm = new ClimbArm();
 	
 	Command autonomousCommand;
 
@@ -54,16 +58,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {		
 		log.add("Robot Init", LOG_LEVEL);
 		
-<<<<<<< HEAD
-
 		drivetrain = new Drivetrain();
-			
-=======
-		if(RobotMap.hasDrivetrain) {
-			drivetrain = new Drivetrain();			
-		}
->>>>>>> cc74e59d21781cf2ad29d7218d2b85f1e504c878
-		
+
 		if(RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();
 			imu.calibrate();

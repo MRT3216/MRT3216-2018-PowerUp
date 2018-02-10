@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class OurEncoder extends Subsystem {
+public class BaseEncoder extends Subsystem {
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ENCODER;
 	private Logger log = new Logger(LOG_LEVEL, getName());
@@ -22,7 +22,7 @@ public class OurEncoder extends Subsystem {
 	private static final double GEAR_RATIO = 12/13.0;
 	private static final double FUDGE_FACTOR = 1.0;
 	
-	public OurEncoder(int channelA, int channelB, String encoderName, boolean reversed) {
+	public BaseEncoder(int channelA, int channelB, String encoderName, boolean reversed) {
 		log.add("Constructor", LOG_LEVEL);
 		this.encoderName = encoderName;
 		
