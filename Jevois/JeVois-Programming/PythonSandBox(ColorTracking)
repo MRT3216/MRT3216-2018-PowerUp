@@ -2,30 +2,14 @@ import libjevois as jevois
 import cv2
 import numpy as np 
 
-# Simple example of image processing using OpenCV in Python on JeVois
-#
-# This module is here for you to experiment with Python OpenCV on JeVois.
-#
-# By default, we get the next video frame from the camera as an OpenCV BGR (color) image named 'inimg'.
-# We then apply some image processing to it to create an output BGR image named 'outimg'.
+# By default, we get the next video frame from the camera as an OpenCV RGB (color) image named 'inimg'.
+# We then apply some image processing to it to create an output RGB image named 'outimg'.
 # We finally add some text drawings to outimg and send it to host over USB.
 #
-# See http://jevois.org/tutorials for tutorials on getting started with programming JeVois in Python without having
-# to install any development software on your host computer.
-#
-# @author Laurent Itti
+# @author Laurent Itti edited by Preston Stevens and Aaron Santa Cruz
 # 
 # @videomapping YUYV 352 288 30.0 YUYV 352 288 30.0 JeVois PythonSandbox
-# @email itti\@usc.edu
-# @address University of Southern California, HNB-07A, 3641 Watt Way, Los Angeles, CA 90089-2520, USA
-# @copyright Copyright (C) 2017 by Laurent Itti, iLab and the University of Southern California
-# @mainurl http://jevois.org
-# @supporturl http://jevois.org/doc
-# @otherurl http://iLab.usc.edu
-# @license GPL v3
-# @distribution Unrestricted
-# @restrictions None
-# @ingroup modules
+
 class PythonSandbox:
 	# ###################################################################################################
 	## Constructor
@@ -47,7 +31,7 @@ class PythonSandbox:
 		# Detect edges using the Laplacian algorithm from OpenCV:
 		#
 		# Replace the line below by your own code! See for example
-		# - http://docs.opencv.org/trunk/d4/d13/tutorial_py_filtering.html
+
 		# - http://docs.opencv.org/trunk/d9/d61/tutorial_py_morphological_ops.html
 		# - http://docs.opencv.org/trunk/d5/d0f/tutorial_py_gradients.html
 		# - http://docs.opencv.org/trunk/d7/d4d/tutorial_py_thresholding.html
@@ -76,7 +60,11 @@ class PythonSandbox:
 		fps = self.timer.stop()
 		height, width, channels = outimg.shape # if outimg is grayscale, change to: height, width = outimg.shape
 		cv2.putText(outimg, fps, (3, height - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
-
+		
+		# assigning blur variable to blur live output
+		
+		blur = cv2.GaussianBlur(outimg,(5,5),0)
+		
 		# Convert our BGR output image to video output format and send to host over USB. If your output image is not
 		# BGR, you can use sendCvGRAY(), sendCvRGB(), or sendCvRGBA() as appropriate:
-		outframe.sendCvBGR(outimg)
+		outframe.sendCvBGR(blur)
