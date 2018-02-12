@@ -1,8 +1,8 @@
 # MRT3216-2018-PowerUp
 
 #### **NetworkTable Key Values**
-These values need to only be **read** into the dashboard:
-**speed**: 0-2 - Speed Multiplier
+These values need to only be **read** into the dashboard:  
+**speed**: 0-2 - Speed Multiplier  
 **sensitivity** - Speed scale coefficent  
 **slow** - Speed Multiplier in Slow Mode  
 
