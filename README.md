@@ -10,6 +10,10 @@ These values need to only be **read** into the dashboard:
   - current status of the pincher
 - **gear**: HIGH or LOW
   - current transmission gear
+- **rightDriveEncoderDistance**: inches
+  - distance traveled by the right encoder
+- **leftDriveEncoderDistance**: inches
+  - distance traveled by the left encoder
 
 These values need to be **read and set** in the dashboard:<br>
 
