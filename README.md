@@ -4,7 +4,7 @@
 These values need to only be **read** into the dashboard:
 
 **speed** - Speed Multiplier
-- 0-1
+- 0-1 
 **sensitivity** - Speed scale coefficent  
 **slow** - Speed Multiplier in Slow Mode  
 
