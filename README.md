@@ -2,12 +2,12 @@
 
 #### **NetworkTable Key Values**
 These values need to only be **read** into the dashboard:  
-**speed**: 0-2  
-- Speed Multiplier  
-**sensitivity**  
-- Speed scale coefficent  
-**slow**: 0-75%  
-- Speed Multiplier in Slow Mode  
+- **speed**: 0-2  
+  - Speed Multiplier  
+ -**sensitivity**  
+  - Speed scale coefficent  
+- **slow**: 0-75%  
+  - Speed Multiplier in Slow Mode  
 
 
 These values need to be **read and set** in the dashboard:<br>
