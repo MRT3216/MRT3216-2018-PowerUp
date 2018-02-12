@@ -6,7 +6,7 @@ These values need to only be **read** into the dashboard:
 - Speed Multiplier  
 **sensitivity**  
 - Speed scale coefficent  
-**slow**:0-75%  
+**slow**: 0-75%  
 - Speed Multiplier in Slow Mode  
 
 
