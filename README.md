@@ -1,11 +1,14 @@
 # MRT3216-2018-PowerUp
 
-#### **NetworkTable KeyValues**
-These values need
+#### **NetworkTable Key Values**
+These values need to only be **read** into the dashboard:
 **speed** - Speed Multiplier  
 **sensitivity** - Speed scale coefficent  
-**deadzone** - Deadzone in joysticks  
+ 
 **slow** - Speed Multiplier in Slow Mode  
 
+These values need to be **read and set** in the dashboard:
+**deadzone** - Deadzone in joysticks 
+- 0-1
 
 Ip's and passwords: https://docs.google.com/document/d/1gnbhW8H-TXnGVFWnfqmTPNoPVJzINSkYyQ2_zQQK6Qc/edit?usp=sharing
