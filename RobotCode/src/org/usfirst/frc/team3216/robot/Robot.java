@@ -33,12 +33,12 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static final AirCompressor airCompressor = new AirCompressor();
+	public static AirCompressor airCompressor;
 	public static Drivetrain drivetrain;
-	public static final ClimbArm climbArm = new ClimbArm();
-	public static final Winch winch = new Winch();
+	public static  ClimbArm climbArm;
+	public static Winch winch;
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static final Elevator elevator = new Elevator();
+	public static Elevator elevator;
 	public static final BaseEncoder leftEncoder = 
 			new BaseEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
@@ -69,6 +69,22 @@ public class Robot extends IterativeRobot {
 			imu.calibrate();
 			imu.reset();	
 		}	
+		
+		if(RobotMap.hasElevator) {
+			elevator = new Elevator();
+		}
+		
+		if(RobotMap.hasWinch) {
+			winch = new Winch();
+		}
+		
+		if(RobotMap.hasPneumatics) {
+			airCompressor  = new AirCompressor();
+		}
+		
+		if(RobotMap.hasClimbArm) {
+			 climbArm = new ClimbArm();
+		}
 	}
 
 	/**
