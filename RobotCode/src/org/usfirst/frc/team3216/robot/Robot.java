@@ -201,6 +201,8 @@ public class Robot extends IterativeRobot {
 				settings.getEntry(RobotMap.ntElevatorHeight).getDouble(RobotMap.ELEVATOR_HEIGHT);
 		RobotMap.CURRENT_GEAR = 
 				RobotMap.Gear.valueOf(settings.getEntry(RobotMap.ntGear).getString(RobotMap.CURRENT_GEAR.name()));
+		RobotMap.currentBot = 
+				RobotMap.Bot.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
 		
 						
 		/** Write to NetworkTable **/		
