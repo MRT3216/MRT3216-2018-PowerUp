@@ -14,12 +14,18 @@ These values need to only be **read** into the dashboard:
   - distance traveled by the right encoder
 - **leftDriveEncoderDistance**: inches
   - distance traveled by the left encoder
+- **rangeFinderDistance**: inches
+  - distance to rangefinder without smoothing
+- **rangeFinderAverageDistance**: inches
+  - distance to rangefinder with smoothing
 
 These values need to be **read and set** in the dashboard:<br>
 
 **ALL MODES**
 - **bot**: TESTBOARD, BLUEFISH, MAINBOT
-  - which bot is the code on
+  - which bot is the code on  
+- **kp**: 0.00-0.1 in 0.005 increments
+  - correction factor for drive straight code
   
 **Autonomous**
 - **Autonomous**: CROSS_LINE or ???  
@@ -32,9 +38,9 @@ These values need to be **read and set** in the dashboard:<br>
 **Teleop**
 - **deadzone**: 0-1 in 0.5 increment  
   - deadzone in joysticks     
-- **climbArmSpeed**: ??
+- **climbArmSpeed**: 0.00-0.1 in 0.02 increments
   - speed at which the robot climbs
-- **speed**: 0-2  
+- **speed**: 0-2
   - speed multiplier  
 - **sensitivity**  
   - speed scale coefficent  
