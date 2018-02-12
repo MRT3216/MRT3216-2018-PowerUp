@@ -104,6 +104,7 @@ public class RobotMap {
 	public static final String ntMedianSmoothingReadings		= "medianSmoothingReadings";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
 	public static final String ntClimbArmSpeed					= "climbArmSpeed";
+	public static final String ntBot							= "bot";
 
 	/** Network Table Values **/
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
