@@ -8,10 +8,10 @@ These values need to only be **read** into the dashboard:
 
 
 These values need to be **read and set** in the dashboard:<br>
-**deadzone**: 0-1 in 0.5 increment -
--Deadzone in joysticks  
+**deadzone**: 0-1 in 0.5 increment  
+- Deadzone in joysticks  
 **medianSmoothingReadings**: 1-21 in increments of 2  
--How many readings will be used to smooth rangefinder distance  
+- How many readings will be used to smooth rangefinder distance  
 **autonomousRangefinderDistance**: 0-100 cm  
 -point at which robot stops due to rangefinder distance  
 
