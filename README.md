@@ -9,8 +9,7 @@ These values need to only be **read** into the dashboard:
  
 **slow** - Speed Multiplier in Slow Mode  
 
-These values need to be **read and set** in the dashboard:
-
+These values need to be **read and set** in the dashboard:<br>
 **deadzone** - Deadzone in joysticks 
 - 0-1
 
