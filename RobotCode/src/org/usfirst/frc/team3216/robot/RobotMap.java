@@ -13,8 +13,8 @@ public class RobotMap {
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
-	public static Bot currentBot = Bot.TESTBOARD;
-	public static boolean hasIMU = (currentBot == Bot.TESTBOARD) ? false : true;
+	public static Bot currentBot = Bot.MAINBOT;
+	public static boolean hasIMU = (currentBot == Bot.MAINBOT) ? false : true;
 	public static boolean hasJoystick = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasPneumatics = (currentBot == Bot.BLUEFISH) ? false : true;
 	public static boolean hasShifter = (currentBot == Bot.BLUEFISH) ? false : true;

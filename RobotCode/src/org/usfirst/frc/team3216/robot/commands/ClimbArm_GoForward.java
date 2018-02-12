@@ -7,19 +7,19 @@ import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ClimbArm_Rotate extends Command {
-
+/**
+ *
+ */
+public class ClimbArm_GoForward extends Command {
+	
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_CLIMB_ARM;
 	
 	Logger log = new Logger(LOG_LEVEL, getName());
 	ClimbArm climbArm = Robot.climbArm;
-	private double degrees;
-	private double encoderValue;
-	double motorSpeed = RobotMap.CLIMB_ARM_SPEED;
 
-    public ClimbArm_Rotate(double degrees) {
-        requires(climbArm);
-        this.degrees = degrees;
+    public ClimbArm_GoForward() {
+        // Use requires() here to declare subsystem dependencies
+    	requires(climbArm);
     }
 
     // Called just before this Command runs the first time
@@ -28,26 +28,7 @@ public class ClimbArm_Rotate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	encoderValue = 0; //Once we get the encoder for the arm working, we need to set this to the value of the encoder rotation
-    	if(degrees > 0) { //checks if it is positive
-	    	if(encoderValue < degrees) { //if the arm needs to continue rotating forwards
-	    		climbArm.setPower(motorSpeed);
-	    	}
-	    	else { //stop arm when it reaches or passes goal
-	    		climbArm.stop();
-	    	}
-    	}
-    	else if (degrees > 0) { //checks if it is negative
-    		if(encoderValue > degrees) { //if the arm needs to continue rotating backwards
-    			climbArm.setPower(-1 * motorSpeed);
-    		}
-    		else { //stop arm when it reaches or passes goal
-    			climbArm.stop();
-    		}
-    	}
-    	else { //only called if degrees = 0
-    		climbArm.stop();
-    	}
+    	climbArm.setPower(RobotMap.CLIMB_ARM_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -2,6 +2,7 @@ package org.usfirst.frc.team3216.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -13,6 +14,7 @@ import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 import org.usfirst.frc.team3216.robot.subsystems.BaseEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
+import org.usfirst.frc.team3216.robot.subsystems.AirCompressor;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team3216.robot.subsystems.Shifter;
@@ -31,7 +33,10 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
+	public static final AirCompressor airCompressor = new AirCompressor();
 	public static Drivetrain drivetrain;
+	public static final ClimbArm climbArm = new ClimbArm();
+	public static final Winch winch = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final Elevator elevator = new Elevator();
 	public static final BaseEncoder leftEncoder = 
@@ -45,8 +50,7 @@ public class Robot extends IterativeRobot {
 	public static Shifter shifter = new Shifter();
 	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
-	public static final Winch winch = new Winch();
-	public static final ClimbArm climbArm = new ClimbArm();
+
 	
 	Command autonomousCommand;
 

@@ -2,6 +2,9 @@ package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.commands.CGroup_ShootCube;
+import org.usfirst.frc.team3216.robot.commands.ClimbArm_GoBackwards;
+import org.usfirst.frc.team3216.robot.commands.ClimbArm_GoForward;
+import org.usfirst.frc.team3216.robot.commands.ClimbArm_Stop;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ExtendPopper;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
@@ -35,6 +38,10 @@ public class OI {
 			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
 			controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
 			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
+			controlStick.button8.whenPressed(new ClimbArm_GoBackwards());
+			controlStick.button8.whenReleased(new ClimbArm_Stop());
+			controlStick.button9.whenPressed(new ClimbArm_GoForward());
+			controlStick.button9.whenReleased(new ClimbArm_Stop());
 			if(RobotMap.hasShifter) {
 				controlStick.button2.whenPressed(new Shifter_ShiftUp());
 				controlStick.button3.whenPressed(new Shifter_ShiftDown());
