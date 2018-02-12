@@ -12,7 +12,10 @@ These values need to only be **read** into the dashboard:
   - current transmission gear
 
 These values need to be **read and set** in the dashboard:<br>
-
+**ALL MODES**
+- **bot**: TESTBOARD, BLUEFISH, MAINBOT
+  - which bot is the code on
+  
 **Autonomous**
 - **Autonomous**: CROSS_LINE or ???  
   - autonomous mode
