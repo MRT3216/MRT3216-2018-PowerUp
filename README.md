@@ -2,10 +2,10 @@
 
 #### **NetworkTable Key Values**
 These values need to only be **read** into the dashboard:
-
 **speed**: 0-2 - Speed Multiplier
 **sensitivity** - Speed scale coefficent  
 **slow** - Speed Multiplier in Slow Mode  
+
 
 These values need to be **read and set** in the dashboard:<br>
 **deadzone**: 0-1 in 0.5 increment - Deadzone in joysticks  
