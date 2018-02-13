@@ -3,6 +3,7 @@ package org.usfirst.frc.team3216.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -33,6 +34,8 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
+	public static DigitalInput topSwitch;
+	public static DigitalInput bottomSwitch;
 	public static AirCompressor airCompressor;
 	public static Drivetrain drivetrain;
 	public static  ClimbArm climbArm;
@@ -72,6 +75,8 @@ public class Robot extends IterativeRobot {
 		
 		if(RobotMap.hasElevator) {
 			elevator = new Elevator();
+			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
+			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
 		}
 		
 		if(RobotMap.hasWinch) {
@@ -138,6 +143,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
+		log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
 	}
 
 	@Override

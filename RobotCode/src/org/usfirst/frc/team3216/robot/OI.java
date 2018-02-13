@@ -32,20 +32,20 @@ public class OI {
 		log.add("OI Constructor", LOG_LEVEL);
 		
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
+		if(RobotMap.hasShifter) {
+			gamepad.RB.whenPressed(new Shifter_ShiftUp());
+			gamepad.LB.whenPressed(new Shifter_ShiftDown());
+		}
 		if(RobotMap.hasJoystick) {
 			log.add("Joystick Contructed", LOG_LEVEL);
 			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
-			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
-			controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
+			controlStick.button4.whenPressed(new Pneumatics_ClosePincher());
+			controlStick.button5.whenPressed(new Pneumatics_OpenPincher());
 			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
 			controlStick.button8.whenPressed(new ClimbArm_GoBackwards());
 			controlStick.button8.whenReleased(new ClimbArm_Stop());
 			controlStick.button9.whenPressed(new ClimbArm_GoForward());
 			controlStick.button9.whenReleased(new ClimbArm_Stop());
-			if(RobotMap.hasShifter) {
-				controlStick.button2.whenPressed(new Shifter_ShiftUp());
-				controlStick.button3.whenPressed(new Shifter_ShiftDown());
-			}
 			if(RobotMap.hasWinch) {
 				controlStick.button6.whenPressed(new Winch_GoUp());
 				controlStick.button6.whenReleased(new Winch_Stop());
@@ -74,7 +74,6 @@ public class OI {
 		joystickValue *= -.5;
 
 		//log.add("getDriveRight (" + joystickValue + ")", LOG_LEVEL);
-		//log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		return joystickValue;		
 	}
 	
@@ -82,6 +81,7 @@ public class OI {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
 		//log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
+		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		return joystickValue;	
 	}
 	

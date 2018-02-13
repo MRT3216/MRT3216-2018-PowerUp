@@ -6,6 +6,7 @@ import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Elevator_Move;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,6 +23,8 @@ public class Elevator extends Subsystem {
     // here. Call these from Commands.
 	OI oi = Robot.oi;
 	private Talon motor;
+	DigitalInput topSwitch = Robot.topSwitch;
+	DigitalInput bottomSwitch = Robot.bottomSwitch;
 	
 	public Elevator() {
 		motor = new Talon(RobotMap.PWM_ELEVATOR_MOTOR);
@@ -42,7 +45,12 @@ public class Elevator extends Subsystem {
 	private double safetyCheck(double power) {
 		power = Math.min(1.0, power);
 		power = Math.max(-1.0, power);
-		return power;
+		if((!topSwitch.get() && power > 0) || (!bottomSwitch.get() && power < 0)) {
+			return power;
+		}
+		else {
+			return 0.0;
+		}
 	}
 	
 	private boolean canGo() {
