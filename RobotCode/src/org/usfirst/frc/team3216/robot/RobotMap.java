@@ -13,7 +13,7 @@ public class RobotMap {
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
-	public static Bot currentBot = Bot.BLUEFISH;
+	public static Bot currentBot = Bot.MAINBOT;
 	
 	/** Subsystems for each bot ***********************************************/
 	public static boolean hasIMU = (currentBot == Bot.MAINBOT) ? false : true;
@@ -23,7 +23,7 @@ public class RobotMap {
 	public static boolean hasDrivetrain = (currentBot == Bot.TESTBOARD) ? false : true;
 	public static boolean hasWinch = (currentBot == Bot.MAINBOT) ? true : false;
 	public static boolean hasElevator = (currentBot == Bot.MAINBOT) ? true : false;
-	public static boolean hasClimbArm = (currentBot == Bot.MAINBOT) ? true: false;
+	public static boolean hasClimbArm = (currentBot == Bot.MAINBOT) ? true : false;
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
@@ -71,8 +71,8 @@ public class RobotMap {
 	public static final boolean 	LOG_TO_CONSOLE 				= true;
 	public static final boolean 	LOG_TO_FILE 				= false;
 	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.ALL;
-	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
-	public static final Logger.Level	LOG_OI 					= Logger.Level.OFF;
+	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.OFF;
+	public static final Logger.Level	LOG_OI 					= Logger.Level.TRACE;
 	
 	/** Subsystems **/                                                   
 	public static final Logger.Level	LOG_DRIVETRAIN			= Logger.Level.OFF;

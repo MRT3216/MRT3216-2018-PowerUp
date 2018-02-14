@@ -45,12 +45,13 @@ public class Elevator extends Subsystem {
 	private double safetyCheck(double power) {
 		power = Math.min(1.0, power);
 		power = Math.max(-1.0, power);
-		if((!topSwitch.get() && power > 0) || (!bottomSwitch.get() && power < 0)) {
+		/*if((!topSwitch.get() && power > 0) || (!bottomSwitch.get() && power < 0)) {
 			return power;
 		}
 		else {
 			return 0.0;
-		}
+		}*/
+		return power;
 	}
 	
 	private boolean canGo() {

@@ -34,14 +34,15 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static DigitalInput topSwitch;
-	public static DigitalInput bottomSwitch;
-	public static AirCompressor airCompressor;
+	public static DigitalInput topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
+	public static DigitalInput bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
+	public static Elevator elevator = new Elevator();
+
+	public static AirCompressor airCompressor = new AirCompressor();
 	public static Drivetrain drivetrain;
-	public static  ClimbArm climbArm;
-	public static Winch winch;
+	public static ClimbArm climbArm = new ClimbArm();
+	public static Winch winch = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static Elevator elevator;
 	public static final BaseEncoder leftEncoder = 
 			new BaseEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 	
@@ -73,7 +74,7 @@ public class Robot extends IterativeRobot {
 			imu.reset();	
 		}	
 		
-		if(RobotMap.hasElevator) {
+		/*if(RobotMap.hasElevator) {
 			elevator = new Elevator();
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
@@ -87,9 +88,9 @@ public class Robot extends IterativeRobot {
 			airCompressor  = new AirCompressor();
 		}
 		
-		if(RobotMap.hasClimbArm) {
+		/*if(true) {
 			 climbArm = new ClimbArm();
-		}
+		}*/
 	}
 
 	/**
