@@ -30,6 +30,8 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	    new Waypoint(-2, -2, 0),                        // Waypoint @ x=-2, y=-2, exit angle=0 radians
     	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
     	};
+
+        log.add("hash of waypoint list: " + points.hash(), LOG_LEVEL);
     	
     	
     	// Create the Trajectory Configuration
