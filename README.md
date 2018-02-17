@@ -2,12 +2,13 @@
 
 #### **NetworkTable Key Values**
 These values need to only be **read** into the dashboard:  
-- **elevatorHeight**: 
-  - current height of the elevator
-- **popper**: EXTENDED or RETRACTED
-  - current status of the popper
+--Robot Status--
 - **pincher**: OPEN or CLOSED
   - current status of the pincher
+- **popper**: EXTENDED or RETRACTED
+  - current status of the popper
+- **elevatorHeight**: 
+  - current height of the elevator
 - **gear**: HIGH or LOW
   - current transmission gear
 - **rightDriveEncoderDistance**: inches
