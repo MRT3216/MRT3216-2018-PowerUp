@@ -32,7 +32,7 @@ public class RobotMap {
 	public static boolean hasClimbArm = (currentBot == Bot.MAINBOT) ? true : false;
 	
 	/** Autonomous ************************************************************/
-	public static enum AutonomousModes {CROSS_LINE};
+	public static enum AutonomousModes {CROSS_LINE, SWITCH, SCALE};
 	public static enum StartingPositions {LEFT, CENTER, RIGHT};
 	
 	/** USB ports *************************************************************/

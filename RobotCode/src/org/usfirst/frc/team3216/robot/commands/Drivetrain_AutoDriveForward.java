@@ -13,9 +13,11 @@ import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 public class Drivetrain_AutoDriveForward extends Drivetrain_Drive {
 	protected RangeFinder rangeFinder = Robot.rangeFinder;
 	protected double initialHeading = 0;
+	double distance;
 	
-    public Drivetrain_AutoDriveForward() {    	
+    public Drivetrain_AutoDriveForward(double distance) {   
     	super();
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
@@ -54,11 +56,16 @@ public class Drivetrain_AutoDriveForward extends Drivetrain_Drive {
     protected void execute() {
     	log.add(Double.toString(rangeFinder.getSmoothedDistancedInInches()), LOG_LEVEL);
     	
-    	if(rangeFinder.getSmoothedDistancedInInches() > RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE) {
+    	if(rangeFinder.getSmoothedDistancedInInches() > distance) {
     		driveStraight(-.5, initialHeading);
     	}
     	else {
     		drivetrain.setPower(0,0);
     	}
     }
+    
+    protected boolean isFinished() {
+        return (rangeFinder.getSmoothedDistancedInInches() <= distance);
+    }
+
 }

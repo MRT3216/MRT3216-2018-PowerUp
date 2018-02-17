@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
+import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
@@ -56,7 +58,8 @@ public class Robot extends IterativeRobot {
 	public static ADIS16448_IMU imu;
 	public static OI oi;
 
-
+	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
+	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
 	
 	Command autonomousCommand;
 
@@ -127,7 +130,35 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 		
-		autonomousCommand = new Drivetrain_AutoDriveForward();
+		switch(autonomousMode) {
+		
+		case CROSS_LINE: 
+			if(startingPosition == StartingPositions.CENTER) {
+				autonomousCommand = new Drivetrain_AutoDriveForward(25); //For now it drives straight, but when we have 
+	   																	 //motion profiling working, we'll want to have it 
+																		 //turn and go around the center stack of cubes.
+
+			}
+			else {
+				autonomousCommand = new Drivetrain_AutoDriveForward(25);
+
+			}
+			
+		case SWITCH:
+			if(startingPosition == StartingPositions.LEFT) {
+				
+			}
+			else if(startingPosition == StartingPositions.CENTER) {
+				
+			}
+			else {
+				
+			}
+		
+		case SCALE:
+			
+		}
+		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
