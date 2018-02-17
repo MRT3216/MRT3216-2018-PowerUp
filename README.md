@@ -18,9 +18,9 @@ These values need to only be **read** into the dashboard:
   - distance to rangefinder without smoothing
 - **rangeFinderAverageDistance**: inches
   - distance to rangefinder with smoothing
-- **Gyro**: drive/navx/yaw
+- **drive/navx/yaw**: Gyro
   - Assumes that you already have a / after SmartDashboard
-- **Timer**: timer
+- **timer**: timer
   - Assumes that you already have a / after SmartDashboard
 
 These values need to be **read and set** in the dashboard:<br>
