@@ -66,7 +66,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 			log.add("trajectory file not found, generating new path", LOG_LEVEL);
 			trajectory = Pathfinder.generate(points, config);
 			log.add("saving path to cache", LOG_LEVEL);
-			Pathfinder.writeToFile(saveFile,trajectory);
+			//Pathfinder.writeToFile(saveFile,trajectory);
 		}
 		
 		log.add("Trajectory generated:", LOG_LEVEL);
