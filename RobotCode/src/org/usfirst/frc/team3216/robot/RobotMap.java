@@ -33,6 +33,7 @@ public class RobotMap {
 	
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {CROSS_LINE};
+	public static enum StartingPositions {LEFT, CENTER, RIGHT};
 	
 	/** USB ports *************************************************************/
 	public static final int USB_GAMEPAD 		= 0;
@@ -126,6 +127,7 @@ public class RobotMap {
 
 	/** Network Table Values **/
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
+	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
 	public static double JOYSTICK_DEADZONE 						= 0.05;
 	public static String AUTO_LIST								= "CROSS_LINE|SCALE|SWITCH";
 	public static double JOYSTICK_SENSITIVITY 					= 1.0;
