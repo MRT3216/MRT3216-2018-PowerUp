@@ -27,8 +27,8 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
   	
     	// 3 Waypoints    	
     	Waypoint[] points = new Waypoint[] {
-    	    //new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
-    		new Waypoint(-4, -1, 0),
+    	    new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
+    		new Waypoint(-2, -2, 0),
     	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
     	};
 
