@@ -5,8 +5,6 @@ import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.RobotMap.Gear;
 import org.usfirst.frc.team3216.robot.subsystems.Shifter;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

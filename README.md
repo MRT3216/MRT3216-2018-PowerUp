@@ -10,22 +10,24 @@ These values need to only be **read** into the dashboard:
 - **elevatorHeight**: 
   - current height of the elevator
 - **gear**: HIGH or LOW
-  - current transmission gear
+  - current transmission gear  
 --Encoders--
 - **rightDriveEncoderDistance**: inches
   - distance traveled by the right encoder
 - **leftDriveEncoderDistance**: inches
-  - distance traveled by the left encoder
+  - distance traveled by the left encoder  
 --Rangefinder--
 - **rangeFinderDistance**: inches
   - distance to rangefinder without smoothing
 - **rangeFinderAverageDistance**: inches
-  - distance to rangefinder with smoothing
+  - distance to rangefinder with smoothing  
 --Match info--
 - **timer**: in min:sec
   - Current time of the match
 - **color**: red or blue
-  - Current alliance  
+  - Current alliance
+- **switchScale**: left or right (LR)
+  - Alliance side for switch and scale  
 --Gyro--
 - **drive/navx/yaw**: Gyro
   - Current heading

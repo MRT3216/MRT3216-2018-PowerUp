@@ -3,8 +3,6 @@ package org.usfirst.frc.team3216.robot.subsystems;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.RobotMap.Gear;
-import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftUp;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
