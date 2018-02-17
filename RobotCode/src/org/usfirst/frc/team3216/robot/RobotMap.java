@@ -122,7 +122,7 @@ public class RobotMap {
 	public static final String ntBot							= "bot";
 	public static final String ntElevatorThreshold				= "elevatorThreshold";
 	public static final String ntTime							= "time";
-	
+	public static final String ntColor							= "color";
 
 	/** Network Table Values **/
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
@@ -141,6 +141,4 @@ public class RobotMap {
 	public static double SHOOT_CUBE_DELAY						= 0.1;
 	public static double CLIMB_ARM_SPEED						= 0.075;
 	public static double ELEVATOR_THRESHOLD						= 0.2;
-	public static double TIME									= DriverStation.getInstance().getMatchTime();
-
 }

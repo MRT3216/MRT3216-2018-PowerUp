@@ -236,5 +236,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntElevatorHeight).setDouble(RobotMap.ELEVATOR_HEIGHT);
 		settings.getEntry(RobotMap.ntGear).setString(RobotMap.CURRENT_GEAR.name());
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
+		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
 	}
 }
