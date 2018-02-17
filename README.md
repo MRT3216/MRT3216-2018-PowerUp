@@ -15,12 +15,12 @@ These values need to only be **read** into the dashboard:
 - **rightDriveEncoderDistance**: inches
   - distance traveled by the right encoder
 - **leftDriveEncoderDistance**: inches
-  - distance traveled by the left encoder
+  - distance traveled by the left encoder  
 --Rangefinder--
 - **rangeFinderDistance**: inches
   - distance to rangefinder without smoothing
 - **rangeFinderAverageDistance**: inches
-  - distance to rangefinder with smoothing
+  - distance to rangefinder with smoothing  
 --Match info--
 - **timer**: in min:sec
   - Current time of the match
