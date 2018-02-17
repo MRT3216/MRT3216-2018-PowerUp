@@ -73,7 +73,7 @@ public abstract class Drivetrain_Drive extends Command {
 		log.add("Current: " + currentAngle, LOG_LEVEL);
 		log.add("Adjustment: " + angleAdjustment, LOG_LEVEL);
 
-    	double turn = angleAdjustment * RobotMap.KP;
+    	double turn = angleAdjustment * RobotMap.DRIVESTRAIGHT_KP;
     	log.add("Turn: " + turn, LOG_LEVEL);
     	execute(throttle, turn);    	
     }

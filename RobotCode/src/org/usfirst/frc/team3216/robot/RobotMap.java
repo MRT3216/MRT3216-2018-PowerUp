@@ -98,49 +98,56 @@ public class RobotMap {
 	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
 	
 	
-	/** Network Table Names **/
+	/** Network Table Key Names **/
 	public static final String networkTableName 				= "SmartDashboard";
+	// Control settings
 	public static final String ntDeadzone  						= "deadzone";
 	public static final String ntSensitivity 					= "sensitivity";
-	public static final String ntSpeed 							= "speed";
+	public static final String ntDriveStraightKP				= "kp";
+	// Encoders
+	public static final String ntRightDriveEncoderDistance		= "rightDriveEncoderDistance";
+	public static final String ntLeftDriveEncoderDistance		= "leftDriveEncoderDistance";
+	// Rangefinder
 	public static final String ntRangeFinderDistance 			= "rangeFinderDistance";
 	public static final String ntRangeFinderAverageDistance		= "rangeFinderAverageDistance";
-	public static final String ntKP 							= "kp";
-	public static final String ntRightDriveEncoderDistance		= "rightDriveEncoderDistance";
-	public static final String ntRightDriveEncoderRate			= "rightDriveEncoderRate";
-	public static final String ntLeftDriveEncoderDistance		= "leftDriveEncoderDistance";
-	public static final String ntLeftDriveEncoderRate			= "leftDriveEncoderRate";
-	public static final String ntAutonomousMode					= "/autonomous/modes";
-	public static final String ntAutoList						= "/autonomous/list";
+	public static final String ntMedianSmoothingReadings		= "medianSmoothingReadings";
+	// Gyro
+	public static final String ntYaw							= "drive/navx/yaw";
+	// Robot Status	
 	public static final String ntPincher						= "pincher";
 	public static final String ntPopper							= "popper";
 	public static final String ntElevatorHeight					= "elevatorHeight";
 	public static final String ntGear							= "gear";
-	public static final String ntShootCubeDelay					= "shootCubeDelay";
-	public static final String ntMedianSmoothingReadings		= "medianSmoothingReadings";
-	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
-	public static final String ntClimbArmSpeed					= "climbArmSpeed";
+	// Robot Settings
 	public static final String ntBot							= "bot";
+	public static final String ntClimbArmSpeed					= "climbArmSpeed";
 	public static final String ntElevatorThreshold				= "elevatorThreshold";
+	// Match info
 	public static final String ntTime							= "time";
 	public static final String ntColor							= "color";
+	// Autonomous
+	public static final String ntStartingPosition				= "startingPosition";
+	public static final String ntAutonomousMode					= "/autonomous/modes";
+	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
+	
 
-	/** Network Table Values **/
-	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
-	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
+	/** Network Table Values**/
+	// Control Settings
 	public static double JOYSTICK_DEADZONE 						= 0.05;
-	public static String AUTO_LIST								= "CROSS_LINE|SCALE|SWITCH";
 	public static double JOYSTICK_SENSITIVITY 					= 1.0;
-	public static double JOYSTICK_EQUALITY_THRESHHOLD			= 0.05;
-	public static double SPEED 									= 1.0;
-	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
-	public static double KP 									= 0.01;
-	public static int MEDIAN_SMOOTHING_READINGS					= 15;
+	public static double DRIVESTRAIGHT_KP 						= 0.01;
+	// Rangefinder
+	public static int MEDIAN_SMOOTHING_READINGS					= 15;	
+	// Robot Status
 	public static Pincher PINCHER_STATUS						= RobotMap.Pincher.CLOSED;
 	public static Popper POPPER_STATUS							= RobotMap.Popper.RETRACTED;
 	public static double ELEVATOR_HEIGHT						= 0.0;
 	public static Gear CURRENT_GEAR                             = Gear.LOW;
-	public static double SHOOT_CUBE_DELAY						= 0.1;
+	// Robot Settings
 	public static double CLIMB_ARM_SPEED						= 0.2;
-	public static double ELEVATOR_THRESHOLD						= 0.2;
+	public static double ELEVATOR_THRESHOLD						= 0.2;	
+	// Autonomous
+	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
+	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
+	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
 }

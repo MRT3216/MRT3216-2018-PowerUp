@@ -226,42 +226,37 @@ public class Robot extends IterativeRobot {
 		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
 		
 		/** Read from NetworkTable **/
+		// Control Settings
 		RobotMap.JOYSTICK_DEADZONE = 
 				settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
 		RobotMap.JOYSTICK_SENSITIVITY = 
 				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
-		RobotMap.SPEED = 
-				settings.getEntry(RobotMap.ntSpeed).getDouble(RobotMap.SPEED);
-		RobotMap.KP = 
-				settings.getEntry(RobotMap.ntKP).getDouble(RobotMap.KP);		
+		RobotMap.DRIVESTRAIGHT_KP = 
+				settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);			
+		// Rangefinder
 		double m = 
 				settings.getEntry(RobotMap.ntMedianSmoothingReadings).getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
 		RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
-		
-		RobotMap.PINCHER_STATUS = 
-				RobotMap.Pincher.valueOf(settings.getEntry(RobotMap.ntPincher).getString(RobotMap.PINCHER_STATUS.name()));
-		RobotMap.POPPER_STATUS = 
-				RobotMap.Popper.valueOf(settings.getEntry(RobotMap.ntPopper).getString(RobotMap.POPPER_STATUS.name()));
-		RobotMap.ELEVATOR_HEIGHT = 
-				settings.getEntry(RobotMap.ntElevatorHeight).getDouble(RobotMap.ELEVATOR_HEIGHT);
-		RobotMap.CURRENT_GEAR = 
-				RobotMap.Gear.valueOf(settings.getEntry(RobotMap.ntGear).getString(RobotMap.CURRENT_GEAR.name()));
+		// Robot Status
 		RobotMap.currentBot = 
 				RobotMap.Bot.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
+		// Robot Settings
 		RobotMap.CLIMB_ARM_SPEED = 
-				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
-
-		
+				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);		
+		RobotMap.ELEVATOR_THRESHOLD =
+				settings.getEntry(RobotMap.ntElevatorThreshold).getDouble(RobotMap.ELEVATOR_THRESHOLD);		
+		// Autonomous
+		RobotMap.AUTONOMOUS_MODE = 
+				RobotMap.AutonomousModes.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));	
+		RobotMap.STARTING_POSITION = 
+				RobotMap.StartingPositions.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));	
 						
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
 		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistance());
-		settings.getEntry(RobotMap.ntLeftDriveEncoderRate).setDouble(leftEncoder.getRate());
 		settings.getEntry(RobotMap.ntRightDriveEncoderDistance).setDouble(rightEncoder.getDistance());
-		settings.getEntry(RobotMap.ntRightDriveEncoderRate).setDouble(rightEncoder.getRate());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
-		settings.getEntry(RobotMap.ntAutoList).setString(RobotMap.AUTO_LIST);
 		settings.getEntry(RobotMap.ntPincher).setString(RobotMap.PINCHER_STATUS.name());
 		settings.getEntry(RobotMap.ntPopper).setString(RobotMap.POPPER_STATUS.name());
 		settings.getEntry(RobotMap.ntElevatorHeight).setDouble(RobotMap.ELEVATOR_HEIGHT);
