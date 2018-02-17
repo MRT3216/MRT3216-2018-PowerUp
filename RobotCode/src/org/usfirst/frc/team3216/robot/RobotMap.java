@@ -19,7 +19,7 @@ public class RobotMap {
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
-	public static Bot currentBot = Bot.MAINBOT;
+	public static Bot currentBot = Bot.BLUEFISH;
 	
 	/** Subsystems for each bot ***********************************************/
 	public static boolean hasIMU = (currentBot == Bot.MAINBOT) ? false : true;
@@ -139,6 +139,6 @@ public class RobotMap {
 	public static double ELEVATOR_HEIGHT						= 0.0;
 	public static Gear CURRENT_GEAR                             = Gear.LOW;
 	public static double SHOOT_CUBE_DELAY						= 0.1;
-	public static double CLIMB_ARM_SPEED						= 0.075;
+	public static double CLIMB_ARM_SPEED						= 0.2;
 	public static double ELEVATOR_THRESHOLD						= 0.2;
 }

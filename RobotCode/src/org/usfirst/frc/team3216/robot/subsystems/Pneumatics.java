@@ -33,7 +33,7 @@ public class Pneumatics extends Subsystem {
 	}
 	
 	private void initPneumatics() {
-		openPincher();
+		closePincher();
 		closePopper();
 	}
 	
