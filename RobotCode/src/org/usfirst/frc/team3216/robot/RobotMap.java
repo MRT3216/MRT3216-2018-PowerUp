@@ -130,7 +130,8 @@ public class RobotMap {
 	public static final String ntStartingPosition				= "startingPosition";
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
-	
+	public static final String TRAJECTORY_CACHE					= "trajectory.csv";
+
 
 	/** Network Table Values**/
 	// Control Settings
@@ -152,4 +153,5 @@ public class RobotMap {
 	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
 	public static double MAX_VELOCITY							= 0.5; // in m/s
+
 }
