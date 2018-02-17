@@ -11,18 +11,24 @@ These values need to only be **read** into the dashboard:
   - current height of the elevator
 - **gear**: HIGH or LOW
   - current transmission gear
+--Encoders--
 - **rightDriveEncoderDistance**: inches
   - distance traveled by the right encoder
 - **leftDriveEncoderDistance**: inches
   - distance traveled by the left encoder
+--Rangefinder--
 - **rangeFinderDistance**: inches
   - distance to rangefinder without smoothing
 - **rangeFinderAverageDistance**: inches
   - distance to rangefinder with smoothing
+--Match info--
+- **timer**: in min:sec
+  - Current time of the match
+- **color**: red or blue
+  - Current alliance  
+--Gyro--
 - **drive/navx/yaw**: Gyro
-  - Assumes that you already have a / after SmartDashboard
-- **timer**: timer
-  - Assumes that you already have a / after SmartDashboard
+  - Current heading
 
 These values need to be **read and set** in the dashboard:<br>
 
@@ -33,12 +39,16 @@ These values need to be **read and set** in the dashboard:<br>
   - correction factor for drive straight code
   
 **Teleop**
+--Control Settings--
 - **deadzone**: 0-1 in 0.5 increment  
-  - deadzone in joysticks     
+  - deadzone in joysticks
+- **sensitivity**  
+  - joystick sensitivity 
+--Robot Settings--
 - **climbArmSpeed**: 0.00-0.1 in 0.02 increments
   - speed at which the robot climbs
-- **sensitivity**  
-  - joystick sensitivity  
+- **elevatorThreshold**: 0.00-1 in 0.1 increments
+  - +/- distance that the elevator encoder is from specified height
   
 **Autonomous**
 - **startingPosition**: LEFT, CENTER, RIGHT  
