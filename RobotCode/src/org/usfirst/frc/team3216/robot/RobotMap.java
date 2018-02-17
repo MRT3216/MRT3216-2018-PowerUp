@@ -131,7 +131,7 @@ public class RobotMap {
 	public static final String ntStartingPosition				= "startingPosition";
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
-	public static final String TRAJECTORY_CACHE					= "trajectory.csv";
+	public static final String TRAJECTORY_CACHE					= "trajectory.bin";
 
 
 	/** Network Table Values**/

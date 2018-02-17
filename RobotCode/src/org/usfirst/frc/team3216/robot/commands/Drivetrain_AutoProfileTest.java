@@ -32,7 +32,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
     	};
 
-        String hashString
+        //String hashString = 
 
         log.add("hash of waypoint list: " + points.hashCode(), LOG_LEVEL);
     	
@@ -61,12 +61,12 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
         File saveFile = new File(RobotMap.TRAJECTORY_CACHE);
         if(saveFile.exists() && !saveFile.isDirectory()) {
             log.add("trajectory file already found, usng cached paths", LOG_LEVEL);
-            trajectory = Pathfinder.readFromCSV(saveFile);
+            trajectory = Pathfinder.readFromFile(saveFile);
         } else {
             log.add("trajectory file not found, generating new path", LOG_LEVEL);
             trajectory = Pathfinder.generate(points, config);
             log.add("saving path to cache", LOG_LEVEL);
-            Pathfinder.writeToCSV(saveFile,trajectory);
+            Pathfinder.writeToFile(saveFile,trajectory);
         }
     	
     	log.add("Trajectory generated:", LOG_LEVEL);
