@@ -97,6 +97,8 @@ public class Robot extends IterativeRobot {
 		}
 		
 		oi  = new OI();
+		
+		autonomousCommand = new Drivetrain_AutoProfileTest();
 	}
 
 	/**
@@ -128,7 +130,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
-		
+		/*
 		switch(autonomousMode) {
 		
 		case CROSS_LINE: 
@@ -166,7 +168,8 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		
-		autonomousCommand = new Drivetrain_AutoProfileTest();
+		
+
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

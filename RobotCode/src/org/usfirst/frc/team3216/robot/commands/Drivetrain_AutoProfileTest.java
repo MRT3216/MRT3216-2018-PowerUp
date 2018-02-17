@@ -13,7 +13,7 @@ import jaci.pathfinder.modifiers.TankModifier;
  *
  */
 public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
-	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_RANGEFINDER;
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_AUTOPROFILE;
 	private Logger log = new Logger(LOG_LEVEL, getName());
 	protected double initialHeading = 0;
 	private Trajectory trajectory;
@@ -23,17 +23,10 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 	
     public Drivetrain_AutoProfileTest() {   
     	super();
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	super.initialize();
-    	
-    	initialHeading = imu.getAngleZ();
-    	
+  	
     	// 3 Waypoints    	
     	Waypoint[] points = new Waypoint[] {
-    	    new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
+    	    //new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
     	    new Waypoint(-2, -2, 0),                        // Waypoint @ x=-2, y=-2, exit angle=0 radians
     	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
     	};
@@ -50,10 +43,26 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	// Max Velocity:        1.7 m/s
     	// Max Acceleration:    2.0 m/s/s
     	// Max Jerk:            60.0 m/s/s/s
-    	Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
-
+    	Trajectory.Config config = 
+    			new Trajectory.Config(
+    					Trajectory.FitMethod.HERMITE_CUBIC, 
+    					Trajectory.Config.SAMPLES_HIGH, 
+    					0.05, 
+    					RobotMap.MAX_VELOCITY, 
+    					2.0, 
+    					60.0);
+    	
     	// Generate the trajectory
     	trajectory = Pathfinder.generate(points, config);
+    	
+    	log.add("Trajector generated:", LOG_LEVEL);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	super.initialize();
+    	
+    	initialHeading = imu.getAngleZ();
     	
     	// The distance between the left and right sides of the wheelbase is 0.6m
     	double wheelbase_width = 0.514;
@@ -92,13 +101,13 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     			RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
     			RobotMap.WHEEL_DIAMETER);
 
-    	int max_velocity = 1;
+    	double max_velocity = RobotMap.MAX_VELOCITY;
     	
     	// The first argument is the proportional gain. Usually this will be quite high
     	// The second argument is the integral gain. This is unused for motion profiling
     	// The third argument is the derivative gain. Tweak this if you are unhappy with the tracking of the trajectory
     	// The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
-    	// The trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
+    	//     trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
     	// The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker
     	encLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
     	encRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
@@ -113,7 +122,10 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
     	double turn = 0.8 * (-1.0/80.0) * angleDifference;
 
-    	drivetrain.setPower(l + turn, r - turn);	
+    	log.add("l + turn: " + (l + turn), LOG_LEVEL);
+    	log.add("r - turn: " + (r - turn), LOG_LEVEL);
+    	
+    	drivetrain.setPower(0.05 * (l + turn), 0.05 * (r - turn));	
     }
     
     protected boolean isFinished() {

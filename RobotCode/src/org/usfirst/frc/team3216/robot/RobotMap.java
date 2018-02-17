@@ -151,4 +151,5 @@ public class RobotMap {
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
 	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
+	public static double MAX_VELOCITY							= 0.5; // in m/s
 }
