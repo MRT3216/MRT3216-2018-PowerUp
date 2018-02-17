@@ -2,7 +2,6 @@ package org.usfirst.frc.team3216.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -13,11 +12,11 @@ import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
 import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileTest;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3216.robot.subsystems.DrivetrainEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
-import org.usfirst.frc.team3216.robot.subsystems.BaseEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
 import org.usfirst.frc.team3216.robot.subsystems.AirCompressor;
 import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
@@ -166,6 +165,8 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		
+		autonomousCommand = new Drivetrain_AutoProfileTest();
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
@@ -207,10 +208,9 @@ public class Robot extends IterativeRobot {
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
 		
-		log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
-		log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
-		log.add("Climb Speed: " + RobotMap.CLIMB_ARM_SPEED, LOG_LEVEL);
-
+		//log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
+		//log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
+		//log.add("Climb Speed: " + RobotMap.CLIMB_ARM_SPEED, LOG_LEVEL);
 	}
 
 	/**

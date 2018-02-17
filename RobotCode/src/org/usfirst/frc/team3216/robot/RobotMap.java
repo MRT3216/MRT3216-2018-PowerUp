@@ -1,12 +1,6 @@
 package org.usfirst.frc.team3216.robot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.usfirst.frc.team3216.lib.Logger;
-
-import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -84,7 +78,7 @@ public class RobotMap {
 	public static final boolean 	LOG_TO_CONSOLE 				= true;
 	public static final boolean 	LOG_TO_FILE 				= false;
 	public static final Logger.Level 	LOG_GLOBAL 				= Logger.Level.ALL;
-	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.TRACE;
+	public static final Logger.Level 	LOG_ROBOT 				= Logger.Level.OFF;
 	public static final Logger.Level	LOG_OI 					= Logger.Level.OFF;
 	
 	/** Subsystems **/                                                   
@@ -102,6 +96,7 @@ public class RobotMap {
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD			= Logger.Level.OFF;
 	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
+	public static final Logger.Level LOG_AUTOPROFILE			= Logger.Level.TRACE;
 	
 	
 	/** Network Table Key Names **/

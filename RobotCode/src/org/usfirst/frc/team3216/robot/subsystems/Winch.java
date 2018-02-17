@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3216.robot.subsystems;
 
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.OI;
-import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Talon;

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3216.robot.commands;
 
+import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
-import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
@@ -13,17 +13,16 @@ import jaci.pathfinder.modifiers.TankModifier;
  *
  */
 public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
-	protected RangeFinder rangeFinder = Robot.rangeFinder;
+	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_RANGEFINDER;
+	private Logger log = new Logger(LOG_LEVEL, getName());
 	protected double initialHeading = 0;
-	private double distance;
 	private Trajectory trajectory;
 	private TankModifier modifier; 
 	private EncoderFollower encLeft;
 	private EncoderFollower encRight;
 	
-    public Drivetrain_AutoProfileTest(double distance) {   
+    public Drivetrain_AutoProfileTest() {   
     	super();
-    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
@@ -71,6 +70,8 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	
     	encLeft = new EncoderFollower(left);
     	encRight = new EncoderFollower(right);   
+    	
+    	log.add("initialized", LOG_LEVEL);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -116,7 +117,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     }
     
     protected boolean isFinished() {
-        return (rangeFinder.getSmoothedDistancedInInches() <= distance);
+        return false;
     }
 
 }
