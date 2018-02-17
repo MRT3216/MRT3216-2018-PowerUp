@@ -27,7 +27,7 @@ These values need to only be **read** into the dashboard:
 - **color**: red or blue
   - Current alliance
 - **switchScale**: left or right (LR)
-  - Alliance side for switch and scale <br>
+  - Alliance side for switch and scale
 --Gyro--
 - **drive/navx/yaw**: Gyro
   - Current heading
