@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,14 +35,14 @@ public class Robot extends IterativeRobot {
 	
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static DigitalInput topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
-	public static DigitalInput bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
-	public static Elevator elevator = new Elevator();
+	public static DigitalInput topSwitch;	//= new DigitalInput(RobotMap.DIO_TOP_SWITCH);
+	public static DigitalInput bottomSwitch; // = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
+	public static Elevator elevator; // = new Elevator();
 
-	public static AirCompressor airCompressor = new AirCompressor();
+	public static AirCompressor airCompressor; // = new AirCompressor();
 	public static Drivetrain drivetrain;
-	public static ClimbArm climbArm = new ClimbArm();
-	public static Winch winch = new Winch();
+	public static ClimbArm climbArm; // = new ClimbArm();
+	public static Winch winch; // = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final BaseEncoder leftEncoder = 
 			new BaseEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
@@ -52,8 +53,9 @@ public class Robot extends IterativeRobot {
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
-	public static final OI oi = new OI();
 	public static ADIS16448_IMU imu;
+	public static OI oi;
+
 
 	
 	Command autonomousCommand;
@@ -74,7 +76,7 @@ public class Robot extends IterativeRobot {
 			imu.reset();	
 		}	
 		
-		/*if(RobotMap.hasElevator) {
+		if(RobotMap.hasElevator) {
 			elevator = new Elevator();
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
@@ -88,9 +90,11 @@ public class Robot extends IterativeRobot {
 			airCompressor  = new AirCompressor();
 		}
 		
-		/*if(true) {
+		if(RobotMap.hasClimbArm) {
 			 climbArm = new ClimbArm();
-		}*/
+		}
+		
+		oi  = new OI();
 	}
 
 	/**
@@ -173,6 +177,9 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		
 		log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
+		log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
+		log.add("Climb Speed: " + RobotMap.CLIMB_ARM_SPEED, LOG_LEVEL);
+
 	}
 
 	/**
@@ -210,6 +217,9 @@ public class Robot extends IterativeRobot {
 				RobotMap.Gear.valueOf(settings.getEntry(RobotMap.ntGear).getString(RobotMap.CURRENT_GEAR.name()));
 		RobotMap.currentBot = 
 				RobotMap.Bot.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
+		RobotMap.CLIMB_ARM_SPEED = 
+				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
+
 		
 						
 		/** Write to NetworkTable **/		
@@ -220,9 +230,11 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntRightDriveEncoderDistance).setDouble(rightEncoder.getDistance());
 		settings.getEntry(RobotMap.ntRightDriveEncoderRate).setDouble(rightEncoder.getRate());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
+		settings.getEntry(RobotMap.ntAutoList).setString(RobotMap.AUTO_LIST);
 		settings.getEntry(RobotMap.ntPincher).setString(RobotMap.PINCHER_STATUS.name());
 		settings.getEntry(RobotMap.ntPopper).setString(RobotMap.POPPER_STATUS.name());
 		settings.getEntry(RobotMap.ntElevatorHeight).setDouble(RobotMap.ELEVATOR_HEIGHT);
 		settings.getEntry(RobotMap.ntGear).setString(RobotMap.CURRENT_GEAR.name());
+		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 	}
 }
