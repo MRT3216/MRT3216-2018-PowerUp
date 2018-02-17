@@ -83,13 +83,13 @@ public abstract class Drivetrain_Drive extends Command {
 			double goalPower, 
 			double currentPower, 
 			double dt) {
-		double maxDeltaPower = RobotMap.ACCELERATION_MAX * dt;
+/*		double maxDeltaPower = RobotMap.ACCELERATION_MAX * dt;
 		double deltaPower = Math.abs(goalPower - currentPower);
 		double deltaSign = (goalPower < currentPower) ? -1.0 : 1.0;
 		
 		deltaPower = Math.min(maxDeltaPower, deltaPower);
 		goalPower = currentPower + deltaSign * deltaPower;
-
+*/
 		return goalPower;
 	}	
 
