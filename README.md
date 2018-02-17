@@ -18,6 +18,10 @@ These values need to only be **read** into the dashboard:
   - distance to rangefinder without smoothing
 - **rangeFinderAverageDistance**: inches
   - distance to rangefinder with smoothing
+- **Gyro**: drive/navx/yaw
+  - Assumes that you already have a / after SmartDashboard
+- **Timer**: timer
+  - Assumes that you already have a / after SmartDashboard
 
 These values need to be **read and set** in the dashboard:<br>
 
@@ -45,7 +49,9 @@ These values need to be **read and set** in the dashboard:<br>
 - **sensitivity**  
   - speed scale coefficent  
 - **slow**: 0-75%  
-  - speed multiplier in slow mode 
+  - speed multiplier in slow mode
+  
+
 
 
 Ip's and passwords: https://docs.google.com/document/d/1gnbhW8H-TXnGVFWnfqmTPNoPVJzINSkYyQ2_zQQK6Qc/edit?usp=sharing
