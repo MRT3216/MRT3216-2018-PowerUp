@@ -52,10 +52,16 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     					2.0, 
     					60.0);
     	
-    	// Generate the trajectory
-    	trajectory = Pathfinder.generate(points, config);
+
+        File saveFile = new File(RobotMap.TRAJECTORY_CACHE);
+        if(saveFile.exists() && !saveFile.isDirectory()) {
+            trajectory = Pathfinder.readFromCSV(saveFile);
+        } else {
+            trajectory = Pathfinder.generate(points, config);
+            Pathfinder.writeToCSV(saveFile,trajectory);
+        }
     	
-    	log.add("Trajector generated:", LOG_LEVEL);
+    	log.add("Trajectory generated:", LOG_LEVEL);
     }
 
     // Called just before this Command runs the first time
