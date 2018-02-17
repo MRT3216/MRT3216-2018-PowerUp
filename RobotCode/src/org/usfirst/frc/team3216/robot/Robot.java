@@ -263,5 +263,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntGear).setString(RobotMap.CURRENT_GEAR.name());
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
+		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getYaw());
 	}
 }
