@@ -10,7 +10,7 @@ These values need to only be **read** into the dashboard:
 - **elevatorHeight**: 
   - current height of the elevator
 - **gear**: HIGH or LOW
-  - current transmission gear
+  - current transmission gear  
 --Encoders--
 - **rightDriveEncoderDistance**: inches
   - distance traveled by the right encoder
@@ -27,7 +27,7 @@ These values need to only be **read** into the dashboard:
 - **color**: red or blue
   - Current alliance
 - **switchScale**: left or right (LR)
-  - Alliance side for switch and scale
+  - Alliance side for switch and scale  
 --Gyro--
 - **drive/navx/yaw**: Gyro
   - Current heading
