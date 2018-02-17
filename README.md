@@ -31,26 +31,23 @@ These values need to be **read and set** in the dashboard:<br>
 - **kp**: 0.00-0.1 in 0.005 increments
   - correction factor for drive straight code
   
-**Autonomous**
-- **Autonomous**: CROSS_LINE or ???  
-  - autonomous mode
-- **autonomousRangefinderDistance**: 0-100 cm  
-  - point at which robot stops due to rangefinder distance
-- **medianSmoothingReadings**: 1-21 in increments of 2  
-  - readings that will be used to smooth rangefinder distance 
-  
 **Teleop**
 - **deadzone**: 0-1 in 0.5 increment  
   - deadzone in joysticks     
 - **climbArmSpeed**: 0.00-0.1 in 0.02 increments
   - speed at which the robot climbs
-- **speed**: 0-2
-  - speed multiplier  
 - **sensitivity**  
-  - speed scale coefficent  
-- **slow**: 0-75%  
-  - speed multiplier in slow mode
+  - joystick sensitivity  
   
+**Autonomous**
+- **startingPosition**: LEFT, CENTER, RIGHT  
+  - starting position of robot
+- **/autonomous/modes**: CROSS_LINE or ???  
+  - autonomous mode
+- **autonomousRangefinderDistance**: 0-100 cm  
+  - point at which robot stops due to rangefinder distance
+- **medianSmoothingReadings**: 1-21 in increments of 2  
+  - readings that will be used to smooth rangefinder distance 
 
 
 
