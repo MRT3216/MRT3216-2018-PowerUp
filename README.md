@@ -25,7 +25,9 @@ These values need to only be **read** into the dashboard:
 - **timer**: in min:sec
   - Current time of the match
 - **color**: red or blue
-  - Current alliance  
+  - Current alliance
+- **switchScale**: left or right (LR)
+  - Alliance side for switch and scale
 --Gyro--
 - **drive/navx/yaw**: Gyro
   - Current heading
