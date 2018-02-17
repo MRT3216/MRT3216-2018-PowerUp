@@ -16,10 +16,9 @@ public class BaseEncoder extends Subsystem {
 	private Logger log = new Logger(LOG_LEVEL, getName());
 	private Encoder encoder;
 	private String encoderName;
-	
-	private static final double WHEEL_DIAMETER = 4;
-	private static final double PULSE_PER_REVOLUTION = 360;
-	private static final double GEAR_RATIO = 12/13.0;
+	protected double GEAR_RATIO;
+	protected double PULSE_PER_REVOLUTION;	
+	protected static final double WHEEL_DIAMETER = 4;
 	private static final double FUDGE_FACTOR = 1.0;
 	
 	public BaseEncoder(int channelA, int channelB, String encoderName, boolean reversed) {
@@ -27,19 +26,9 @@ public class BaseEncoder extends Subsystem {
 		this.encoderName = encoderName;
 		
     	encoder = new Encoder(channelA, channelB, false, EncodingType.k4X);
-    	encoder.reset();
-    	
-    	/*
-    	encoder.setMaxPeriod(.1);
-    	encoder.setMinRate(10);   	    	
-		*/
-    	
-    	double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION
-    			/ GEAR_RATIO * FUDGE_FACTOR;
-    	
+    	encoder.reset(); 
     	encoder.setReverseDirection(reversed);
     	encoder.setSamplesToAverage(7);
-    	encoder.setDistancePerPulse(distancePerPulse);
 	}
     
     public void initDefaultCommand() {
@@ -47,26 +36,28 @@ public class BaseEncoder extends Subsystem {
     }
     
     public void initEncoder() {
+    	double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION
+    			/ GEAR_RATIO * FUDGE_FACTOR; 	
+    	encoder.setDistancePerPulse(distancePerPulse);
+    	
     	encoder.reset();
     }
     
-    public double getDistance() {    	
-    	
+    public double getDistance() {       	
     	double distance = encoder.getDistance();
-    	double count = encoder.get();
     	log.add(this.encoderName + " distance: " + distance, LOG_LEVEL);
-    	log.add(this.encoderName + " count: " + count,LOG_LEVEL);
-    	//log.add("Raw: " + encoder.getRaw(), LOG_LEVEL);
-    	//log.add("Stopped: " + encoder.getStopped(), LOG_LEVEL);
-    	
     	return distance;	
     }
     
     public double getRate() {
     	double rate = encoder.getRate();
     	
-    	//log.add("Encoder rate: " + rate, LOG_LEVEL);
+    	log.add(this.encoderName + " rate: " + rate, LOG_LEVEL);
     	
     	return rate;
+    }
+    
+    public int getCount() {
+    	return encoder.get();
     }
 }

@@ -69,6 +69,12 @@ public class RobotMap {
 	public static final double ACCELERATION_MAX = 1.5;
 	// Determines the threshold at which the robot drives straight
 	public static final double TURN_RATE_THRESHOLD = 0.5;
+	public static final double DRIVETRAIN_GEAR_RATIO = 
+			(currentBot == Bot.MAINBOT) ? 0 : 12/13.0;
+	public static final int DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION = 
+			(currentBot == Bot.MAINBOT) ? 0 : 360;
+	public static final double WHEEL_DIAMETER = 
+			(currentBot == Bot.MAINBOT) ? 6.0 : 4.0;
 		
 	/** Logger Settings *******************************************************/
 	public static final String 		LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";

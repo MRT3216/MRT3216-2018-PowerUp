@@ -15,6 +15,7 @@ import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3216.robot.subsystems.DrivetrainEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 import org.usfirst.frc.team3216.robot.subsystems.BaseEncoder;
 import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
@@ -46,12 +47,11 @@ public class Robot extends IterativeRobot {
 	public static ClimbArm climbArm; // = new ClimbArm();
 	public static Winch winch; // = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static final BaseEncoder leftEncoder = 
-			new BaseEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
-	
+	public static final DrivetrainEncoder leftEncoder = 
+			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 
-	public static final BaseEncoder rightEncoder = 
-			new BaseEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);	
+	public static final DrivetrainEncoder rightEncoder = 
+			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
