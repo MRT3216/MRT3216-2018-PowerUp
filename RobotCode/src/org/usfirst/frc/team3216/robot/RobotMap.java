@@ -126,6 +126,7 @@ public class RobotMap {
 	// Match info
 	public static final String ntTime							= "time";
 	public static final String ntColor							= "color";
+	public static final String ntGameData						= "gameData";
 	// Autonomous
 	public static final String ntStartingPosition				= "startingPosition";
 	public static final String ntAutonomousMode					= "/autonomous/modes";

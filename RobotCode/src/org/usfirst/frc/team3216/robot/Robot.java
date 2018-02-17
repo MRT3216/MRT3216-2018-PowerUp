@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
 	public static Shifter shifter = new Shifter();
 	public static ADIS16448_IMU imu;
 	public static OI oi;
+	public static AutonomousChooser autonomousChooser;
 
 	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
 	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
@@ -97,8 +98,12 @@ public class Robot extends IterativeRobot {
 		}
 		
 		oi  = new OI();
+<<<<<<< HEAD
+		autonomousChooser = new AutonomousChooser();
+=======
 		
 		autonomousCommand = new Drivetrain_AutoProfileTest();
+>>>>>>> 5728cbc05fa2cebae41a723200d5fe380153a4dc
 	}
 
 	/**
@@ -130,6 +135,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
+<<<<<<< HEAD
+		
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+=======
 		/*
 		switch(autonomousMode) {
 		
@@ -155,11 +164,13 @@ public class Robot extends IterativeRobot {
 			else {
 				
 			}
+>>>>>>> 5728cbc05fa2cebae41a723200d5fe380153a4dc
 		
-		case SCALE:
-			
+		switch(autonomousMode) {
+			case SWITCH:	autonomousCommand = autonomousChooser.Switch(gameData);
+			case SCALE: 	autonomousCommand = autonomousChooser.Scale(gameData);
+			default:		autonomousCommand = autonomousChooser.Cross_Line(gameData);
 		}
-		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -266,6 +277,10 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntGear).setString(RobotMap.CURRENT_GEAR.name());
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
+<<<<<<< HEAD
+		settings.getEntry(RobotMap.ntGameData).setString(DriverStation.getInstance().getGameSpecificMessage());
+=======
 		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getYaw());
+>>>>>>> 5728cbc05fa2cebae41a723200d5fe380153a4dc
 	}
 }
