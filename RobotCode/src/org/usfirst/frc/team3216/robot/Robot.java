@@ -57,6 +57,7 @@ public class Robot extends IterativeRobot {
 	public static Shifter shifter = new Shifter();
 	public static ADIS16448_IMU imu;
 	public static OI oi;
+	public static AutonomousChooser autonomousChooser;
 
 	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
 	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
@@ -98,6 +99,7 @@ public class Robot extends IterativeRobot {
 		}
 		
 		oi  = new OI();
+		autonomousChooser = new AutonomousChooser();
 	}
 
 	/**
@@ -130,35 +132,13 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 		
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
 		switch(autonomousMode) {
-		
-		case CROSS_LINE: 
-			if(startingPosition == StartingPositions.CENTER) {
-				autonomousCommand = new Drivetrain_AutoDriveForward(25); //For now it drives straight, but when we have 
-	   																	 //motion profiling working, we'll want to have it 
-																		 //turn and go around the center stack of cubes.
-
-			}
-			else {
-				autonomousCommand = new Drivetrain_AutoDriveForward(25);
-
-			}
-			
-		case SWITCH:
-			if(startingPosition == StartingPositions.LEFT) {
-				
-			}
-			else if(startingPosition == StartingPositions.CENTER) {
-				
-			}
-			else {
-				
-			}
-		
-		case SCALE:
-			
+			case SWITCH:	autonomousCommand = autonomousChooser.Switch(gameData);
+			case SCALE: 	autonomousCommand = autonomousChooser.Scale(gameData);
+			default:		autonomousCommand = autonomousChooser.Cross_Line(gameData);
 		}
-		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -263,5 +243,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntGear).setString(RobotMap.CURRENT_GEAR.name());
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
+		settings.getEntry(RobotMap.ntGameData).setString(DriverStation.getInstance().getGameSpecificMessage());
 	}
 }
