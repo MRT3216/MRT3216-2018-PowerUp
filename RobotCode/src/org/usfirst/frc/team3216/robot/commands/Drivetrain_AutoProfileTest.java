@@ -27,13 +27,13 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
    	
     	// 3 Waypoints    	
     	Waypoint[] points = new Waypoint[] {
-    	    //new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
-    		//new Waypoint(-2, -2, 0),
-    	    //new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
-    		new Waypoint(-4, 0, 0),
-    		new Waypoint(0, 0, 0),
-    		new Waypoint(4, -2, 0),
-    		new Waypoint(8, 2, 0),
+    	    new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
+    		new Waypoint(-2, -2, 0),
+    	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
+    		//new Waypoint(-4, 0, 0),
+    		//new Waypoint(0, 0, 0)
+    		//new Waypoint(0, 2, 0),
+    		//new Waypoint(2, 2, 0),
     	};
 
 		//String hashString = 
@@ -47,7 +47,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 		// Fit Method:          HERMITE_CUBIC or HERMITE_QUINTIC
 		// Sample Count:        SAMPLES_HIGH (100 000)
 		//    	                SAMPLES_LOW  (10 000)
-		//    	               SAMPLES_FAST (1 000)
+		//    	                SAMPLES_FAST (1 000)
 		// Time Step:           0.05 Seconds
 		// Max Velocity:        1.7 m/s
 		// Max Acceleration:    2.0 m/s/s
@@ -60,7 +60,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 						RobotMap.MAX_VELOCITY, 
 						2.0, 
 						60.0);
-		
+		/*
         File saveFile = new File(RobotMap.TRAJECTORY_CACHE);
         if(saveFile.exists() && !saveFile.isDirectory()) {
             log.add("trajectory file already found, usng cached paths", LOG_LEVEL);
@@ -70,16 +70,21 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
             trajectory = Pathfinder.generate(points, config);
             log.add("saving path to cache", LOG_LEVEL);
             //Pathfinder.writeToFile(saveFile,trajectory);
-        }
-    	
+        }*/
+		File saveFile = new File(RobotMap.TRAJECTORY_CSV);
+        trajectory = Pathfinder.generate(points, config);
+        //Pathfinder.writeToFile(saveFile,trajectory);
     	log.add("Trajectory generated:", LOG_LEVEL);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	super.initialize();
+    	Robot.leftEncoder.reset();
+    	Robot.rightEncoder.reset();
+    	//initialCount = Robot.leftEncoder.getCount();
     	imu.reset();
-    	initialHeading = imu.getAngleZ();
+    	//initialHeading = imu.getYaw();
     	
     	// The distance between the left and right sides of the wheelbase is 0.6m
     	double wheelbase_width = RobotMap.WHEEL_WIDTH;
@@ -104,7 +109,9 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 	protected void execute() {
 		int encoder_position_left = Robot.leftEncoder.getCount();
 		int encoder_position_right = Robot.rightEncoder.getCount();
-		
+		//log.add("Left Enc Count: " + encoder_position_left, LOG_LEVEL);
+		//log.add("Right Enc Count: " + encoder_position_right, LOG_LEVEL);
+		//log.add("Initial Count: " + initialCount, LOG_LEVEL);
 		// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
 		// 'getEncPosition' function.
 		// encoder ticks per full revolution
@@ -112,13 +119,13 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 		encLeft.configureEncoder(
 				encoder_position_left, 
 				RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
-				RobotMap.WHEEL_DIAMETER);
+				RobotMap.WHEEL_DIAMETER_METERS);
 		encRight.configureEncoder(
 				encoder_position_right, 
 				RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
-				RobotMap.WHEEL_DIAMETER);
+				RobotMap.WHEEL_DIAMETER_METERS);
 
-		double max_velocity = RobotMap.MAX_VELOCITY;
+		double max_velocity = 2.0;//RobotMap.MAX_VELOCITY;
 		
 		// The first argument is the proportional gain. Usually this will be quite high
 		// The second argument is the integral gain. This is unused for motion profiling
@@ -133,17 +140,20 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 		double r = encRight.calculate(encoder_position_right);
 
     	// Assuming the gyro is giving a value in degrees
-    	double gyro_heading = Robot.imu.getAngleZ();
+    	double gyro_heading = (-1*Robot.imu.getAngleZ()) % 360;
+    	
+    	gyro_heading = (gyro_heading < 0) ? 360 + gyro_heading : gyro_heading;
     	double desired_heading = Pathfinder.r2d(encLeft.getHeading());  // Should also be in degrees
 
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		double turn = 0.8 * (-1.0/80.0) * angleDifference;
 
-    	log.add("yaw: " + gyro_heading, LOG_LEVEL);
-    	//log.add("l + turn: " + (l + turn), LOG_LEVEL);
-    	//log.add("r - turn: " + (r - turn), LOG_LEVEL);
-    	
-    	drivetrain.setPower(0.05 * (l + turn), 0.05 * (r - turn));	
+    	log.add("angleZ: " + gyro_heading, LOG_LEVEL);
+    	log.add("Desired Heading: " + desired_heading, LOG_LEVEL);
+    	log.add("l + turn: " + 0.1 * (l + turn), LOG_LEVEL);
+    	log.add("r - turn: " + 0.1 * (r - turn), LOG_LEVEL);
+
+    	drivetrain.setPower((l + turn), (r - turn));	
     }
     
 	protected boolean isFinished() {

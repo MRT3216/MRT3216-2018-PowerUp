@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
 	public static Winch winch; // = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final DrivetrainEncoder leftEncoder = 
-			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
+			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
 
 	public static final DrivetrainEncoder rightEncoder = 
 			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);	
@@ -243,6 +243,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
 		settings.getEntry(RobotMap.ntGameData).setString(DriverStation.getInstance().getGameSpecificMessage());
-		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getYaw());
+		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getAngleZ());
 	}
 }

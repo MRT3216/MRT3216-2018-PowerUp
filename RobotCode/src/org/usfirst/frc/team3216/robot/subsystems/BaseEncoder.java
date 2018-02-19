@@ -24,7 +24,7 @@ public class BaseEncoder extends Subsystem {
 		log.add("Constructor", LOG_LEVEL);
 		this.encoderName = encoderName;
 		
-    	encoder = new Encoder(channelA, channelB, false, EncodingType.k4X);
+    	encoder = new Encoder(channelA, channelB, false, EncodingType.k1X);
     	encoder.reset(); 
     	encoder.setReverseDirection(reversed);
     	encoder.setSamplesToAverage(7);
@@ -58,5 +58,9 @@ public class BaseEncoder extends Subsystem {
     
     public int getCount() {
     	return encoder.get();
+    }
+    
+    public void reset() {
+    	encoder.reset();
     }
 }

@@ -48,8 +48,8 @@ public class RobotMap {
 	public static final int RANGEFINDER = 0;
 	
 	/** Digital Input ports ***************************************************/
-	public static final int LEFT_ENCODER_CHANNEL_A = 8;
-	public static final int LEFT_ENCODER_CHANNEL_B = 9;
+	public static final int LEFT_ENCODER_CHANNEL_A = 9;
+	public static final int LEFT_ENCODER_CHANNEL_B = 8;
 	public static final int RIGHT_ENCODER_CHANNEL_A = 6;
 	public static final int RIGHT_ENCODER_CHANNEL_B = 7;
 	
@@ -68,7 +68,9 @@ public class RobotMap {
 	public static final int DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION = 
 			(currentBot == Bot.MAINBOT) ? 360 : 360;
 	public static final double WHEEL_DIAMETER = 
-			(currentBot == Bot.MAINBOT) ? 6.0 : 4.0;
+			(currentBot == Bot.MAINBOT) ? 6 : 3.875;
+	public static final double WHEEL_DIAMETER_METERS = 
+			(currentBot == Bot.MAINBOT) ? 0.1524 : 0.098425;
 	public static final double WHEEL_WIDTH =
 			(currentBot == Bot.MAINBOT) ? 0.565 : 0.514;
 	
@@ -135,6 +137,7 @@ public class RobotMap {
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
 	public static final String TRAJECTORY_CACHE					= "trajectory.bin";
+	public static final String TRAJECTORY_CSV					= "trajectory.csv";
 
 
 	/** Network Table Values**/
