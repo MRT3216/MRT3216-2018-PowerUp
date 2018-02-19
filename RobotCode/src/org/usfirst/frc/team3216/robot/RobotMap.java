@@ -13,6 +13,7 @@ public class RobotMap {
 	public static enum Pincher {OPEN, CLOSED;}
 	public static enum Popper {EXTENDED, RETRACTED;}
 	public static enum Gear {HIGH, LOW;}	
+	public static enum cubeDetection {YES, NO;}
 	public static Bot currentBot = Bot.BLUEFISH;
 	
 	/** Subsystems for each bot ***********************************************/
@@ -124,6 +125,8 @@ public class RobotMap {
 	public static final String ntPopper							= "popper";
 	public static final String ntElevatorHeight					= "elevatorHeight";
 	public static final String ntGear							= "gear";
+	// Cube detected -> Dashboard settings
+	public static final String ntCubeDetection					= "cubeDetection";
 	// Robot Settings
 	public static final String ntBot							= "bot";
 	public static final String ntClimbArmSpeed					= "climbArmSpeed";
@@ -152,6 +155,8 @@ public class RobotMap {
 	public static Popper POPPER_STATUS							= RobotMap.Popper.RETRACTED;
 	public static double ELEVATOR_HEIGHT						= 0.0;
 	public static Gear CURRENT_GEAR                             = Gear.LOW;
+	//CubeDetection -> Dashboard Settings
+	public static Gear CURRENT_CUBEDETECTION                    = CUBEDETECTION.NO;
 	// Robot Settings
 	public static double CLIMB_ARM_SPEED						= 0.2;
 	public static double ELEVATOR_THRESHOLD						= 0.2;	
