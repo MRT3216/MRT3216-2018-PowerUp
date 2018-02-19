@@ -36,32 +36,31 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     		new Waypoint(8, 2, 0),
     	};
 
-        //String hashString = 
+		//String hashString = 
 
-        log.add("hash of waypoint list: " + points.hashCode(), LOG_LEVEL);
-    	
-    	
-    	// Create the Trajectory Configuration
-    	//
-    	// Arguments:
-    	// Fit Method:          HERMITE_CUBIC or HERMITE_QUINTIC
-    	// Sample Count:        SAMPLES_HIGH (100 000)
-    	//    	                SAMPLES_LOW  (10 000)
-    	//    	               SAMPLES_FAST (1 000)
-    	// Time Step:           0.05 Seconds
-    	// Max Velocity:        1.7 m/s
-    	// Max Acceleration:    2.0 m/s/s
-    	// Max Jerk:            60.0 m/s/s/s
-    	Trajectory.Config config = 
-    			new Trajectory.Config(
-    					Trajectory.FitMethod.HERMITE_CUBIC, 
-    					Trajectory.Config.SAMPLES_HIGH, 
-    					0.05, 
-    					RobotMap.MAX_VELOCITY, 
-    					2.0, 
-    					60.0);
-    	
-
+		log.add("hash of waypoint list: " + points.hashCode(), LOG_LEVEL);
+		
+		
+		// Create the Trajectory Configuration
+		//
+		// Arguments:
+		// Fit Method:          HERMITE_CUBIC or HERMITE_QUINTIC
+		// Sample Count:        SAMPLES_HIGH (100 000)
+		//    	                SAMPLES_LOW  (10 000)
+		//    	               SAMPLES_FAST (1 000)
+		// Time Step:           0.05 Seconds
+		// Max Velocity:        1.7 m/s
+		// Max Acceleration:    2.0 m/s/s
+		// Max Jerk:            60.0 m/s/s/s
+		Trajectory.Config config = 
+				new Trajectory.Config(
+						Trajectory.FitMethod.HERMITE_CUBIC, 
+						Trajectory.Config.SAMPLES_HIGH, 
+						0.05, 
+						RobotMap.MAX_VELOCITY, 
+						2.0, 
+						60.0);
+		
         File saveFile = new File(RobotMap.TRAJECTORY_CACHE);
         if(saveFile.exists() && !saveFile.isDirectory()) {
             log.add("trajectory file already found, usng cached paths", LOG_LEVEL);
@@ -86,59 +85,59 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	double wheelbase_width = RobotMap.WHEEL_WIDTH;
 
     	// Create the Modifier Object
-    	modifier = new TankModifier(trajectory);
+		modifier = new TankModifier(trajectory);
 
-    	// Generate the Left and Right trajectories using the original trajectory
-    	// as the center
-    	modifier.modify(wheelbase_width);
-    	
-    	Trajectory left  = modifier.getLeftTrajectory();       // Get the Left Side
-    	Trajectory right = modifier.getRightTrajectory();      // Get the Right Side
-    	
-    	encLeft = new EncoderFollower(left);
-    	encRight = new EncoderFollower(right);   
-    	
-    	log.add("initialized", LOG_LEVEL);
-    }
+		// Generate the Left and Right trajectories using the original trajectory
+		// as the center
+		modifier.modify(wheelbase_width);
+		
+		Trajectory left  = modifier.getLeftTrajectory();       // Get the Left Side
+		Trajectory right = modifier.getRightTrajectory();      // Get the Right Side
+		
+		encLeft = new EncoderFollower(left);
+		encRight = new EncoderFollower(right);   
+		
+		log.add("initialized", LOG_LEVEL);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	int encoder_position_left = Robot.leftEncoder.getCount();
-    	int encoder_position_right = Robot.rightEncoder.getCount();
-    	
-    	// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
-    	// 'getEncPosition' function.
-    	// encoder ticks per full revolution
-    	// Wheel Diameter is the diameter of your wheels (or pulley for a track system) in meters    	
-    	encLeft.configureEncoder(
-    			encoder_position_left, 
-    			RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
-    			RobotMap.WHEEL_DIAMETER);
-    	encRight.configureEncoder(
-    			encoder_position_right, 
-    			RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
-    			RobotMap.WHEEL_DIAMETER);
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		int encoder_position_left = Robot.leftEncoder.getCount();
+		int encoder_position_right = Robot.rightEncoder.getCount();
+		
+		// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
+		// 'getEncPosition' function.
+		// encoder ticks per full revolution
+		// Wheel Diameter is the diameter of your wheels (or pulley for a track system) in meters    	
+		encLeft.configureEncoder(
+				encoder_position_left, 
+				RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
+				RobotMap.WHEEL_DIAMETER);
+		encRight.configureEncoder(
+				encoder_position_right, 
+				RobotMap.DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION, 
+				RobotMap.WHEEL_DIAMETER);
 
-    	double max_velocity = RobotMap.MAX_VELOCITY;
-    	
-    	// The first argument is the proportional gain. Usually this will be quite high
-    	// The second argument is the integral gain. This is unused for motion profiling
-    	// The third argument is the derivative gain. Tweak this if you are unhappy with the tracking of the trajectory
-    	// The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
-    	//     trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
-    	// The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker
-    	encLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
-    	encRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		double max_velocity = RobotMap.MAX_VELOCITY;
+		
+		// The first argument is the proportional gain. Usually this will be quite high
+		// The second argument is the integral gain. This is unused for motion profiling
+		// The third argument is the derivative gain. Tweak this if you are unhappy with the tracking of the trajectory
+		// The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
+		//     trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
+		// The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker
+		encLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		encRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
 
-    	double l = encLeft.calculate(encoder_position_left);
-    	double r = encRight.calculate(encoder_position_right);
+		double l = encLeft.calculate(encoder_position_left);
+		double r = encRight.calculate(encoder_position_right);
 
     	// Assuming the gyro is giving a value in degrees
     	double gyro_heading = Robot.imu.getAngleZ();
     	double desired_heading = Pathfinder.r2d(encLeft.getHeading());  // Should also be in degrees
 
-    	double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-    	double turn = 0.8 * (-1.0/80.0) * angleDifference;
+		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
+		double turn = 0.8 * (-1.0/80.0) * angleDifference;
 
     	log.add("yaw: " + gyro_heading, LOG_LEVEL);
     	//log.add("l + turn: " + (l + turn), LOG_LEVEL);
@@ -147,8 +146,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	drivetrain.setPower(0.05 * (l + turn), 0.05 * (r - turn));	
     }
     
-    protected boolean isFinished() {
-        return false;
-    }
-
+	protected boolean isFinished() {
+		return false;
+	}
 }
