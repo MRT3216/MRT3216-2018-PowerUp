@@ -133,13 +133,13 @@ public class Robot extends IterativeRobot {
 		log.add("Autonomous Init", LOG_LEVEL);
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-
+		/*
 		switch(autonomousMode) {
 			case SWITCH:	autonomousCommand = autonomousChooser.Switch(gameData);
 			case SCALE: 	autonomousCommand = autonomousChooser.Scale(gameData);
 			default:		autonomousCommand = autonomousChooser.Cross_Line(gameData);
 		}
-
+		*/
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

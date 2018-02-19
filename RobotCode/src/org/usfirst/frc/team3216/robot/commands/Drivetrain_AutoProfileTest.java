@@ -24,12 +24,16 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 	
     public Drivetrain_AutoProfileTest() {   
     	super();
-  	
+   	
     	// 3 Waypoints    	
     	Waypoint[] points = new Waypoint[] {
-    	    new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
-    		new Waypoint(-2, -2, 0),
-    	    new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
+    	    //new Waypoint(-4, -1, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
+    		//new Waypoint(-2, -2, 0),
+    	    //new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
+    		new Waypoint(-4, 0, 0),
+    		new Waypoint(0, 0, 0),
+    		new Waypoint(4, -2, 0),
+    		new Waypoint(8, 2, 0),
     	};
 
         //String hashString = 
@@ -66,7 +70,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
             log.add("trajectory file not found, generating new path", LOG_LEVEL);
             trajectory = Pathfinder.generate(points, config);
             log.add("saving path to cache", LOG_LEVEL);
-            Pathfinder.writeToFile(saveFile,trajectory);
+            //Pathfinder.writeToFile(saveFile,trajectory);
         }
     	
     	log.add("Trajectory generated:", LOG_LEVEL);
@@ -75,11 +79,11 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     // Called just before this Command runs the first time
     protected void initialize() {
     	super.initialize();
-    	
+    	imu.reset();
     	initialHeading = imu.getAngleZ();
     	
     	// The distance between the left and right sides of the wheelbase is 0.6m
-    	double wheelbase_width = 0.514;
+    	double wheelbase_width = RobotMap.WHEEL_WIDTH;
 
     	// Create the Modifier Object
     	modifier = new TankModifier(trajectory);
@@ -130,14 +134,15 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
     	double r = encRight.calculate(encoder_position_right);
 
     	// Assuming the gyro is giving a value in degrees
-    	double gyro_heading = Robot.imu.getYaw();
+    	double gyro_heading = Robot.imu.getAngleZ();
     	double desired_heading = Pathfinder.r2d(encLeft.getHeading());  // Should also be in degrees
 
     	double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
     	double turn = 0.8 * (-1.0/80.0) * angleDifference;
 
-    	log.add("l + turn: " + (l + turn), LOG_LEVEL);
-    	log.add("r - turn: " + (r - turn), LOG_LEVEL);
+    	log.add("yaw: " + gyro_heading, LOG_LEVEL);
+    	//log.add("l + turn: " + (l + turn), LOG_LEVEL);
+    	//log.add("r - turn: " + (r - turn), LOG_LEVEL);
     	
     	drivetrain.setPower(0.05 * (l + turn), 0.05 * (r - turn));	
     }
