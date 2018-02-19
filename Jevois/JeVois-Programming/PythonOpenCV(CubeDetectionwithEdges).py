@@ -9,7 +9,7 @@ import numpy as np
 # @displayname Python OpenCV
 # @videomapping GRAY 640 480 20.0 YUYV 640 480 20.0 JeVois PythonOpenCV
 class PythonOpenCV:
-	# ###################################################################################################
+	# ###################################################################################################vfc
 	kernel = np.ones((5,5), np.uint8)
 	## Constructor
 	def __init__(self):
@@ -32,8 +32,8 @@ class PythonOpenCV:
 		hsv = cv2.cvtColor(closing, cv2.COLOR_RGB2HSV)
 
 		# define range of yellow color in HSV
-		lower_yellow = np.array([70, 170, 65])
-		upper_yellow = np.array([85,255,255])
+		lower_yellow = np.array([70, 120, 40])
+		upper_yellow = np.array([110,255,255])
 
 		# Threshold the HSV image to get only yellow colors
 		mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
