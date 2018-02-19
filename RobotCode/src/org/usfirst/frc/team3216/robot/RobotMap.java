@@ -64,13 +64,13 @@ public class RobotMap {
 	// Determines the threshold at which the robot drives straight
 	public static final double TURN_RATE_THRESHOLD = 0.5;
 	public static final double DRIVETRAIN_GEAR_RATIO = 
-			(currentBot == Bot.MAINBOT) ? 0 : 12/13.0;
+			(currentBot == Bot.MAINBOT) ? 7 : 12/13.0;
 	public static final int DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION = 
 			(currentBot == Bot.MAINBOT) ? 360 : 360;
 	public static final double WHEEL_DIAMETER = 
 			(currentBot == Bot.MAINBOT) ? 6.0 : 4.0;
 	public static final double WHEEL_WIDTH =
-			(currentBot == Bot.MAINBOT) ? 0 : 0.514;
+			(currentBot == Bot.MAINBOT) ? 0.565 : 0.514;
 	
 		
 	/** Logger Settings *******************************************************/
