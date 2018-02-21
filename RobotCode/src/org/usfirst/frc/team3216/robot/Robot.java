@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static DigitalInput topSwitch;	//= new DigitalInput(RobotMap.DIO_TOP_SWITCH);
+	public static DigitalInput topSwitch; // = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 	public static DigitalInput bottomSwitch; // = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
 	public static Elevator elevator; // = new Elevator();
 
@@ -46,11 +46,11 @@ public class Robot extends IterativeRobot {
 	public static ClimbArm climbArm; // = new ClimbArm();
 	public static Winch winch; // = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static final DrivetrainEncoder leftEncoder =
-			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
+	public static final DrivetrainEncoder leftEncoder = new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A,
+			RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
 
-	public static final DrivetrainEncoder rightEncoder =
-			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+	public static final DrivetrainEncoder rightEncoder = new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A,
+			RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
 
 	public static Pneumatics pneumatics = new Pneumatics();
 	public static Shifter shifter = new Shifter();
@@ -64,8 +64,8 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -73,40 +73,40 @@ public class Robot extends IterativeRobot {
 
 		drivetrain = new Drivetrain();
 
-		if(RobotMap.hasIMU) {
+		if (RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();
 			imu.calibrate();
 			imu.reset();
 		}
 
-		if(RobotMap.hasElevator) {
+		if (RobotMap.hasElevator) {
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
 			elevator = new Elevator();
 
 		}
 
-		if(RobotMap.hasWinch) {
+		if (RobotMap.hasWinch) {
 			winch = new Winch();
 		}
 
-		if(RobotMap.hasPneumatics) {
-			airCompressor  = new AirCompressor();
+		if (RobotMap.hasPneumatics) {
+			airCompressor = new AirCompressor();
 		}
 
-		if(RobotMap.hasClimbArm) {
-			 climbArm = new ClimbArm();
+		if (RobotMap.hasClimbArm) {
+			climbArm = new ClimbArm();
 		}
 
-		oi  = new OI();
+		oi = new OI();
 
 		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers();
 	}
 
 	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+	 * This function is called once each time the robot enters Disabled mode. You
+	 * can use it to reset any subsystem information you want to clear when the
+	 * robot is disabled.
 	 */
 	@Override
 	public void disabledInit() {
@@ -120,14 +120,14 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
+	 * between different autonomous modes using the dashboard. The sendable chooser
+	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+	 * remove all of the chooser code and uncomment the getString code to get the
+	 * auto name from the text box below the Gyro
 	 *
 	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * chooser code above (like the commented example) or additional comparisons to
+	 * the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
@@ -135,17 +135,16 @@ public class Robot extends IterativeRobot {
 
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		/*
-		switch(autonomousMode) {
-			case SWITCH:	autonomousCommand = autonomousChooser.Switch(gameData);
-			case SCALE: 	autonomousCommand = autonomousChooser.Scale(gameData);
-			default:		autonomousCommand = autonomousChooser.Cross_Line(gameData);
-		}
-		*/
+		 * switch(autonomousMode) { case SWITCH: autonomousCommand =
+		 * autonomousChooser.Switch(gameData); case SCALE: autonomousCommand =
+		 * autonomousChooser.Scale(gameData); default: autonomousCommand =
+		 * autonomousChooser.Cross_Line(gameData); }
+		 */
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
+		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
+		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
+		 * ExampleCommand(); break; }
 		 */
 
 		// schedule the autonomous command (example)
@@ -183,7 +182,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " + imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
+		// log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " +
+		// imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
 		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
@@ -198,38 +198,33 @@ public class Robot extends IterativeRobot {
 	}
 
 	public static void syncWithNetworkTables() {
-		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
+		NetworkTableInstance defaultTable = NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
 
 		/** Read from NetworkTable **/
 		// Control Settings
 
-
-		RobotMap.JOYSTICK_DEADZONE =
-				settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
-		RobotMap.JOYSTICK_SENSITIVITY =
-				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
-		RobotMap.DRIVESTRAIGHT_KP =
-				settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);
+		RobotMap.JOYSTICK_DEADZONE = settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
+		RobotMap.JOYSTICK_SENSITIVITY = settings.getEntry(RobotMap.ntSensitivity)
+				.getDouble(RobotMap.JOYSTICK_SENSITIVITY);
+		RobotMap.DRIVESTRAIGHT_KP = settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);
 		// Rangefinder
-		double m =
-				settings.getEntry(RobotMap.ntMedianSmoothingReadings).getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
+		double m = settings.getEntry(RobotMap.ntMedianSmoothingReadings).getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
 		RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
 		// Robot Status
-		RobotMap.currentBot =
-				RobotMap.Bot.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
+		RobotMap.currentBot = RobotMap.Bot
+				.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
 		// Robot Settings
-		RobotMap.CLIMB_ARM_SPEED =
-				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
-		RobotMap.ELEVATOR_THRESHOLD =
-				settings.getEntry(RobotMap.ntElevatorThreshold).getDouble(RobotMap.ELEVATOR_THRESHOLD);
+		RobotMap.CLIMB_ARM_SPEED = settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
+		RobotMap.ELEVATOR_THRESHOLD = settings.getEntry(RobotMap.ntElevatorThreshold)
+				.getDouble(RobotMap.ELEVATOR_THRESHOLD);
 		// Autonomous
-		RobotMap.AUTONOMOUS_MODE =
-				RobotMap.AutonomousModes.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
-		RobotMap.STARTING_POSITION =
-				RobotMap.StartingPositions.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
+		RobotMap.AUTONOMOUS_MODE = RobotMap.AutonomousModes
+				.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
+		RobotMap.STARTING_POSITION = RobotMap.StartingPositions
+				.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
 
-		/** Write to NetworkTable **/		
+		/** Write to NetworkTable **/
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
 		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistanceInFeet());

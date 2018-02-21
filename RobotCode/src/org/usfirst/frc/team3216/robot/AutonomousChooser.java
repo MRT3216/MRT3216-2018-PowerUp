@@ -13,46 +13,42 @@ public class AutonomousChooser {
 	Command autonomousCommand;
 
 	public Command Cross_Line(String gameData) {
-		if(startingPosition == StartingPositions.CENTER) {
-			autonomousCommand = new Drivetrain_AutoDriveForward(25); //For now it drives straight, but when we have 
-   																	 //motion profiling working, we'll want to have it 
-																	 //turn and go around the center stack of cubes.
-		}
-		else {
+		if (startingPosition == StartingPositions.CENTER) {
+			autonomousCommand = new Drivetrain_AutoDriveForward(25); // For now it drives straight, but when we have
+																		// motion profiling working, we'll want to have
+																		// it
+																		// turn and go around the center stack of cubes.
+		} else {
 			autonomousCommand = new Drivetrain_AutoDriveForward(25);
 		}
 		return autonomousCommand;
 	}
 
 	public Command Switch(String gameData) {
-		if((startingPosition == StartingPositions.LEFT && gameData.charAt(0) == 'L') || (startingPosition == StartingPositions.RIGHT && gameData.charAt(0) == 'R')) {
+		if ((startingPosition == StartingPositions.LEFT && gameData.charAt(0) == 'L')
+				|| (startingPosition == StartingPositions.RIGHT && gameData.charAt(0) == 'R')) {
 			autonomousCommand = new CGroup_Auto_StraightSwitch();
-		}
-		else if(startingPosition == StartingPositions.CENTER) {
-			//TODO: commands for doing switch for center position.
+		} else if (startingPosition == StartingPositions.CENTER) {
+			// TODO: commands for doing switch for center position.
 			autonomousCommand = new Drivetrain_AutoDriveForward(25);
 		}
 		return autonomousCommand;
 	}
 
 	public Command Scale(String gameData) {
-		if((startingPosition == StartingPositions.LEFT)) {
-			if(gameData.charAt(1) == 'L') {
-				//autonomousCommand = (command for left scale starting on left side)
+		if ((startingPosition == StartingPositions.LEFT)) {
+			if (gameData.charAt(1) == 'L') {
+				// autonomousCommand = (command for left scale starting on left side)
+			} else {
+				// autonomousCommand = (command for left scale starting on right side)
 			}
-			else {
-				//autonomousCommand = (command for left scale starting on right side)
+		} else if ((startingPosition == StartingPositions.RIGHT)) {
+			if (gameData.charAt(1) == 'R') {
+				// autonomousCommand = (command for right scale starting on right side)
+			} else {
+				// autonomousCommand = (command for right scale starting on left side)
 			}
-		}
-		else if((startingPosition == StartingPositions.RIGHT)) {
-			if(gameData.charAt(1) == 'R') {
-				//autonomousCommand = (command for right scale starting on right side)
-			}
-			else {
-				//autonomousCommand = (command for right scale starting on left side)
-			}
-		}
-		else {
+		} else {
 			autonomousCommand = new Drivetrain_AutoDriveForward(25);
 		}
 		return autonomousCommand;
