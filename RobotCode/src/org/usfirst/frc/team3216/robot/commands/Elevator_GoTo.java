@@ -12,49 +12,51 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Elevator_GoTo extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ELEVATOR;
-	
+
 	Logger log = new Logger(LOG_LEVEL, getName());
 	Elevator elevator = Robot.elevator;
 	double threshold = RobotMap.ELEVATOR_THRESHOLD;
-	
+
 	double height;
-    public Elevator_GoTo(double height) {
-        requires(elevator);
-        this.height = Math.abs(height);
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	elevator.stop();
-    }
+	public Elevator_GoTo(double height) {
+		requires(elevator);
+		this.height = Math.abs(height);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	/*if((elevatorEncoder < height) && ((height - elevatorEncoder.getDistance()) < threshold)) {
-    		elevator.setPower(1);
-    	}
-    	else if((elevatorEncoder > height) && (((elevatorEncoder.getDistance()) - height) < threshold)) {
-    		elevator.setPower(-1);
-    	}
-    	else {
-    		elevator.stop();
-    	}
-    	*/
-    }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		elevator.stop();
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;//(Math.abs(elevatorEncoder.getDistance() - height) < threshold) ;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		/*
+		 * if((elevatorEncoder < height) && ((height - elevatorEncoder.getDistance()) <
+		 * threshold)) { elevator.setPower(1); } else if((elevatorEncoder > height) &&
+		 * (((elevatorEncoder.getDistance()) - height) < threshold)) {
+		 * elevator.setPower(-1); } else { elevator.stop(); }
+		 */
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	elevator.stop();
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;// (Math.abs(elevatorEncoder.getDistance() - height) < threshold) ;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	elevator.stop();
-    }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+		elevator.stop();
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+		elevator.stop();
+	}
 }

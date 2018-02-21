@@ -8,15 +8,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class AirCompressor extends Subsystem {
 	Compressor compressor;
-		
-    public AirCompressor() {
-    	compressor = new Compressor(0);
-    	compressor.setClosedLoopControl(true);
-    }
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	public AirCompressor() {
+		compressor = new Compressor(0);
+		compressor.setClosedLoopControl(true);
+	}
+
+	@Override
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
 }
-

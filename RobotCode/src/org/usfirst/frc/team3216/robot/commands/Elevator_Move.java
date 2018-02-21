@@ -13,38 +13,43 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Elevator_Move extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ELEVATOR;
-	
+
 	Logger log = new Logger(LOG_LEVEL, getName());
 	Elevator elevator = Robot.elevator;
 	OI oi = Robot.oi;
 
-    public Elevator_Move() {
-        requires(elevator);
-    }
+	public Elevator_Move() {
+		requires(elevator);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	elevator.stop();
-    }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		elevator.stop();
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	double power = oi.getStickY();
-    	//log.add("Joystick Power: " + power, LOG_LEVEL);
-    	elevator.setPower(power);
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		double power = oi.getStickY();
+		// log.add("Joystick Power: " + power, LOG_LEVEL);
+		elevator.setPower(power);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }

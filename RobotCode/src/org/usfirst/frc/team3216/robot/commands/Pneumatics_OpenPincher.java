@@ -15,35 +15,40 @@ public class Pneumatics_OpenPincher extends Command {
 	Logger log = new Logger(RobotMap.LOG_PNEUMATICS, "OpenPincher");
 
 	Pneumatics pneumatics = Robot.pneumatics;
-   
+
 	public Pneumatics_OpenPincher() {
 		log.add("Contructor", LOG_LEVEL);
-        requires(pneumatics);
-    }
+		requires(pneumatics);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	log.add("Initialize", LOG_LEVEL);
-    }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		log.add("Initialize", LOG_LEVEL);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	log.add("Execute", LOG_LEVEL);
-    	pneumatics.openPincher();    	
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		log.add("Execute", LOG_LEVEL);
+		pneumatics.openPincher();
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	log.add("End", LOG_LEVEL);
-    }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+		log.add("End", LOG_LEVEL);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }

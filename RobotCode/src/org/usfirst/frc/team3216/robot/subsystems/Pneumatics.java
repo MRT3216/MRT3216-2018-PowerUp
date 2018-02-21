@@ -17,58 +17,58 @@ public class Pneumatics extends Subsystem {
 	private DoubleSolenoid popper;
 	private final DoubleSolenoid.Value forward = DoubleSolenoid.Value.kForward;
 	private final DoubleSolenoid.Value reverse = DoubleSolenoid.Value.kReverse;
-	
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
+
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
+
 	public Pneumatics() {
 		log.add("Constuctor", LOG_LEVEL);
-		
-		if(RobotMap.hasPneumatics) {
-			pincher = new DoubleSolenoid(0,1);
+
+		if (RobotMap.hasPneumatics) {
+			pincher = new DoubleSolenoid(0, 1);
 			popper = new DoubleSolenoid(2, 3);
-			
+
 			initPneumatics();
 		}
 	}
-	
+
 	private void initPneumatics() {
 		closePincher();
 		closePopper();
 	}
-	
-	//opens arms to release cube
+
+	// opens arms to release cube
 	public void openPincher() {
-		if(pincher.get() != forward)  { 
+		if (pincher.get() != forward) {
 			pincher.set(forward);
 			log.add("OpenPincher executed", LOG_LEVEL);
 		}
 	}
-	
-	//closes arms to grab cube
+
+	// closes arms to grab cube
 	public void closePincher() {
-		if(pincher.get() != reverse) {
+		if (pincher.get() != reverse) {
 			pincher.set(reverse);
 			log.add("ClosePincher Closed", LOG_LEVEL);
 		}
 	}
-	
-	//activates ejecting arm
+
+	// activates ejecting arm
 	public void openPopper() {
-		if(popper.get() != forward) {
+		if (popper.get() != forward) {
 			popper.set(forward);
 		}
 	}
-	
+
 	public void closePopper() {
-		if(popper.get() != reverse) {
+		if (popper.get() != reverse) {
 			popper.set(reverse);
 		}
 	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	@Override
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
 }
-

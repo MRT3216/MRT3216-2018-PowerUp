@@ -22,19 +22,19 @@ public class OI {
 	public Gamepad gamepad;
 	public ControlStick controlStick;
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_OI;
-	
+
 	/** Instance Variables ****************************************************/
 	Logger log = new Logger(RobotMap.LOG_OI, "OI");
-	
+
 	public OI() {
 		log.add("OI Constructor", LOG_LEVEL);
-		
+
 		gamepad = new Gamepad(RobotMap.USB_GAMEPAD);
-		if(RobotMap.hasShifter) {
+		if (RobotMap.hasShifter) {
 			gamepad.Y.whenPressed(new Shifter_ShiftUp());
 			gamepad.A.whenPressed(new Shifter_ShiftDown());
 		}
-		if(RobotMap.hasJoystick) {
+		if (RobotMap.hasJoystick) {
 			log.add("Joystick Contructed", LOG_LEVEL);
 			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
 			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
@@ -44,74 +44,74 @@ public class OI {
 			controlStick.button8.whenReleased(new ClimbArm_Stop());
 			controlStick.button9.whenPressed(new ClimbArm_GoForward());
 			controlStick.button9.whenReleased(new ClimbArm_Stop());
-			if(RobotMap.hasWinch) {
+			if (RobotMap.hasWinch) {
 				controlStick.button6.whenPressed(new Winch_GoUp());
 				controlStick.button6.whenReleased(new Winch_Stop());
 				controlStick.button7.whenPressed(new Winch_GoDown());
 				controlStick.button7.whenReleased(new Winch_Stop());
 			}
 		}
-		
+
 	}
-	
+
 	/** Gamepad Functions *****************************************************/
 	public double getDriveLeft() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = scaleJoystick(joystickValue);
 		joystickValue *= -.5;
-		
-		//log.add("getDriveLeft (" + joystickValue + ")", LOG_LEVEL);
-		//log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
-		
+
+		// log.add("getDriveLeft (" + joystickValue + ")", LOG_LEVEL);
+		// log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
+
 		return joystickValue;
 	}
-	
+
 	public double getDriveRight() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_Y_AXIS);
 		joystickValue = scaleJoystick(joystickValue);
 		joystickValue *= -.5;
 
-		//log.add("getDriveRight (" + joystickValue + ")", LOG_LEVEL);
-		return joystickValue;		
+		// log.add("getDriveRight (" + joystickValue + ")", LOG_LEVEL);
+		return joystickValue;
 	}
-	
+
 	public double getLeftY() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
-		//log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
+		// log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
 		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
-		return joystickValue;	
+		return joystickValue;
 	}
-	
+
 	public double getRightX() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
 		joystickValue = checkDeadZone(joystickValue);
-		//log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
-		return joystickValue;	
+		// log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
+		return joystickValue;
 	}
-	
-	/** Control Stick Functions ***********************************************/	
+
+	/** Control Stick Functions ***********************************************/
 	public double getStickY() {
 		double joystickValue = controlStick.getRawAxis(ControlStick.JOYSTICK_Y_AXIS);
-		//TODO - add checkDeadZone (if needed)
+		// TODO - add checkDeadZone (if needed)
 		log.add("StickY: " + joystickValue, LOG_LEVEL);
 		return joystickValue;
-	}	
-	
+	}
+
 	private double scaleJoystick(double joystickValue) {
 		joystickValue = checkDeadZone(joystickValue);
 		joystickValue = scaleSensitivity(joystickValue);
 		return joystickValue;
 	}
-	
-    // Scale Joystick Sensitivity 
+
+	// Scale Joystick Sensitivity
 	// a = sensitivity, and x is the power parameter
-    // y = a(x^3) + (1-a)x
-    private double scaleSensitivity(double x) {
-    	double a = RobotMap.JOYSTICK_SENSITIVITY;
-    	return a * (Math.pow(x, 3)) + (a-1) * x;	
-    }	
-	
+	// y = a(x^3) + (1-a)x
+	private double scaleSensitivity(double x) {
+		double a = RobotMap.JOYSTICK_SENSITIVITY;
+		return a * (Math.pow(x, 3)) + (a - 1) * x;
+	}
+
 	private double checkDeadZone(double joystickValue) {
 		if (Math.abs(joystickValue) < RobotMap.JOYSTICK_DEADZONE) {
 			joystickValue = 0.0;

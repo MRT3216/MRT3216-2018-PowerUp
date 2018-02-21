@@ -13,35 +13,40 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Shifter_ShiftUp extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_SHIFTER;
 	Logger log = new Logger(LOG_LEVEL, "Shifter");
-	
+
 	private Shifter shifter = Robot.shifter;
 
-    public Shifter_ShiftUp() {
-        requires(shifter);
-    }
+	public Shifter_ShiftUp() {
+		requires(shifter);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	log.add("Initialize", LOG_LEVEL);
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		log.add("Initialize", LOG_LEVEL);
 
-    }
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	shifter.shiftUp();
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		shifter.shiftUp();
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }

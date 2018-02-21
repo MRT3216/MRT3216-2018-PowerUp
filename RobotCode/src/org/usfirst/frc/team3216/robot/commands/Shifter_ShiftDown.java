@@ -13,37 +13,42 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Shifter_ShiftDown extends Command {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_SHIFTER;
 	Logger log = new Logger(LOG_LEVEL, "Shifter");
-	
+
 	private Shifter shifter = Robot.shifter;
-	
-    public Shifter_ShiftDown() {
-    	log.add("Shifter: " + shifter, LOG_LEVEL);
-        requires(shifter);
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	log.add("Initialize", LOG_LEVEL);
+	public Shifter_ShiftDown() {
+		log.add("Shifter: " + shifter, LOG_LEVEL);
+		requires(shifter);
+	}
 
-    }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+		log.add("Initialize", LOG_LEVEL);
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	shifter.shiftDown();
-    }
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		shifter.shiftDown();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	log.add("End", LOG_LEVEL);
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+		log.add("End", LOG_LEVEL);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }
