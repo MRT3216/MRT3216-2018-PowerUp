@@ -50,8 +50,8 @@ public class RobotMap {
 	/** Digital Input ports ***************************************************/
 	public static final int LEFT_ENCODER_CHANNEL_A = 9;
 	public static final int LEFT_ENCODER_CHANNEL_B = 8;
-	public static final int RIGHT_ENCODER_CHANNEL_A = 6;
-	public static final int RIGHT_ENCODER_CHANNEL_B = 7;
+	public static final int RIGHT_ENCODER_CHANNEL_A = 7;
+	public static final int RIGHT_ENCODER_CHANNEL_B = 6;
 	
 	/** Drive Mode Settings ***************************************************/
 	public static enum DriveMode {TANK, ARCADE;}
@@ -60,20 +60,23 @@ public class RobotMap {
 	/** Drivetrain Settings ***************************************************/
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
-	public static final double ACCELERATION_MAX = 1.5;
+	public static final double ACCELERATION_MAX = 2.0;
 	// Determines the threshold at which the robot drives straight
+	public static final double METERS_TO_FEET = 3.28084;
 	public static final double TURN_RATE_THRESHOLD = 0.5;
 	public static final double DRIVETRAIN_GEAR_RATIO = 
-			(currentBot == Bot.MAINBOT) ? 7 : 12/13.0;
+			(currentBot == Bot.MAINBOT) ? 7.0 : 24.0/26;
 	public static final int DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION = 
 			(currentBot == Bot.MAINBOT) ? 360 : 360;
 	public static final double WHEEL_DIAMETER = 
-			(currentBot == Bot.MAINBOT) ? 6 : 3.875;
+			(currentBot == Bot.MAINBOT) ? 6 : 3.85;
 	public static final double WHEEL_DIAMETER_METERS = 
 			(currentBot == Bot.MAINBOT) ? 0.1524 : 0.098425;
-	public static final double WHEEL_WIDTH =
+	public static final double WHEEL_DIAMETER_FEET = WHEEL_DIAMETER / 12.0;
+	public static final double WHEEL_WIDTH_METERS =
 			(currentBot == Bot.MAINBOT) ? 0.565 : 0.514;
-	
+	public static final double WHEEL_WIDTH_FEET = WHEEL_WIDTH_METERS * METERS_TO_FEET;
+
 		
 	/** Logger Settings *******************************************************/
 	public static final String 		LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";
@@ -137,13 +140,14 @@ public class RobotMap {
 	public static final String ntAutonomousMode					= "/autonomous/modes";
 	public static final String ntAutonomousRangefinderDistance  = "autonomousRangefinderDistance";
 	public static final String TRAJECTORY_CACHE					= "trajectory.bin";
-	public static final String TRAJECTORY_CSV					= "trajectory.csv";
-
+	public static final String TRAJECTORY_CSV					= "/home/lvuser/traj.csv";
+	public static final String TRAJECTORY_LEFTCSV				= "/home/lvuser/trajLeft.csv";
+	public static final String TRAJECTORY_RIGHTCSV				= "/home/lvuser/trajRight.csv";
 
 	/** Network Table Values**/
 	// Control Settings
 	public static double JOYSTICK_DEADZONE 						= 0.05;
-	public static double JOYSTICK_SENSITIVITY 					= 1.0;
+	public static double JOYSTICK_SENSITIVITY 					= 0.5;
 	public static double DRIVESTRAIGHT_KP 						= 0.01;
 	// Rangefinder
 	public static int MEDIAN_SMOOTHING_READINGS					= 15;	
@@ -159,6 +163,6 @@ public class RobotMap {
 	public static AutonomousModes AUTONOMOUS_MODE				= AutonomousModes.CROSS_LINE;
 	public static StartingPositions STARTING_POSITION			= StartingPositions.CENTER;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE 		= 25;
-	public static double MAX_VELOCITY							= 0.5; // in m/s
+	public static double MAX_VELOCITY							= 10.0; // in ft/s
 
 }

@@ -12,6 +12,7 @@ import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
 import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileDistanceFollowers;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileTest;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
 			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
 
 	public static final DrivetrainEncoder rightEncoder = 
-			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);	
+			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);	
 	
 	public static Pneumatics pneumatics = new Pneumatics(); 
 	public static Shifter shifter = new Shifter();
@@ -99,7 +100,7 @@ public class Robot extends IterativeRobot {
 		
 		oi  = new OI();
 		
-		autonomousCommand = new Drivetrain_AutoProfileTest();
+		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers();
 	}
 
 	/**
@@ -233,8 +234,8 @@ public class Robot extends IterativeRobot {
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
-		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistance());
-		settings.getEntry(RobotMap.ntRightDriveEncoderDistance).setDouble(rightEncoder.getDistance());
+		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistanceInFeet());
+		settings.getEntry(RobotMap.ntRightDriveEncoderDistance).setDouble(rightEncoder.getDistanceInFeet());
 		settings.getEntry(RobotMap.ntAutonomousMode).setString(RobotMap.AUTONOMOUS_MODE.name());
 		settings.getEntry(RobotMap.ntPincher).setString(RobotMap.PINCHER_STATUS.name());
 		settings.getEntry(RobotMap.ntPopper).setString(RobotMap.POPPER_STATUS.name());
