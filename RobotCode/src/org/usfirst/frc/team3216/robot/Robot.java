@@ -1,5 +1,20 @@
 package org.usfirst.frc.team3216.robot;
 
+import org.usfirst.frc.team3216.lib.Logger;
+import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
+import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileDistanceFollowers;
+import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
+import org.usfirst.frc.team3216.robot.subsystems.AirCompressor;
+import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
+import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3216.robot.subsystems.DrivetrainEncoder;
+import org.usfirst.frc.team3216.robot.subsystems.Elevator;
+import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
+import org.usfirst.frc.team3216.robot.subsystems.Shifter;
+import org.usfirst.frc.team3216.robot.subsystems.Winch;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -8,22 +23,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
-import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileDistanceFollowers;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileTest;
-import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
-import org.usfirst.frc.team3216.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3216.robot.subsystems.DrivetrainEncoder;
-import org.usfirst.frc.team3216.robot.subsystems.Elevator;
-import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
-import org.usfirst.frc.team3216.robot.subsystems.AirCompressor;
-import org.usfirst.frc.team3216.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
-import org.usfirst.frc.team3216.robot.subsystems.Shifter;
-import org.usfirst.frc.team3216.robot.subsystems.Winch;
 
 /**
  * The VM is configured to automatically run this class, and to call the

@@ -1,14 +1,15 @@
 package org.usfirst.frc.team3216.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_ArcadeDrive;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_TankDrive;
+
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *

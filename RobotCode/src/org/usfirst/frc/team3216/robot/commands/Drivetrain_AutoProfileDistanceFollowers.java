@@ -1,14 +1,16 @@
 package org.usfirst.frc.team3216.robot.commands;
 
+import java.io.File;
+
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
+
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.DistanceFollower;
 import jaci.pathfinder.modifiers.TankModifier;
-import java.io.File;
 
 /**
  *
