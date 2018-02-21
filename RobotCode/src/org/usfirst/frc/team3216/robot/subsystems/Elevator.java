@@ -30,11 +30,10 @@ public class Elevator extends Subsystem {
 	}
 	
 	public void setPower(double power) {
-		if(canGo()) {
+			power = heightCheck(power);
 			power = safetyCheck(power);
 			log.add("Elevator Power: " + power, LOG_LEVEL);
 			motor.set(power);	
-		}
 	}
 	
 	public void stop() {
@@ -53,10 +52,16 @@ public class Elevator extends Subsystem {
 		return power;
 	}
 	
-	private boolean canGo() {
-		//TODO: Insert Code to check if it is within encoder range
-		//may need separate methods for up and down.
-		return true;
+	private double heightCheck(double power) {
+		log.add("Top: " + topSwitch.get(), LOG_LEVEL);
+		log.add("Bottom: " + bottomSwitch.get(), LOG_LEVEL);
+		log.add("Power: " + power, LOG_LEVEL);
+		if((power < 0 && topSwitch.get()) || (power > 0 && bottomSwitch.get())) {
+			return power;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 

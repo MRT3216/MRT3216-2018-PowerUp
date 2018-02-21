@@ -78,11 +78,12 @@ public class Robot extends IterativeRobot {
 			imu.calibrate();
 			imu.reset();	
 		}	
-		
+
 		if(RobotMap.hasElevator) {
-			elevator = new Elevator();
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
+			elevator = new Elevator();
+
 		}
 		
 		if(RobotMap.hasWinch) {
@@ -201,11 +202,13 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public static void syncWithNetworkTables() {
-		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
+		/*NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
 		
 		/** Read from NetworkTable **/
 		// Control Settings
+		
+		/*
 		RobotMap.JOYSTICK_DEADZONE = 
 				settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
 		RobotMap.JOYSTICK_SENSITIVITY = 
@@ -230,7 +233,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.STARTING_POSITION = 
 				RobotMap.StartingPositions.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));	
 						
-		/** Write to NetworkTable **/		
+		/** Write to NetworkTable **		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
 		settings.getEntry(RobotMap.ntLeftDriveEncoderDistance).setDouble(leftEncoder.getDistance());
@@ -243,6 +246,6 @@ public class Robot extends IterativeRobot {
 		settings.getEntry(RobotMap.ntTime).setDouble(DriverStation.getInstance().getMatchTime());
 		settings.getEntry(RobotMap.ntColor).setString(DriverStation.getInstance().getAlliance().name());
 		settings.getEntry(RobotMap.ntGameData).setString(DriverStation.getInstance().getGameSpecificMessage());
-		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getAngleZ());
+		settings.getEntry(RobotMap.ntYaw).setDouble(imu.getAngleZ());*/
 	}
 }
