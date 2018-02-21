@@ -35,7 +35,7 @@ import org.usfirst.frc.team3216.robot.subsystems.Winch;
 public class Robot extends IterativeRobot {
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
-	
+
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
 	public static DigitalInput topSwitch;	//= new DigitalInput(RobotMap.DIO_TOP_SWITCH);
@@ -47,13 +47,13 @@ public class Robot extends IterativeRobot {
 	public static ClimbArm climbArm; // = new ClimbArm();
 	public static Winch winch; // = new Winch();
 	public static final RangeFinder rangeFinder = new RangeFinder();
-	public static final DrivetrainEncoder leftEncoder = 
+	public static final DrivetrainEncoder leftEncoder =
 			new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
 
-	public static final DrivetrainEncoder rightEncoder = 
-			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);	
-	
-	public static Pneumatics pneumatics = new Pneumatics(); 
+	public static final DrivetrainEncoder rightEncoder =
+			new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+
+	public static Pneumatics pneumatics = new Pneumatics();
 	public static Shifter shifter = new Shifter();
 	public static ADIS16448_IMU imu;
 	public static OI oi;
@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 
 	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
 	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
-	
+
 	Command autonomousCommand;
 
 	/**
@@ -69,37 +69,38 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	@Override
-	public void robotInit() {		
+	public void robotInit() {
 		log.add("Robot Init", LOG_LEVEL);
-		
+
 		drivetrain = new Drivetrain();
 
 		if(RobotMap.hasIMU) {
 			imu = new ADIS16448_IMU();
 			imu.calibrate();
-			imu.reset();	
-		}	
-		
+			imu.reset();
+		}
+
 		if(RobotMap.hasElevator) {
-			elevator = new Elevator();
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
+			elevator = new Elevator();
+
 		}
-		
+
 		if(RobotMap.hasWinch) {
 			winch = new Winch();
 		}
-		
+
 		if(RobotMap.hasPneumatics) {
 			airCompressor  = new AirCompressor();
 		}
-		
+
 		if(RobotMap.hasClimbArm) {
 			 climbArm = new ClimbArm();
 		}
-		
+
 		oi  = new OI();
-		
+
 		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers();
 	}
 
@@ -132,7 +133,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
-		
+
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		/*
 		switch(autonomousMode) {
@@ -165,15 +166,15 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		log.add("Teleop Init", LOG_LEVEL); 		
-		
+		log.add("Teleop Init", LOG_LEVEL);
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		
+
 		leftEncoder.initEncoder();
 		rightEncoder.initEncoder();
 	}
@@ -187,10 +188,6 @@ public class Robot extends IterativeRobot {
 		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
-		
-		//log.add("Smoothing Readings: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
-		//log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
-		//log.add("Climb Speed: " + RobotMap.CLIMB_ARM_SPEED, LOG_LEVEL);
 	}
 
 	/**
@@ -200,37 +197,39 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
-	
+
 	public static void syncWithNetworkTables() {
 		NetworkTableInstance defaultTable =  NetworkTableInstance.getDefault();
 		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
-		
+
 		/** Read from NetworkTable **/
 		// Control Settings
-		RobotMap.JOYSTICK_DEADZONE = 
+
+
+		RobotMap.JOYSTICK_DEADZONE =
 				settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
-		RobotMap.JOYSTICK_SENSITIVITY = 
+		RobotMap.JOYSTICK_SENSITIVITY =
 				settings.getEntry(RobotMap.ntSensitivity).getDouble(RobotMap.JOYSTICK_SENSITIVITY);
-		RobotMap.DRIVESTRAIGHT_KP = 
-				settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);			
+		RobotMap.DRIVESTRAIGHT_KP =
+				settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);
 		// Rangefinder
-		double m = 
+		double m =
 				settings.getEntry(RobotMap.ntMedianSmoothingReadings).getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
 		RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
 		// Robot Status
-		RobotMap.currentBot = 
+		RobotMap.currentBot =
 				RobotMap.Bot.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
 		// Robot Settings
-		RobotMap.CLIMB_ARM_SPEED = 
-				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);		
+		RobotMap.CLIMB_ARM_SPEED =
+				settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
 		RobotMap.ELEVATOR_THRESHOLD =
-				settings.getEntry(RobotMap.ntElevatorThreshold).getDouble(RobotMap.ELEVATOR_THRESHOLD);		
+				settings.getEntry(RobotMap.ntElevatorThreshold).getDouble(RobotMap.ELEVATOR_THRESHOLD);
 		// Autonomous
-		RobotMap.AUTONOMOUS_MODE = 
-				RobotMap.AutonomousModes.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));	
-		RobotMap.STARTING_POSITION = 
-				RobotMap.StartingPositions.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));	
-						
+		RobotMap.AUTONOMOUS_MODE =
+				RobotMap.AutonomousModes.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
+		RobotMap.STARTING_POSITION =
+				RobotMap.StartingPositions.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
+
 		/** Write to NetworkTable **/		
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
