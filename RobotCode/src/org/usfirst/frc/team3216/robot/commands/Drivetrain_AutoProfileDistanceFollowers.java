@@ -33,7 +33,8 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 				// new Waypoint(-2, -2, 0),
 				// new Waypoint(0, 0, 0) // Waypoint @ x=0, y=0, exit angle=0 radians
 				// new Waypoint(-4, 0, 0),
-				new Waypoint(0, 10, 0), new Waypoint(5, 5, 0), new Waypoint(10, 10, 0), new Waypoint(15, 10, 0)
+				new Waypoint(0, 10, 0), new Waypoint(5, 5, 0), new Waypoint(10, 10, 0), new Waypoint(15, 10, 0),
+				new Waypoint(17, 10, 0)
 				// new Waypoint(2, 2, 0),
 		};
 
@@ -126,18 +127,17 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 
 		gyro_heading = (gyro_heading < 0) ? 360 + gyro_heading : gyro_heading;
 
-		gyro_heading = 0;
-
 		double desired_heading = Pathfinder.r2d(encLeft.getHeading()); // Should also be in degrees
 
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-		// double turn = 0.8 * (-1.0/80.0) * angleDifference;
-		double turn = 0;
-		// log.add("angleZ: " + gyro_heading, LOG_LEVEL);
-		// log.add("Desired Heading: " + desired_heading, LOG_LEVEL);
+		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
+		log.add("gyro_heading: " + gyro_heading, LOG_LEVEL);
+		log.add("desired_heading: " + desired_heading, LOG_LEVEL);
+		log.add("turn: " + turn, LOG_LEVEL);
 		log.add("l: " + l, LOG_LEVEL);
 		log.add("r: " + r, LOG_LEVEL);
-		// log.add("turn: " + turn, LOG_LEVEL);
+		log.add("l - turn: " + (l - turn), LOG_LEVEL);
+		log.add("r + turn: " + (r + turn), LOG_LEVEL);
 
 		drivetrain.setPower((r - turn), (l + turn));
 		// drivetrain.setPower(.1, .1);
