@@ -8,89 +8,43 @@ import org.usfirst.frc.team3216.robot.RobotMap;
 
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.DistanceFollower;
-import jaci.pathfinder.modifiers.TankModifier;
 
 /** 
- *
+ * 
  */
 public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_AUTOPROFILE;
 	private Logger log = new Logger(LOG_LEVEL, getName());
-	private Trajectory trajectory;
-	private TankModifier modifier;
-	private DistanceFollower encLeft;
-	private DistanceFollower encRight;
+	private DistanceFollower followerLeft;
+	private DistanceFollower followerRight;
+	private int count = 0;
 
 	public Drivetrain_AutoProfileDistanceFollowers() {
 		super();
-
-		// 3 Waypoints
-		Waypoint[] points = new Waypoint[] {
-				// new Waypoint(-4, -1, Pathfinder.d2r(-45)), // Waypoint @ x=-4, y=-1, exit
-				// angle=-45 degrees
-				// new Waypoint(-2, -2, 0),
-				// new Waypoint(0, 0, 0) // Waypoint @ x=0, y=0, exit angle=0 radians
-				// new Waypoint(-4, 0, 0),
-				new Waypoint(0, 10, 0), new Waypoint(5, 5, 0), new Waypoint(10, 10, 0), new Waypoint(15, 10, 0),
-				new Waypoint(17, 10, 0)
-				// new Waypoint(2, 2, 0),
-		};
-
-		log.add("hash of waypoint list: " + points.hashCode(), LOG_LEVEL);
-
-		// Create the Trajectory Configuration
-		//
-		// Arguments:
-		// Fit Method: HERMITE_CUBIC or HERMITE_QUINTIC
-		// Sample Count: SAMPLES_HIGH (100 000)
-		// SAMPLES_LOW (10 000)
-		// SAMPLES_FAST (1 000)
-		// Time Step: 0.05 Seconds
-		// Max Velocity: 1.7 m/s
-		// Max Acceleration: 2.0 m/s/s
-		// Max Jerk: 60.0 m/s/s/s
-		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
-				Trajectory.Config.SAMPLES_HIGH, 0.02, RobotMap.MAX_VELOCITY - 5, 3.0, 60.0);
-
-		File saveFile = new File(RobotMap.TRAJECTORY_CSV);
-		trajectory = Pathfinder.generate(points, config);
-		log.add(saveFile.getAbsolutePath(), LOG_LEVEL);
-		Pathfinder.writeToCSV(saveFile, trajectory);
-		log.add("Trajectory generated:", LOG_LEVEL);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		super.initialize();
+		// Reset the values of the encoder
 		Robot.leftEncoder.reset();
 		Robot.rightEncoder.reset();
+		// Reset doesn't take a long time, calibrate does
+		imu.reset();
 
-		// imu.reset();
-
-		// The distance between the left and right sides of the wheelbase
-		double wheelbase_width = RobotMap.WHEEL_WIDTH_FEET;
-
-		// Create the Modifier Object
-		modifier = new TankModifier(trajectory);
-
-		// Generate the Left and Right trajectories using the original trajectory
-		// as the center
-		modifier.modify(wheelbase_width);
-
-		Trajectory left = modifier.getLeftTrajectory(); // Get the Left Side
-		Trajectory right = modifier.getRightTrajectory(); // Get the Right Side
-
+		// Read in the Trajectory for the left and right
 		File leftFile = new File(RobotMap.TRAJECTORY_LEFTCSV);
 		File rightFile = new File(RobotMap.TRAJECTORY_RIGHTCSV);
-		Pathfinder.writeToCSV(leftFile, left);
-		Pathfinder.writeToCSV(rightFile, right);
+		Trajectory left = Pathfinder.readFromCSV(leftFile);
+		Trajectory right = Pathfinder.readFromCSV(rightFile);
 
-		encLeft = new DistanceFollower(left);
-		encRight = new DistanceFollower(right);
+		// Create a distance follower to follow the the path
+		followerLeft = new DistanceFollower(left);
+		followerRight = new DistanceFollower(right);
 
+		// Get the velocity
 		double max_velocity = RobotMap.MAX_VELOCITY;
 
 		// The first argument is the proportional gain. Usually this will be quite high
@@ -103,8 +57,8 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		// motors can read)
 		// The fifth argument is your acceleration gain. Tweak this if you want to get
 		// to a higher or lower speed quicker
-		encLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
-		encRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		followerLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		followerRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
 
 		log.add("initialized", LOG_LEVEL);
 	}
@@ -112,24 +66,31 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		// Increment the count (how many times this has been run)
+		count++;
+
+		// Get the distance that each encoder has traveled
 		double encoder_distance_left = Robot.leftEncoder.getDistanceInFeet();
 		double encoder_distance_right = Robot.rightEncoder.getDistanceInFeet();
+		log.add("Count: " + count, LOG_LEVEL);
 		log.add("Enc distance left: " + encoder_distance_left, LOG_LEVEL);
 		log.add("Enc distance right: " + encoder_distance_right, LOG_LEVEL);
-		log.add("L Seg: " + encLeft.getSegment().position, LOG_LEVEL);
-		log.add("R Seg: " + encRight.getSegment().position, LOG_LEVEL);
+		log.add("L Seg: " + followerLeft.getSegment().position, LOG_LEVEL);
+		log.add("R Seg: " + followerRight.getSegment().position, LOG_LEVEL);
 
-		double l = encLeft.calculate(encoder_distance_left);
-		double r = encRight.calculate(encoder_distance_right);
+		// Read from both of the followers
+		double l = followerLeft.calculate(encoder_distance_left);
+		double r = followerRight.calculate(encoder_distance_right);
 
-		// Assuming the gyro is giving a value in degrees
+		// Get the current angle from the IMU (in degrees)
 		double gyro_heading = (-1 * Robot.imu.getAngleZ()) % 360;
 
-		gyro_heading = (gyro_heading < 0) ? 360 + gyro_heading : gyro_heading;
+		// Get the heading that the the robot should be at
+		double desired_heading = Pathfinder.r2d(followerLeft.getHeading()); // Should also be in degrees
 
-		double desired_heading = Pathfinder.r2d(encLeft.getHeading()); // Should also be in degrees
-
+		// Calculate the difference between the desired heading and the actual ehading
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
+		// Calculate the turn (??? ask Jaci ???)
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
 		log.add("gyro_heading: " + gyro_heading, LOG_LEVEL);
 		log.add("desired_heading: " + desired_heading, LOG_LEVEL);
@@ -139,12 +100,15 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		log.add("l - turn: " + (l - turn), LOG_LEVEL);
 		log.add("r + turn: " + (r + turn), LOG_LEVEL);
 
+		// Set the power to each motor
+		// IMPORTANT: For some reason this has to be sent in backwards (r is sent to
+		// left motor, r is sent to right)
+		// No idea why, but for now it just is?
 		drivetrain.setPower((r - turn), (l + turn));
-		// drivetrain.setPower(.1, .1);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return encLeft.isFinished() && encRight.isFinished();
+		return followerLeft.isFinished() && followerRight.isFinished();
 	}
 }

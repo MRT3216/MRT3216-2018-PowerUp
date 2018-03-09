@@ -133,6 +133,7 @@ public class Drivetrain_AutoProfileTest extends Drivetrain_Drive {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		// Get the current position of the encoder
 		int encoder_position_left = Robot.leftEncoder.getCount();
 		int encoder_position_right = Robot.rightEncoder.getCount();
 		log.add("Enc pos left: " + encoder_position_left, LOG_LEVEL);
