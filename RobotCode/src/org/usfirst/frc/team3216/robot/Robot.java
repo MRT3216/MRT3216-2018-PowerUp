@@ -15,11 +15,12 @@ import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 import org.usfirst.frc.team3216.robot.subsystems.Shifter;
 import org.usfirst.frc.team3216.robot.subsystems.Winch;
 
+import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -31,7 +32,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	/** Configuration Constants ***********************************************/
 	private static final Logger.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
 
@@ -57,6 +58,9 @@ public class Robot extends IterativeRobot {
 	public static ADIS16448_IMU imu;
 	public static OI oi;
 	public static AutonomousChooser autonomousChooser;
+	// Network tables
+	private static NetworkTableInstance defaultTable = NetworkTableInstance.getDefault();
+	private static NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
 
 	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
 	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
@@ -83,7 +87,6 @@ public class Robot extends IterativeRobot {
 			topSwitch = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
 			bottomSwitch = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
 			elevator = new Elevator();
-
 		}
 
 		if (RobotMap.hasWinch) {
@@ -101,6 +104,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers();
+
+		setupNetworkTableListeners();
 	}
 
 	/**
@@ -159,7 +164,6 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		syncWithNetworkTables();
 		Scheduler.getInstance().run();
-		log.add("autonomousRangeFinderDistance: " + RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE, LOG_LEVEL);
 	}
 
 	@Override
@@ -184,8 +188,10 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		// log.add("X: " + imu.getAngleX() + " Y: " + imu.getAngleY() + " Z: " +
 		// imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
-		log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
+		// log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
+
+		log.add("Median Smoothing: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
 		Scheduler.getInstance().run();
 	}
 
@@ -197,33 +203,58 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 
+	public void setupNetworkTableListeners() {
+		settings.addEntryListener((table, key, entry, value, flags) -> {
+			// log.add("Key: " + key + " Value: " + value.getValue() + " Flags: " + flags,
+			// this.Log_Level);
+
+			switch (key) {
+			// Control Settings
+			case RobotMap.ntDeadzone:
+				RobotMap.JOYSTICK_DEADZONE = settings.getEntry(RobotMap.ntDeadzone)
+						.getDouble(RobotMap.JOYSTICK_DEADZONE);
+				break;
+			case RobotMap.ntSensitivity:
+				RobotMap.JOYSTICK_SENSITIVITY = settings.getEntry(RobotMap.ntSensitivity)
+						.getDouble(RobotMap.JOYSTICK_SENSITIVITY);
+				break;
+			case RobotMap.ntDriveStraightKP:
+				RobotMap.DRIVESTRAIGHT_KP = settings.getEntry(RobotMap.ntDriveStraightKP)
+						.getDouble(RobotMap.DRIVESTRAIGHT_KP);
+				break;
+			// Rangefinder
+			case RobotMap.ntMedianSmoothingReadings:
+				double m = settings.getEntry(RobotMap.ntMedianSmoothingReadings)
+						.getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
+				RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
+				break;
+			// Robot Status
+			case RobotMap.ntBot:
+				RobotMap.currentBot = RobotMap.Bot
+						.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
+				break;
+			// Robot Settings
+			case RobotMap.ntClimbArmSpeed:
+				RobotMap.CLIMB_ARM_SPEED = settings.getEntry(RobotMap.ntClimbArmSpeed)
+						.getDouble(RobotMap.CLIMB_ARM_SPEED);
+				break;
+			case RobotMap.ntElevatorThreshold:
+				RobotMap.ELEVATOR_THRESHOLD = settings.getEntry(RobotMap.ntElevatorThreshold)
+						.getDouble(RobotMap.ELEVATOR_THRESHOLD);
+				break;
+			// Autonomous
+			case RobotMap.ntAutonomousMode:
+				RobotMap.AUTONOMOUS_MODE = RobotMap.AutonomousModes.valueOf(
+						settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
+			case RobotMap.ntStartingPosition:
+				RobotMap.STARTING_POSITION = RobotMap.StartingPositions.valueOf(
+						settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
+
+			}
+		}, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+	}
+
 	public static void syncWithNetworkTables() {
-		NetworkTableInstance defaultTable = NetworkTableInstance.getDefault();
-		NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
-
-		/** Read from NetworkTable **/
-		// Control Settings
-
-		RobotMap.JOYSTICK_DEADZONE = settings.getEntry(RobotMap.ntDeadzone).getDouble(RobotMap.JOYSTICK_DEADZONE);
-		RobotMap.JOYSTICK_SENSITIVITY = settings.getEntry(RobotMap.ntSensitivity)
-				.getDouble(RobotMap.JOYSTICK_SENSITIVITY);
-		RobotMap.DRIVESTRAIGHT_KP = settings.getEntry(RobotMap.ntDriveStraightKP).getDouble(RobotMap.DRIVESTRAIGHT_KP);
-		// Rangefinder
-		double m = settings.getEntry(RobotMap.ntMedianSmoothingReadings).getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
-		RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
-		// Robot Status
-		RobotMap.currentBot = RobotMap.Bot
-				.valueOf(settings.getEntry(RobotMap.ntBot).getString(RobotMap.currentBot.name()));
-		// Robot Settings
-		RobotMap.CLIMB_ARM_SPEED = settings.getEntry(RobotMap.ntClimbArmSpeed).getDouble(RobotMap.CLIMB_ARM_SPEED);
-		RobotMap.ELEVATOR_THRESHOLD = settings.getEntry(RobotMap.ntElevatorThreshold)
-				.getDouble(RobotMap.ELEVATOR_THRESHOLD);
-		// Autonomous
-		RobotMap.AUTONOMOUS_MODE = RobotMap.AutonomousModes
-				.valueOf(settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
-		RobotMap.STARTING_POSITION = RobotMap.StartingPositions
-				.valueOf(settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
-
 		/** Write to NetworkTable **/
 		settings.getEntry(RobotMap.ntRangeFinderDistance).setDouble(rangeFinder.getDistanceInInches());
 		settings.getEntry(RobotMap.ntRangeFinderAverageDistance).setDouble(rangeFinder.getSmoothedDistancedInInches());
