@@ -38,14 +38,14 @@ public class Robot extends TimedRobot {
 
 	/** Create Subsystems *****************************************************/
 	private Logger log = new Logger(LOG_LEVEL, "Robot");
-	public static DigitalInput topSwitch; // = new DigitalInput(RobotMap.DIO_TOP_SWITCH);
-	public static DigitalInput bottomSwitch; // = new DigitalInput(RobotMap.DIO_BOTTOM_SWITCH);
-	public static Elevator elevator; // = new Elevator();
+	public static DigitalInput topSwitch;
+	public static DigitalInput bottomSwitch;
+	public static Elevator elevator;
 
-	public static AirCompressor airCompressor; // = new AirCompressor();
+	public static AirCompressor airCompressor;
 	public static Drivetrain drivetrain;
-	public static ClimbArm climbArm; // = new ClimbArm();
-	public static Winch winch; // = new Winch();
+	public static ClimbArm climbArm;
+	public static Winch winch;
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final DrivetrainEncoder leftEncoder = new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A,
 			RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
@@ -145,13 +145,6 @@ public class Robot extends TimedRobot {
 		 * autonomousChooser.Scale(gameData); default: autonomousCommand =
 		 * autonomousChooser.Cross_Line(gameData); }
 		 */
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
-
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
