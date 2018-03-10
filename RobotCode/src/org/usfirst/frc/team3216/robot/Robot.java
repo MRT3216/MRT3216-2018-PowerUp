@@ -179,6 +179,7 @@ public class Robot extends TimedRobot {
 
 		leftEncoder.initEncoder();
 		rightEncoder.initEncoder();
+		shifter.shiftUp();
 	}
 
 	/**

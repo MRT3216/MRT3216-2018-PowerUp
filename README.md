@@ -63,10 +63,12 @@ These values need to be **read and set** in the dashboard:<br>
   - readings that will be used to smooth rangefinder distance 
 
 **Autonomous Paths/WayPoints**
-- **crossTheLine:** drive 11 feet
+- **crossTheLine:** drive 11 feet forward
     - (0, 0, 0)
-    - (11, 0, 0)
-
+    - (7.86, 0, 0)
+- **straighSwitch: ** drive straight to switch
+   - (0, 0, 0)
+   - (8.5, 0, 0)
 
 
 Ip's and passwords: https://docs.google.com/document/d/1gnbhW8H-TXnGVFWnfqmTPNoPVJzINSkYyQ2_zQQK6Qc/edit?usp=sharing
