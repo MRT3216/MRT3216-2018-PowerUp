@@ -36,16 +36,16 @@ public class OI {
 			gamepad.A.whenPressed(new Shifter_ShiftDown());
 		}
 		if (RobotMap.hasJoystick) {
-			
-			//Code to check which joystick is plugged in
+
+			// Code to check which joystick is plugged in
 			controlStick = new ControlStick(RobotMap.USB_ATTACK_CONTROL_STICK);
 			RobotMap.currentControlStick = RobotMap.ControlStick.ATTACK;
-			if(controlStick == null) {
+			if (controlStick == null) {
 				controlStick = new ControlStick(RobotMap.USB_EXTREME_CONTROL_STICK);
 				RobotMap.currentControlStick = RobotMap.ControlStick.EXTREME;
 			}
-			
-			if(RobotMap.currentControlStick == RobotMap.ControlStick.ATTACK) {
+
+			if (RobotMap.currentControlStick == RobotMap.ControlStick.ATTACK) {
 				log.add("Attack Joystick Contructed", LOG_LEVEL);
 				controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
 				controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
@@ -60,8 +60,7 @@ public class OI {
 					controlStick.button7.whenPressed(new Winch_GoDown());
 					controlStick.button7.whenReleased(new Winch_Stop());
 				}
-			}
-			else {
+			} else {
 				log.add("EXTREME Joystick Contructed", LOG_LEVEL);
 				controlStick.button2.whenPressed(new Pneumatics_TogglePincher());
 				controlStick.Trigger.whenPressed(new CGroup_ShootCube());
