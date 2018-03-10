@@ -33,13 +33,10 @@ public class RobotMap {
 		YES, NO;
 	}
 
-<<<<<<< HEAD
 	public static Bot currentBot = Bot.MAINBOT;
 	
 	public static ControlStick currentControlStick;
-=======
-	public static Bot currentBot = Bot.BLUEFISH;
->>>>>>> d2b6e8082726b59138a5b0a004280e7b75101171
+
 
 	/** Subsystems for each bot ***********************************************/
 	public static boolean hasIMU = (currentBot == Bot.MAINBOT) ? true : true;
@@ -121,11 +118,7 @@ public class RobotMap {
 	public static final Logger.Level LOG_RANGEFINDER = Logger.Level.OFF;
 	public static final Logger.Level LOG_IMU = Logger.Level.OFF;
 	public static final Logger.Level LOG_ENCODER = Logger.Level.OFF;
-<<<<<<< HEAD
 	public static final Logger.Level LOG_PNEUMATICS = Logger.Level.TRACE;
-=======
-	public static final Logger.Level LOG_PNEUMATICS = Logger.Level.OFF;
->>>>>>> d2b6e8082726b59138a5b0a004280e7b75101171
 	public static final Logger.Level LOG_ELEVATOR = Logger.Level.OFF;
 	public static final Logger.Level LOG_SHIFTER = Logger.Level.OFF;
 	public static final Logger.Level LOG_WINCH = Logger.Level.OFF;
