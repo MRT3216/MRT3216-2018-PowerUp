@@ -12,6 +12,10 @@ public class RobotMap {
 	public static enum Bot {
 		TESTBOARD, BLUEFISH, MAINBOT;
 	}
+	
+	public static enum ControlStick {
+		ATTACK, EXTREME;
+	}
 
 	public static enum Pincher {
 		OPEN, CLOSED;
@@ -30,6 +34,8 @@ public class RobotMap {
 	}
 
 	public static Bot currentBot = Bot.MAINBOT;
+	
+	public static ControlStick currentControlStick;
 
 	/** Subsystems for each bot ***********************************************/
 	public static boolean hasIMU = (currentBot == Bot.MAINBOT) ? true : true;
@@ -52,7 +58,8 @@ public class RobotMap {
 
 	/** USB ports *************************************************************/
 	public static final int USB_GAMEPAD = 0;
-	public static final int USB_CONTROL_STICK = 2;
+	public static final int USB_ATTACK_CONTROL_STICK = 2;
+	public static final int USB_EXTREME_CONTROL_STICK = 3;
 
 	/** PWM ID numbers ********************************************************/
 	public static final int PWM_LEFT_MOTOR = 0;
@@ -109,8 +116,8 @@ public class RobotMap {
 	public static final Logger.Level LOG_DRIVETRAIN = Logger.Level.OFF;
 	public static final Logger.Level LOG_RANGEFINDER = Logger.Level.OFF;
 	public static final Logger.Level LOG_IMU = Logger.Level.OFF;
-	public static final Logger.Level LOG_ENCODER = Logger.Level.TRACE;
-	public static final Logger.Level LOG_PNEUMATICS = Logger.Level.OFF;
+	public static final Logger.Level LOG_ENCODER = Logger.Level.OFF;
+	public static final Logger.Level LOG_PNEUMATICS = Logger.Level.TRACE;
 	public static final Logger.Level LOG_ELEVATOR = Logger.Level.OFF;
 	public static final Logger.Level LOG_SHIFTER = Logger.Level.OFF;
 	public static final Logger.Level LOG_WINCH = Logger.Level.OFF;
@@ -119,7 +126,7 @@ public class RobotMap {
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD = Logger.Level.OFF;
 	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
-	public static final Logger.Level LOG_AUTOPROFILE = Logger.Level.TRACE;
+	public static final Logger.Level LOG_AUTOPROFILE = Logger.Level.OFF;
 
 	/** Network Table Key Names **/
 	public static final String networkTableName = "SmartDashboard";

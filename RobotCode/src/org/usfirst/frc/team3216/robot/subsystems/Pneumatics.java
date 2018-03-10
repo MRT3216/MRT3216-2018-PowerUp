@@ -41,6 +41,7 @@ public class Pneumatics extends Subsystem {
 	public void openPincher() {
 		if (pincher.get() != forward) {
 			pincher.set(forward);
+			RobotMap.PINCHER_STATUS = RobotMap.Pincher.OPEN;
 			log.add("OpenPincher executed", LOG_LEVEL);
 		}
 	}
@@ -49,6 +50,7 @@ public class Pneumatics extends Subsystem {
 	public void closePincher() {
 		if (pincher.get() != reverse) {
 			pincher.set(reverse);
+			RobotMap.PINCHER_STATUS = RobotMap.Pincher.CLOSED;
 			log.add("ClosePincher Closed", LOG_LEVEL);
 		}
 	}
@@ -57,12 +59,14 @@ public class Pneumatics extends Subsystem {
 	public void openPopper() {
 		if (popper.get() != forward) {
 			popper.set(forward);
+			RobotMap.POPPER_STATUS = RobotMap.Popper.EXTENDED;
 		}
 	}
 
 	public void closePopper() {
 		if (popper.get() != reverse) {
 			popper.set(reverse);
+			RobotMap.POPPER_STATUS = RobotMap.Popper.RETRACTED;
 		}
 	}
 

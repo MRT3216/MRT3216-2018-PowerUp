@@ -7,6 +7,7 @@ import org.usfirst.frc.team3216.robot.commands.ClimbArm_GoForward;
 import org.usfirst.frc.team3216.robot.commands.ClimbArm_Stop;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_ClosePincher;
 import org.usfirst.frc.team3216.robot.commands.Pneumatics_OpenPincher;
+import org.usfirst.frc.team3216.robot.commands.Pneumatics_TogglePincher;
 import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftDown;
 import org.usfirst.frc.team3216.robot.commands.Shifter_ShiftUp;
 import org.usfirst.frc.team3216.robot.commands.Winch_GoDown;
@@ -35,20 +36,45 @@ public class OI {
 			gamepad.A.whenPressed(new Shifter_ShiftDown());
 		}
 		if (RobotMap.hasJoystick) {
-			log.add("Joystick Contructed", LOG_LEVEL);
-			controlStick = new ControlStick(RobotMap.USB_CONTROL_STICK);
-			controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
-			controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
-			controlStick.Trigger.whenPressed(new CGroup_ShootCube());
-			controlStick.button8.whenPressed(new ClimbArm_GoBackwards());
-			controlStick.button8.whenReleased(new ClimbArm_Stop());
-			controlStick.button9.whenPressed(new ClimbArm_GoForward());
-			controlStick.button9.whenReleased(new ClimbArm_Stop());
-			if (RobotMap.hasWinch) {
-				controlStick.button6.whenPressed(new Winch_GoUp());
-				controlStick.button6.whenReleased(new Winch_Stop());
-				controlStick.button7.whenPressed(new Winch_GoDown());
-				controlStick.button7.whenReleased(new Winch_Stop());
+			
+			//Code to check which joystick is plugged in
+			controlStick = new ControlStick(RobotMap.USB_ATTACK_CONTROL_STICK);
+			RobotMap.currentControlStick = RobotMap.ControlStick.ATTACK;
+			if(controlStick == null) {
+				controlStick = new ControlStick(RobotMap.USB_EXTREME_CONTROL_STICK);
+				RobotMap.currentControlStick = RobotMap.ControlStick.EXTREME;
+			}
+			
+			if(RobotMap.currentControlStick == RobotMap.ControlStick.ATTACK) {
+				log.add("Attack Joystick Contructed", LOG_LEVEL);
+				controlStick.button5.whenPressed(new Pneumatics_ClosePincher());
+				controlStick.button4.whenPressed(new Pneumatics_OpenPincher());
+				controlStick.Trigger.whenPressed(new CGroup_ShootCube());
+				controlStick.button8.whenPressed(new ClimbArm_GoBackwards());
+				controlStick.button8.whenReleased(new ClimbArm_Stop());
+				controlStick.button9.whenPressed(new ClimbArm_GoForward());
+				controlStick.button9.whenReleased(new ClimbArm_Stop());
+				if (RobotMap.hasWinch) {
+					controlStick.button6.whenPressed(new Winch_GoUp());
+					controlStick.button6.whenReleased(new Winch_Stop());
+					controlStick.button7.whenPressed(new Winch_GoDown());
+					controlStick.button7.whenReleased(new Winch_Stop());
+				}
+			}
+			else {
+				log.add("EXTREME Joystick Contructed", LOG_LEVEL);
+				controlStick.button2.whenPressed(new Pneumatics_TogglePincher());
+				controlStick.Trigger.whenPressed(new CGroup_ShootCube());
+				controlStick.button3.whenPressed(new ClimbArm_GoBackwards());
+				controlStick.button3.whenReleased(new ClimbArm_Stop());
+				controlStick.button5.whenPressed(new ClimbArm_GoForward());
+				controlStick.button5.whenReleased(new ClimbArm_Stop());
+				if (RobotMap.hasWinch) {
+					controlStick.button6.whenPressed(new Winch_GoUp());
+					controlStick.button6.whenReleased(new Winch_Stop());
+					controlStick.button4.whenPressed(new Winch_GoDown());
+					controlStick.button4.whenReleased(new Winch_Stop());
+				}
 			}
 		}
 

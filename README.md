@@ -62,6 +62,11 @@ These values need to be **read and set** in the dashboard:<br>
 - **medianSmoothingReadings**: 1-21 in increments of 2  
   - readings that will be used to smooth rangefinder distance 
 
+**Autonomous Paths/WayPoints**
+- **crossTheLine:** drive 11 feet
+    - (0, 0, 0)
+    - (11, 0, 0)
+
 
 
 Ip's and passwords: https://docs.google.com/document/d/1gnbhW8H-TXnGVFWnfqmTPNoPVJzINSkYyQ2_zQQK6Qc/edit?usp=sharing
