@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		// String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		/*
 		 * switch(autonomousMode) { case SWITCH: autonomousCommand =
 		 * autonomousChooser.Switch(gameData); case SCALE: autonomousCommand =
@@ -146,8 +146,10 @@ public class Robot extends TimedRobot {
 		 * autonomousChooser.Cross_Line(gameData); }
 		 */
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
+		if (autonomousCommand != null) {
+			log.add(autonomousCommand.getName(), LOG_LEVEL);
 			autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -172,7 +174,9 @@ public class Robot extends TimedRobot {
 
 		leftEncoder.initEncoder();
 		rightEncoder.initEncoder();
-		shifter.shiftUp();
+		if (RobotMap.hasShifter) {
+			shifter.shiftUp();
+		}
 	}
 
 	/**

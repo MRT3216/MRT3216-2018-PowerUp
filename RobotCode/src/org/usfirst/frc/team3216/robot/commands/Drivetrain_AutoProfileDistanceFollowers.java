@@ -22,6 +22,7 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 
 	public Drivetrain_AutoProfileDistanceFollowers() {
 		super();
+		log.add("Constructor", LOG_LEVEL);
 	}
 
 	// Called just before this Command runs the first time
@@ -33,7 +34,7 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		Robot.rightEncoder.reset();
 		// Reset doesn't take a long time, calibrate does
 		imu.reset();
-
+		log.add("About to read files", LOG_LEVEL);
 		// Read in the Trajectory for the left and right
 		File leftFile = new File(RobotMap.TRAJECTORY_LEFTCSV);
 		File rightFile = new File(RobotMap.TRAJECTORY_RIGHTCSV);
@@ -84,11 +85,12 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 
 		// Get the current angle from the IMU (in degrees)
 		double gyro_heading = (-1 * Robot.imu.getAngleZ()) % 360;
+		gyro_heading = (gyro_heading < 0) ? 360 + gyro_heading : gyro_heading;
 
 		// Get the heading that the the robot should be at
 		double desired_heading = Pathfinder.r2d(followerLeft.getHeading()); // Should also be in degrees
 
-		// Calculate the difference between the desired heading and the actual ehading
+		// Calculate the difference between the desired heading and the actual heading
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		// Calculate the turn (??? ask Jaci ???)
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
