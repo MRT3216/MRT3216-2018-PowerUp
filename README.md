@@ -61,14 +61,14 @@ These values need to be **read and set** in the dashboard:<br>
   - point at which robot stops due to rangefinder distance
 - **medianSmoothingReadings**: 1-21 in increments of 2  
   - readings that will be
- - **medianSmoothingReadings**: 1-21 in increments of 2  
-  - readings that will be used to smooth rangefin used to smooth rangefinder distance 
-- **medianSmoothingReadings**: 1-21 in increments of 2  
-  - readings that will be used to smooth rangefin
-  - **medianSmoothingReadings**: 1-21 in increments of 2  
-  - readings that will be used to smooth rangefin
-  - **medianSmoothingReadings**: 1-21 in increments of 2  
-  - readings that will be used to smooth rangefin
+- **maxVelocity**: 2-20 in increments of 0.5  
+  - used in Pathfinder 
+- **proportionalGain**: 0.5-1 in increments of 0.05  
+  - used in Pathfinder
+ - **derivativeGain**: 0-1 in increments of 0.05  
+  - used in Pathfinder
+ - **accerationGain**: 0-1 in increments of 0.05   
+  - used in Pathfinder
 **Autonomous Paths/WayPoints**
 - **crossTheLine:** drive 11 feet forward
     - (0, 0, 0)
