@@ -100,6 +100,13 @@ public class RobotMap {
 	public static final double WHEEL_DIAMETER_FEET = WHEEL_DIAMETER / 12.0;
 	public static final double WHEEL_WIDTH_METERS = (currentBot == Bot.MAINBOT) ? 0.565 : 0.514;
 	public static final double WHEEL_WIDTH_FEET = WHEEL_WIDTH_METERS * METERS_TO_FEET;
+	public static final String PATH_DIRECTORY = "/home/lvuser/Paths/";
+	public static final String TRAJECTORY_LEFTCSV = "/traj_left_detailed.csv";
+	public static final String TRAJECTORY_RIGHTCSV = "/traj_right_detailed.csv";
+	/** Autonomous Settings *******************************************************/
+	public static final String DRIVE_STRAIGHT = "DriveStraight";
+	public static final String FORWARD_TURN_RIGHT = "ForwardTurnRight";
+	public static final String FORWARD_TURN_LEFT = "ForwardTurnLeft";
 
 	/** Logger Settings *******************************************************/
 	public static final String LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";
@@ -162,10 +169,10 @@ public class RobotMap {
 	public static final String ntStartingPosition = "startingPosition";
 	public static final String ntAutonomousMode = "/autonomous/modes";
 	public static final String ntAutonomousRangefinderDistance = "autonomousRangefinderDistance";
-	public static final String TRAJECTORY_CACHE = "trajectory.bin";
-	public static final String TRAJECTORY_CSV = "/home/lvuser/traj.csv";
-	public static final String TRAJECTORY_LEFTCSV = "/home/lvuser/trajLeft.csv";
-	public static final String TRAJECTORY_RIGHTCSV = "/home/lvuser/trajRight.csv";
+	public static final String ntMaxVelocity = "maxVelocity";
+	public static final String ntProportionalGain = "proportionalGain";
+	public static final String ntDerivativeGain = "derivativeGain";
+	public static final String ntAccelerationGain = "accelerationGain";
 
 	/** Network Table Values **/
 	// Control Settings
@@ -189,4 +196,8 @@ public class RobotMap {
 	public static StartingPositions STARTING_POSITION = StartingPositions.CENTER;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE = 25;
 	public static double MAX_VELOCITY = 10.0; // in ft/s
+	public static double PROPORTIONAL_GAIN = 1.0;
+	public static double DERIVATIVE_GAIN = 0.0;
+	public static double ACCELERATION_GAIN = 0.0;
+
 }

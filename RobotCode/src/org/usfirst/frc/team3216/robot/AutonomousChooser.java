@@ -2,7 +2,7 @@ package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
 import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
-import org.usfirst.frc.team3216.robot.commands.CGroup_Auto_StraightSwitch;
+import org.usfirst.frc.team3216.robot.autonomous.CGroup_Auto_StraightSwitch;
 import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
 
 import edu.wpi.first.wpilibj.command.Command;

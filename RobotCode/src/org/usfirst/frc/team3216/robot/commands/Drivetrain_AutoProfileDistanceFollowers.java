@@ -19,9 +19,11 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 	private DistanceFollower followerLeft;
 	private DistanceFollower followerRight;
 	private int count = 0;
+	private String Path;
 
-	public Drivetrain_AutoProfileDistanceFollowers() {
+	public Drivetrain_AutoProfileDistanceFollowers(String Path) {
 		super();
+		this.Path = Path;
 		log.add("Constructor", LOG_LEVEL);
 	}
 
@@ -36,8 +38,8 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		imu.reset();
 		log.add("About to read files", LOG_LEVEL);
 		// Read in the Trajectory for the left and right
-		File leftFile = new File(RobotMap.TRAJECTORY_LEFTCSV);
-		File rightFile = new File(RobotMap.TRAJECTORY_RIGHTCSV);
+		File leftFile = new File(RobotMap.PATH_DIRECTORY + this.Path + RobotMap.TRAJECTORY_LEFTCSV);
+		File rightFile = new File(RobotMap.PATH_DIRECTORY + this.Path + RobotMap.TRAJECTORY_RIGHTCSV);
 		Trajectory left = Pathfinder.readFromCSV(leftFile);
 		Trajectory right = Pathfinder.readFromCSV(rightFile);
 
@@ -58,8 +60,10 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		// motors can read)
 		// The fifth argument is your acceleration gain. Tweak this if you want to get
 		// to a higher or lower speed quicker
-		followerLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
-		followerRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		followerLeft.configurePIDVA(RobotMap.PROPORTIONAL_GAIN, 0.0, RobotMap.DERIVATIVE_GAIN, 1 / max_velocity,
+				RobotMap.ACCELERATION_GAIN);
+		followerRight.configurePIDVA(RobotMap.PROPORTIONAL_GAIN, 0.0, RobotMap.DERIVATIVE_GAIN, 1 / max_velocity,
+				RobotMap.ACCELERATION_GAIN);
 
 		log.add("initialized", LOG_LEVEL);
 	}
