@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGroup_Auto_StraightTurnRight extends CommandGroup {
 
 	public CGroup_Auto_StraightTurnRight() {
-		addParallel(new Drivetrain_AutoProfileDistanceFollowers(RobotMap.DRIVE_STRAIGHT));
+		addSequential(new Drivetrain_AutoProfileDistanceFollowers(RobotMap.FORWARD_TURN_RIGHT));
 		addSequential(new CGroup_ShootCube());
 	}
 }
