@@ -27,7 +27,7 @@ public class CGroup_Auto_StraightSwitch extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 		addParallel(new Drivetrain_AutoDriveForward(RobotMap.AUTONOMOUS_RANGEFINDER_DISTANCE));
-		addSequential(new Elevator_GoTo(10));
+		addSequential(new Elevator_GoTo(true));//true = top of elevator
 		addSequential(new CGroup_ShootCube());
 
 	}
