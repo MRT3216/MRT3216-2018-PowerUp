@@ -49,7 +49,7 @@ public class RobotMap {
 
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {
-		CROSS_LINE, SWITCH, SCALE, CHOOSE_EASIEST
+		CROSS_LINE, SWITCH, SCALE
 	};
 
 	public static enum StartingPositions {
@@ -199,4 +199,5 @@ public class RobotMap {
 	public static double PROPORTIONAL_GAIN = 1.0;
 	public static double DERIVATIVE_GAIN = 0.0;
 	public static double ACCELERATION_GAIN = 0.0;
+
 }
