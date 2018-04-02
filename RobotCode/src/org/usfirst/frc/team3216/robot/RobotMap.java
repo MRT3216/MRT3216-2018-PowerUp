@@ -49,7 +49,7 @@ public class RobotMap {
 
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {
-		CROSS_LINE, SWITCH, SCALE
+		CROSS_LINE, SWITCH, SCALE, CHOOSE_EASIEST
 	};
 
 	public static enum StartingPositions {
