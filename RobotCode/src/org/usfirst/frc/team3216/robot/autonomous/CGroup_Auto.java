@@ -10,8 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CGroup_Auto extends CommandGroup {
 
-	public CGroup_Auto() {
-		addSequential(new Drivetrain_AutoProfileDistanceFollowers(RobotMap.DRIVE_STRAIGHT));
-		addSequential(new CGroup_ShootCube());
+	public CGroup_Auto(String path) {
+		addSequential(new Drivetrain_AutoProfileDistanceFollowers(path));
+		if (path != RobotMap.DRIVE_STRAIGHT) {
+			addSequential(new CGroup_ShootCube());
+		}
 	}
 }
