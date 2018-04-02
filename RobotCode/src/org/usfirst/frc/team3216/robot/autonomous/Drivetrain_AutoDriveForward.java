@@ -1,6 +1,7 @@
-package org.usfirst.frc.team3216.robot.commands;
+package org.usfirst.frc.team3216.robot.autonomous;
 
 import org.usfirst.frc.team3216.robot.Robot;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_Drive;
 import org.usfirst.frc.team3216.robot.subsystems.RangeFinder;
 
 /**

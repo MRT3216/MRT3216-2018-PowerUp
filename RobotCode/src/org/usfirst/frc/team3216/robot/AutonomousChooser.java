@@ -2,55 +2,65 @@ package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
 import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
-import org.usfirst.frc.team3216.robot.autonomous.CGroup_Auto_StraightSwitch;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoDriveForward;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 public class AutonomousChooser {
 	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
 	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
-	Command autonomousCommand;
 
-	public Command Cross_Line(String gameData) {
-		if (startingPosition == StartingPositions.CENTER) {
-			autonomousCommand = new Drivetrain_AutoDriveForward(25); // For now it drives straight, but when we have
-																		// motion profiling working, we'll want to have
-																		// it
-																		// turn and go around the center stack of cubes.
-		} else {
-			autonomousCommand = new Drivetrain_AutoDriveForward(25);
-		}
-		return autonomousCommand;
-	}
+	public String getPath(String gameData) {
+		String path = RobotMap.DRIVE_STRAIGHT;
 
-	public Command Switch(String gameData) {
-		if ((startingPosition == StartingPositions.LEFT && gameData.charAt(0) == 'L')
-				|| (startingPosition == StartingPositions.RIGHT && gameData.charAt(0) == 'R')) {
-			autonomousCommand = new CGroup_Auto_StraightSwitch();
-		} else if (startingPosition == StartingPositions.CENTER) {
-			// TODO: commands for doing switch for center position.
-			autonomousCommand = new Drivetrain_AutoDriveForward(25);
-		}
-		return autonomousCommand;
-	}
+		char switchPos = gameData.charAt(0);
+		char scalePos = gameData.charAt(1);
 
-	public Command Scale(String gameData) {
-		if ((startingPosition == StartingPositions.LEFT)) {
-			if (gameData.charAt(1) == 'L') {
-				// autonomousCommand = (command for left scale starting on left side)
-			} else {
-				// autonomousCommand = (command for left scale starting on right side)
+		switch (autonomousMode) {
+		case CROSS_LINE:
+			path = RobotMap.DRIVE_STRAIGHT;
+			break;
+		case SWITCH:
+			if (startingPosition == StartingPositions.LEFT && switchPos == 'L') {
+				path = RobotMap.LEFT_SWITCH_LEFT;
+			} else if (startingPosition == StartingPositions.LEFT && switchPos == 'R') {
+				path = RobotMap.LEFT_SWITCH_RIGHT;
+			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'L') {
+				path = RobotMap.RIGHT_SWITCH_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'R') {
+				path = RobotMap.RIGHT_SWITCH_RIGHT;
 			}
-		} else if ((startingPosition == StartingPositions.RIGHT)) {
-			if (gameData.charAt(1) == 'R') {
-				// autonomousCommand = (command for right scale starting on right side)
-			} else {
-				// autonomousCommand = (command for right scale starting on left side)
+			break;
+		case SCALE:
+			if (startingPosition == StartingPositions.LEFT && scalePos == 'L') {
+				path = RobotMap.LEFT_SCALE_LEFT;
+			} else if (startingPosition == StartingPositions.LEFT && scalePos == 'R') {
+				path = RobotMap.LEFT_SCALE_RIGHT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'L') {
+				path = RobotMap.RIGHT_SCALE_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'R') {
+				path = RobotMap.RIGHT_SCALE_RIGHT;
 			}
-		} else {
-			autonomousCommand = new Drivetrain_AutoDriveForward(25);
+			break;
+		case EASIEST:
+			if (startingPosition == StartingPositions.LEFT && switchPos == 'L') {
+				path = RobotMap.LEFT_SWITCH_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'R') {
+				path = RobotMap.RIGHT_SWITCH_RIGHT;
+			} else if (startingPosition == StartingPositions.LEFT && scalePos == 'L') {
+				path = RobotMap.LEFT_SCALE_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'R') {
+				path = RobotMap.RIGHT_SCALE_RIGHT;
+			} else if (startingPosition == StartingPositions.LEFT && switchPos == 'R') {
+				path = RobotMap.LEFT_SWITCH_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'L') {
+				path = RobotMap.RIGHT_SWITCH_RIGHT;
+			} else if (startingPosition == StartingPositions.LEFT && scalePos == 'R') {
+				path = RobotMap.LEFT_SCALE_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'L') {
+				path = RobotMap.RIGHT_SCALE_RIGHT;
+			}
+			break;
+		default:
+			break;
 		}
-		return autonomousCommand;
+		return path;
 	}
 }
