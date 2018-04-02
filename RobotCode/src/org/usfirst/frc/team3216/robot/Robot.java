@@ -98,8 +98,6 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		autonomousCommand = new CGroup_Auto();
-
 		setupNetworkTableListeners();
 	}
 
@@ -133,13 +131,9 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 
-		// String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		/*
-		 * switch(autonomousMode) { case SWITCH: autonomousCommand =
-		 * autonomousChooser.Switch(gameData); case SCALE: autonomousCommand =
-		 * autonomousChooser.Scale(gameData); default: autonomousCommand =
-		 * autonomousChooser.Cross_Line(gameData); }
-		 */
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		autonomousCommand = new CGroup_Auto(AutonomousChooser.getPath(gameData));
+
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			log.add(autonomousCommand.getName(), LOG_LEVEL);

@@ -4,11 +4,11 @@ import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
 import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
 
 public class AutonomousChooser {
-	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
-	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
 
-	public String getPath(String gameData) {
+	public static String getPath(String gameData) {
 		String path = RobotMap.DRIVE_STRAIGHT;
+		StartingPositions startingPosition = RobotMap.STARTING_POSITION;
+		AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
 
 		char switchPos = gameData.charAt(0);
 		char scalePos = gameData.charAt(1);
