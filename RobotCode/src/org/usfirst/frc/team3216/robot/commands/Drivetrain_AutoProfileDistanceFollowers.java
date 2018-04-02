@@ -19,9 +19,12 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 	private DistanceFollower followerLeft;
 	private DistanceFollower followerRight;
 	private int count = 0;
+	private String Path;
 
-	public Drivetrain_AutoProfileDistanceFollowers() {
+	public Drivetrain_AutoProfileDistanceFollowers(String Path) {
 		super();
+		this.Path = Path;
+		log.add("Constructor", LOG_LEVEL);
 	}
 
 	// Called just before this Command runs the first time
@@ -33,10 +36,10 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		Robot.rightEncoder.reset();
 		// Reset doesn't take a long time, calibrate does
 		imu.reset();
-
+		log.add("About to read files", LOG_LEVEL);
 		// Read in the Trajectory for the left and right
-		File leftFile = new File(RobotMap.TRAJECTORY_LEFTCSV);
-		File rightFile = new File(RobotMap.TRAJECTORY_RIGHTCSV);
+		File leftFile = new File(RobotMap.PATH_DIRECTORY + this.Path + RobotMap.TRAJECTORY_LEFTCSV);
+		File rightFile = new File(RobotMap.PATH_DIRECTORY + this.Path + RobotMap.TRAJECTORY_RIGHTCSV);
 		Trajectory left = Pathfinder.readFromCSV(leftFile);
 		Trajectory right = Pathfinder.readFromCSV(rightFile);
 
@@ -57,8 +60,10 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		// motors can read)
 		// The fifth argument is your acceleration gain. Tweak this if you want to get
 		// to a higher or lower speed quicker
-		followerLeft.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
-		followerRight.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		followerLeft.configurePIDVA(RobotMap.PROPORTIONAL_GAIN, 0.0, RobotMap.DERIVATIVE_GAIN, 1 / max_velocity,
+				RobotMap.ACCELERATION_GAIN);
+		followerRight.configurePIDVA(RobotMap.PROPORTIONAL_GAIN, 0.0, RobotMap.DERIVATIVE_GAIN, 1 / max_velocity,
+				RobotMap.ACCELERATION_GAIN);
 
 		log.add("initialized", LOG_LEVEL);
 	}
@@ -84,11 +89,12 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 
 		// Get the current angle from the IMU (in degrees)
 		double gyro_heading = (-1 * Robot.imu.getAngleZ()) % 360;
+		gyro_heading = (gyro_heading < 0) ? 360 + gyro_heading : gyro_heading;
 
 		// Get the heading that the the robot should be at
 		double desired_heading = Pathfinder.r2d(followerLeft.getHeading()); // Should also be in degrees
 
-		// Calculate the difference between the desired heading and the actual ehading
+		// Calculate the difference between the desired heading and the actual heading
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		// Calculate the turn (??? ask Jaci ???)
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;

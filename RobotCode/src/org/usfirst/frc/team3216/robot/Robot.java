@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers();
+		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers(RobotMap.FORWARD_TURN_RIGHT);
 
 		setupNetworkTableListeners();
 	}
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		// String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		/*
 		 * switch(autonomousMode) { case SWITCH: autonomousCommand =
 		 * autonomousChooser.Switch(gameData); case SCALE: autonomousCommand =
@@ -146,8 +146,10 @@ public class Robot extends TimedRobot {
 		 * autonomousChooser.Cross_Line(gameData); }
 		 */
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
+		if (autonomousCommand != null) {
+			log.add(autonomousCommand.getName(), LOG_LEVEL);
 			autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -172,7 +174,9 @@ public class Robot extends TimedRobot {
 
 		leftEncoder.initEncoder();
 		rightEncoder.initEncoder();
-		shifter.shiftUp();
+		if (RobotMap.hasShifter) {
+			shifter.shiftUp();
+		}
 	}
 
 	/**
@@ -184,8 +188,6 @@ public class Robot extends TimedRobot {
 		// imu.getAngleZ() + "/n Angle: " + imu.getAngle(), Logger.Level.TRACE);
 		// log.add("Deadzone: " + RobotMap.JOYSTICK_DEADZONE, Logger.Level.TRACE);
 		syncWithNetworkTables();
-
-		log.add("Median Smoothing: " + RobotMap.MEDIAN_SMOOTHING_READINGS, LOG_LEVEL);
 		Scheduler.getInstance().run();
 	}
 
@@ -243,6 +245,17 @@ public class Robot extends TimedRobot {
 			case RobotMap.ntStartingPosition:
 				RobotMap.STARTING_POSITION = RobotMap.StartingPositions.valueOf(
 						settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));
+			case RobotMap.ntMaxVelocity:
+				RobotMap.MAX_VELOCITY = settings.getEntry(RobotMap.ntMaxVelocity).getDouble(RobotMap.MAX_VELOCITY);
+			case RobotMap.ntProportionalGain:
+				RobotMap.PROPORTIONAL_GAIN = settings.getEntry(RobotMap.ntProportionalGain)
+						.getDouble(RobotMap.PROPORTIONAL_GAIN);
+			case RobotMap.ntDerivativeGain:
+				RobotMap.DERIVATIVE_GAIN = settings.getEntry(RobotMap.ntDerivativeGain)
+						.getDouble(RobotMap.DERIVATIVE_GAIN);
+			case RobotMap.ntAccelerationGain:
+				RobotMap.ACCELERATION_GAIN = settings.getEntry(RobotMap.ntAccelerationGain)
+						.getDouble(RobotMap.ACCELERATION_GAIN);
 
 			}
 		}, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
