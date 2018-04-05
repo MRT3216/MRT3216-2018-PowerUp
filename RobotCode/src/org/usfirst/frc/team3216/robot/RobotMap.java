@@ -33,7 +33,7 @@ public class RobotMap {
 		YES, NO;
 	}
 
-	public static Bot currentBot = Bot.BLUEFISH;
+	public static Bot currentBot = Bot.MAINBOT;
 
 	public static ControlStick currentControlStick;
 
