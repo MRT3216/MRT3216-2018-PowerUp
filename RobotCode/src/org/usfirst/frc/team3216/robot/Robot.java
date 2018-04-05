@@ -137,7 +137,7 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			log.add(autonomousCommand.getName(), LOG_LEVEL);
-			autonomousCommand.start();
+			//autonomousCommand.start();
 		}
 	}
 
