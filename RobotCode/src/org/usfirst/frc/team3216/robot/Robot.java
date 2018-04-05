@@ -208,11 +208,13 @@ public class Robot extends TimedRobot {
 						.getDouble(RobotMap.DRIVESTRAIGHT_KP);
 				break;
 			// Rangefinder
+				/*
 			case RobotMap.ntMedianSmoothingReadings:
 				double m = settings.getEntry(RobotMap.ntMedianSmoothingReadings)
 						.getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
 				RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
 				break;
+				*/
 			// Robot Status
 			case RobotMap.ntBot:
 				RobotMap.currentBot = RobotMap.Bot
