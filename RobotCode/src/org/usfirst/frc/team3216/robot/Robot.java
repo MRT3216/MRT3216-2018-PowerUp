@@ -1,9 +1,7 @@
 package org.usfirst.frc.team3216.robot;
 
 import org.usfirst.frc.team3216.lib.Logger;
-import org.usfirst.frc.team3216.robot.RobotMap.AutonomousModes;
-import org.usfirst.frc.team3216.robot.RobotMap.StartingPositions;
-import org.usfirst.frc.team3216.robot.commands.Drivetrain_AutoProfileDistanceFollowers;
+import org.usfirst.frc.team3216.robot.autonomous.CGroup_Auto;
 import org.usfirst.frc.team3216.robot.subsystems.ADIS16448_IMU;
 import org.usfirst.frc.team3216.robot.subsystems.AirCompressor;
 import org.usfirst.frc.team3216.robot.subsystems.ClimbArm;
@@ -21,7 +19,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -62,10 +60,7 @@ public class Robot extends TimedRobot {
 	private static NetworkTableInstance defaultTable = NetworkTableInstance.getDefault();
 	private static NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
 
-	StartingPositions startingPosition = RobotMap.STARTING_POSITION;
-	AutonomousModes autonomousMode = RobotMap.AUTONOMOUS_MODE;
-
-	Command autonomousCommand;
+	CommandGroup autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -103,8 +98,6 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		autonomousCommand = new Drivetrain_AutoProfileDistanceFollowers(RobotMap.FORWARD_TURN_RIGHT);
-
 		setupNetworkTableListeners();
 	}
 
@@ -138,13 +131,9 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
 
-		// String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		/*
-		 * switch(autonomousMode) { case SWITCH: autonomousCommand =
-		 * autonomousChooser.Switch(gameData); case SCALE: autonomousCommand =
-		 * autonomousChooser.Scale(gameData); default: autonomousCommand =
-		 * autonomousChooser.Cross_Line(gameData); }
-		 */
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		autonomousCommand = new CGroup_Auto(AutonomousChooser.getPath(gameData));
+
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			log.add(autonomousCommand.getName(), LOG_LEVEL);
@@ -219,11 +208,13 @@ public class Robot extends TimedRobot {
 						.getDouble(RobotMap.DRIVESTRAIGHT_KP);
 				break;
 			// Rangefinder
+				/*
 			case RobotMap.ntMedianSmoothingReadings:
 				double m = settings.getEntry(RobotMap.ntMedianSmoothingReadings)
 						.getDouble(RobotMap.MEDIAN_SMOOTHING_READINGS);
 				RobotMap.MEDIAN_SMOOTHING_READINGS = (int) m;
 				break;
+				*/
 			// Robot Status
 			case RobotMap.ntBot:
 				RobotMap.currentBot = RobotMap.Bot

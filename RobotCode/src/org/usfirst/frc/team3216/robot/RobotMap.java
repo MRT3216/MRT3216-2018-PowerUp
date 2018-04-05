@@ -33,7 +33,7 @@ public class RobotMap {
 		YES, NO;
 	}
 
-	public static Bot currentBot = Bot.BLUEFISH;
+	public static Bot currentBot = Bot.MAINBOT;
 
 	public static ControlStick currentControlStick;
 
@@ -49,7 +49,7 @@ public class RobotMap {
 
 	/** Autonomous ************************************************************/
 	public static enum AutonomousModes {
-		CROSS_LINE, SWITCH, SCALE
+		CROSS_LINE, SWITCH, SCALE, EASIEST
 	};
 
 	public static enum StartingPositions {
@@ -104,9 +104,15 @@ public class RobotMap {
 	public static final String TRAJECTORY_LEFTCSV = "/traj_left_detailed.csv";
 	public static final String TRAJECTORY_RIGHTCSV = "/traj_right_detailed.csv";
 	/** Autonomous Settings *******************************************************/
+	public static final String LEFT_SWITCH_LEFT = "LSwitchL";
+	public static final String LEFT_SWITCH_RIGHT = "LSwitchR";
+	public static final String RIGHT_SWITCH_LEFT = "RSwitchL";
+	public static final String RIGHT_SWITCH_RIGHT = "RSwitchR";
+	public static final String LEFT_SCALE_LEFT = "LScaleL";
+	public static final String LEFT_SCALE_RIGHT = "LScaleR";
+	public static final String RIGHT_SCALE_LEFT = "RScaleL";
+	public static final String RIGHT_SCALE_RIGHT = "RScaleR";
 	public static final String DRIVE_STRAIGHT = "DriveStraight";
-	public static final String FORWARD_TURN_RIGHT = "ForwardTurnRight";
-	public static final String FORWARD_TURN_LEFT = "ForwardTurnLeft";
 
 	/** Logger Settings *******************************************************/
 	public static final String LOG_FILE_FORMAT = "yyyy-MM-dd-hhmmss";

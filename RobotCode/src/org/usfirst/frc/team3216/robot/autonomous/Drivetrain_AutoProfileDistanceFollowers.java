@@ -1,10 +1,11 @@
-package org.usfirst.frc.team3216.robot.commands;
+package org.usfirst.frc.team3216.robot.autonomous;
 
 import java.io.File;
 
 import org.usfirst.frc.team3216.lib.Logger;
 import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
+import org.usfirst.frc.team3216.robot.commands.Drivetrain_Drive;
 
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
