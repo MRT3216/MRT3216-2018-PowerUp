@@ -1,7 +1,8 @@
-package org.usfirst.frc.team3216.robot.commands;
+package org.usfirst.frc.team3216.robot.autonomous;
 
 import org.usfirst.frc.team3216.robot.RobotMap;
-import org.usfirst.frc.team3216.robot.autonomous.Drivetrain_AutoDriveForward;
+import org.usfirst.frc.team3216.robot.commands.CGroup_ShootCube;
+import org.usfirst.frc.team3216.robot.commands.Elevator_GoTo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
