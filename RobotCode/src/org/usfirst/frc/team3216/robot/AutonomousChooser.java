@@ -48,6 +48,18 @@ public class AutonomousChooser {
 				path = RobotMap.LEFT_SCALE_LEFT;
 			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'R') {
 				path = RobotMap.RIGHT_SCALE_RIGHT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'L') {
+				path = RobotMap.RIGHT_SCALE_RIGHT;
+			}
+			/*
+			if (startingPosition == StartingPositions.LEFT && switchPos == 'L') {
+				path = RobotMap.LEFT_SWITCH_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'R') {
+				path = RobotMap.RIGHT_SWITCH_RIGHT;
+			} else if (startingPosition == StartingPositions.LEFT && scalePos == 'L') {
+				path = RobotMap.LEFT_SCALE_LEFT;
+			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'R') {
+				path = RobotMap.RIGHT_SCALE_RIGHT;
 			} else if (startingPosition == StartingPositions.LEFT && switchPos == 'R') {
 				path = RobotMap.LEFT_SWITCH_LEFT;
 			} else if (startingPosition == StartingPositions.RIGHT && switchPos == 'L') {
@@ -56,7 +68,7 @@ public class AutonomousChooser {
 				path = RobotMap.LEFT_SCALE_LEFT;
 			} else if (startingPosition == StartingPositions.RIGHT && scalePos == 'L') {
 				path = RobotMap.RIGHT_SCALE_RIGHT;
-			}
+			}*/
 			break;
 		default:
 			break;
