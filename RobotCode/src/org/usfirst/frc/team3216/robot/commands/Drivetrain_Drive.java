@@ -61,7 +61,7 @@ public abstract class Drivetrain_Drive extends Command {
 		double dt = timer.get();
 		timer.reset();
 
-		throttle = restrictAcceleration(throttle, throttleOld, dt);
+		//throttle = restrictAcceleration(throttle, throttleOld, dt);
 
 		drivetrain.setPower(throttle - turn, throttle + turn);
 

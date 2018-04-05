@@ -38,12 +38,13 @@ public class OI {
 		if (RobotMap.hasJoystick) {
 
 			// Code to check which joystick is plugged in
-			controlStick = new ControlStick(RobotMap.USB_ATTACK_CONTROL_STICK);
-			RobotMap.currentControlStick = RobotMap.ControlStick.ATTACK;
+			controlStick = new ControlStick(RobotMap.USB_EXTREME_CONTROL_STICK);
+			RobotMap.currentControlStick = RobotMap.ControlStick.EXTREME;
+			/*
 			if (controlStick == null) {
 				controlStick = new ControlStick(RobotMap.USB_EXTREME_CONTROL_STICK);
-				RobotMap.currentControlStick = RobotMap.ControlStick.EXTREME;
-			}
+				RobotMap.currentControlStick = RobotMap.ControlStick.EXTREME;a
+			}*/
 
 			if (RobotMap.currentControlStick == RobotMap.ControlStick.ATTACK) {
 				log.add("Attack Joystick Contructed", LOG_LEVEL);
@@ -110,7 +111,8 @@ public class OI {
 
 	public double getRightX() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.RIGHT_JOY_X_AXIS);
-		joystickValue = checkDeadZone(joystickValue);
+		//joystickValue = checkDeadZone(joystickValue);
+		joystickValue = scaleJoystick(joystickValue);
 		// log.add("getRightX (" + joystickValue + ")", LOG_LEVEL);
 		return joystickValue;
 	}

@@ -58,8 +58,8 @@ public class RobotMap {
 
 	/** USB ports *************************************************************/
 	public static final int USB_GAMEPAD = 0;
-	public static final int USB_ATTACK_CONTROL_STICK = 2;
-	public static final int USB_EXTREME_CONTROL_STICK = 3;
+	public static final int USB_ATTACK_CONTROL_STICK = 3;
+	public static final int USB_EXTREME_CONTROL_STICK = 1;
 
 	/** PWM ID numbers ********************************************************/
 	public static final int PWM_LEFT_MOTOR = 0;
