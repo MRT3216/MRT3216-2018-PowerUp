@@ -5,6 +5,7 @@ import org.usfirst.frc.team3216.robot.Robot;
 import org.usfirst.frc.team3216.robot.RobotMap;
 import org.usfirst.frc.team3216.robot.subsystems.Elevator;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -15,13 +16,13 @@ public class Elevator_GoTo extends Command {
 
 	Logger log = new Logger(LOG_LEVEL, getName());
 	Elevator elevator = Robot.elevator;
-	double threshold = RobotMap.ELEVATOR_THRESHOLD;
+	DigitalInput topSwitch = Robot.topSwitch;
+	DigitalInput bottomSwitch = Robot.bottomSwitch;
+	boolean top;
 
-	double height;
-
-	public Elevator_GoTo(double height) {
+	public Elevator_GoTo(boolean top) {
 		requires(elevator);
-		this.height = Math.abs(height);
+		this.top = top;
 	}
 
 	// Called just before this Command runs the first time
@@ -39,12 +40,15 @@ public class Elevator_GoTo extends Command {
 		 * (((elevatorEncoder.getDistance()) - height) < threshold)) {
 		 * elevator.setPower(-1); } else { elevator.stop(); }
 		 */
+		if(top) {elevator.setPower(1);}
+		else {elevator.setPower(-1);}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;// (Math.abs(elevatorEncoder.getDistance() - height) < threshold) ;
+		if(top) {return !topSwitch.get();}
+		else {return !bottomSwitch.get();}
 	}
 
 	// Called once after isFinished returns true
