@@ -122,8 +122,8 @@ public class RobotMap {
 	public static final boolean LOG_TO_CONSOLE = true;
 	public static final boolean LOG_TO_FILE = false;
 	public static final Logger.Level LOG_GLOBAL = Logger.Level.ALL;
-	public static final Logger.Level LOG_ROBOT = Logger.Level.TRACE;
-	public static final Logger.Level LOG_OI = Logger.Level.OFF;
+	public static final Logger.Level LOG_ROBOT = Logger.Level.OFF;
+	public static final Logger.Level LOG_OI = Logger.Level.TRACE;
 
 	/** Subsystems **/
 	public static final Logger.Level LOG_DRIVETRAIN = Logger.Level.OFF;

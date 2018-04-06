@@ -18,6 +18,7 @@ public class ControlStick extends Joystick {
 
 	/** Axis Mapping for a single joystick ************************************/
 	public static final int JOYSTICK_Y_AXIS = 1;
+	public static final int JOYSTICK_THROTTLE_AXIS = 3;
 
 	/** Button Declarations ***************************************************/
 	Button Trigger = new JoystickButton(this, BUTTON_TRIGGER);

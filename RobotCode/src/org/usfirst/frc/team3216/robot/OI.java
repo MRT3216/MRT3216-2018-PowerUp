@@ -106,7 +106,7 @@ public class OI {
 		//joystickValue = checkDeadZone(joystickValue);
 		joystickValue = scaleJoystick(joystickValue);
 		// log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
-		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
+		//log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		return joystickValue;
 	}
 
@@ -122,8 +122,24 @@ public class OI {
 	public double getStickY() {
 		double joystickValue = controlStick.getRawAxis(ControlStick.JOYSTICK_Y_AXIS);
 		// TODO - add checkDeadZone (if needed)
-		log.add("StickY: " + joystickValue, LOG_LEVEL);
+		//log.add("StickY: " + joystickValue, LOG_LEVEL);
 		return joystickValue;
+	}
+	
+	public char getSide() {
+		log.add("THROTTLE AT: " + controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS), LOG_LEVEL);
+		if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) > 66) {
+			log.add("L", LOG_LEVEL);
+			return 'L';				
+		}
+		else if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) < -66){
+			log.add("R", LOG_LEVEL);
+			return 'R';
+		}
+		else {
+			log.add("D", LOG_LEVEL);
+			return 'D';
+		}
 	}
 
 	private double scaleJoystick(double joystickValue) {
