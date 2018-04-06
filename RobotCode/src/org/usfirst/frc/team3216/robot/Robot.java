@@ -46,10 +46,10 @@ public class Robot extends TimedRobot {
 	public static Winch winch;
 	public static final RangeFinder rangeFinder = new RangeFinder();
 	public static final DrivetrainEncoder leftEncoder = new DrivetrainEncoder(RobotMap.LEFT_ENCODER_CHANNEL_A,
-			RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", true);
+			RobotMap.LEFT_ENCODER_CHANNEL_B, "Left Encoder", false);
 
 	public static final DrivetrainEncoder rightEncoder = new DrivetrainEncoder(RobotMap.RIGHT_ENCODER_CHANNEL_A,
-			RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", false);
+			RobotMap.RIGHT_ENCODER_CHANNEL_B, "Right Encoder", true);
 
 	public static Pneumatics pneumatics = new Pneumatics();
 	public static Shifter shifter = new Shifter();
@@ -138,11 +138,13 @@ public class Robot extends TimedRobot {
 
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		autonomousCommand = new CGroup_Auto(AutonomousChooser.getPath(gameData));
-
+		if (RobotMap.hasShifter) {
+			shifter.shiftDown();
+		}	
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			log.add(autonomousCommand.getName(), LOG_LEVEL);
-			//autonomousCommand.start();
+			autonomousCommand.start();
 		}
 	}
 

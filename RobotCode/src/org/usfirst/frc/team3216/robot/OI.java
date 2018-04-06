@@ -103,7 +103,8 @@ public class OI {
 
 	public double getLeftY() {
 		double joystickValue = gamepad.getRawAxis(Gamepad.LEFT_JOY_Y_AXIS);
-		joystickValue = checkDeadZone(joystickValue);
+		//joystickValue = checkDeadZone(joystickValue);
+		joystickValue = scaleJoystick(joystickValue);
 		// log.add("getLeftY (" + joystickValue + ")", LOG_LEVEL);
 		log.add("Deadzone = " + RobotMap.JOYSTICK_DEADZONE, LOG_LEVEL);
 		return joystickValue;
