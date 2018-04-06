@@ -97,6 +97,11 @@ public class Robot extends TimedRobot {
 		}
 
 		oi = new OI();
+		
+		// Reset the values of the encoder - this is done in the Drivetrain_AutoProfileDistanceFollowers,
+		// but we are doing it here again just in case
+		Robot.leftEncoder.reset();
+		Robot.rightEncoder.reset();	
 
 		setupNetworkTableListeners();
 	}
