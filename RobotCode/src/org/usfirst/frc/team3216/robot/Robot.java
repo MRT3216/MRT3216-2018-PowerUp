@@ -98,10 +98,9 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 		
-		// Reset the values of the encoder - this is done in the Drivetrain_AutoProfileDistanceFollowers,
-		// but we are doing it here again just in case
-		Robot.leftEncoder.reset();
-		Robot.rightEncoder.reset();	
+		leftEncoder.initEncoder();
+		rightEncoder.initEncoder();
+		
 		CameraServer.getInstance().startAutomaticCapture();
 		setupNetworkTableListeners();
 	}
@@ -135,14 +134,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
-		
-		// Reset the values of the encoder - this is done in the Drivetrain_AutoProfileDistanceFollowers,
-		// but we are doing it here again just in case
-		Robot.leftEncoder.reset();
-		Robot.rightEncoder.reset();		
-
+				
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		autonomousCommand = new CGroup_Auto(AutonomousChooser.getPath(gameData));
+		log.add(autonomousCommand.getName(), LOG_LEVEL);
 		if (RobotMap.hasShifter) {
 			shifter.shiftDown();
 		}	
@@ -173,8 +168,8 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 
-		leftEncoder.initEncoder();
-		rightEncoder.initEncoder();
+		//leftEncoder.initEncoder();
+		//rightEncoder.initEncoder();
 		if (RobotMap.hasShifter) {
 			shifter.shiftUp();
 		}
@@ -242,9 +237,11 @@ public class Robot extends TimedRobot {
 						.getDouble(RobotMap.ELEVATOR_THRESHOLD);
 				break;
 			// Autonomous
+				/*
 			case RobotMap.ntAutonomousMode:
 				RobotMap.AUTONOMOUS_MODE = RobotMap.AutonomousModes.valueOf(
 						settings.getEntry(RobotMap.ntAutonomousMode).getString(RobotMap.AUTONOMOUS_MODE.name()));
+				*/
 			case RobotMap.ntStartingPosition:
 				RobotMap.STARTING_POSITION = RobotMap.StartingPositions.valueOf(
 						settings.getEntry(RobotMap.ntStartingPosition).getString(RobotMap.STARTING_POSITION.name()));

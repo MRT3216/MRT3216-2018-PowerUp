@@ -71,7 +71,7 @@ public class AutonomousChooser {
 		default:
 			break;
 		}		
-
+		path = RobotMap.DRIVE_STRAIGHT;
 		return path;
 	}
 }

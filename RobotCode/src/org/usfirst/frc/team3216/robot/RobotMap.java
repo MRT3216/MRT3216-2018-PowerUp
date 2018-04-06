@@ -138,8 +138,8 @@ public class RobotMap {
 
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD = Logger.Level.OFF;
-	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
-	public static final Logger.Level LOG_AUTOPROFILE = Logger.Level.TRACE;
+	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.TRACE;
+	public static final Logger.Level LOG_AUTOPROFILE = Logger.Level.OFF;
 
 	/** Network Table Key Names **/
 	public static final String networkTableName = "SmartDashboard";
@@ -202,7 +202,7 @@ public class RobotMap {
 	public static StartingPositions STARTING_POSITION = StartingPositions.CENTER;
 	public static double AUTONOMOUS_RANGEFINDER_DISTANCE = 25;
 	public static double MAX_VELOCITY = 10.0; // in ft/s
-	public static double PROPORTIONAL_GAIN = 1.0;
+	public static double PROPORTIONAL_GAIN = 0.5;
 	public static double DERIVATIVE_GAIN = 0.0;
 	public static double ACCELERATION_GAIN = 0.0;
 

@@ -99,6 +99,7 @@ public class Drivetrain_AutoProfileDistanceFollowers extends Drivetrain_Drive {
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		// Calculate the turn (??? ask Jaci ???)
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
+		//double turn = 0.0;
 		log.add("gyro_heading: " + gyro_heading, LOG_LEVEL);
 		log.add("desired_heading: " + desired_heading, LOG_LEVEL);
 		log.add("turn: " + turn, LOG_LEVEL);
