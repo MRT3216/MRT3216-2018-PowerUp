@@ -183,7 +183,7 @@ public class RobotMap {
 	/** Network Table Values **/
 	// Control Settings
 	public static double JOYSTICK_DEADZONE = 0.05;
-	public static double JOYSTICK_SENSITIVITY = 0.9;
+	public static double JOYSTICK_SENSITIVITY = 0.8;
 	public static double DRIVESTRAIGHT_KP = 0.01;
 	// Rangefinder
 	public static int MEDIAN_SMOOTHING_READINGS = 15;
