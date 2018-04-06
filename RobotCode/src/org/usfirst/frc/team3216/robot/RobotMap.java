@@ -89,11 +89,11 @@ public class RobotMap {
 	/** Drivetrain Settings ***************************************************/
 	public static final boolean REVERSE_LEFT_MOTOR = true;
 	public static final boolean REVERSE_RIGHT_MOTOR = false;
-	public static final double ACCELERATION_MAX = 2.0;
+	public static final double ACCELERATION_MAX = 3.0;
 	// Determines the threshold at which the robot drives straight
 	public static final double METERS_TO_FEET = 3.28084;
 	public static final double TURN_RATE_THRESHOLD = 0.5;
-	public static final double DRIVETRAIN_GEAR_RATIO = (currentBot == Bot.MAINBOT) ? 7.0 : 24.0 / 26;
+	public static final double DRIVETRAIN_GEAR_RATIO = (currentBot == Bot.MAINBOT) ? 26.0/45.0 : 24.0 / 26;
 	public static final int DRIVETRAIN_ENCODER_PULSE_PER_REVOLUTION = (currentBot == Bot.MAINBOT) ? 360 : 360;
 	public static final double WHEEL_DIAMETER = (currentBot == Bot.MAINBOT) ? 6 : 3.85;
 	public static final double WHEEL_DIAMETER_METERS = (currentBot == Bot.MAINBOT) ? 0.1524 : 0.098425;
@@ -183,7 +183,7 @@ public class RobotMap {
 	/** Network Table Values **/
 	// Control Settings
 	public static double JOYSTICK_DEADZONE = 0.05;
-	public static double JOYSTICK_SENSITIVITY = 0.5;
+	public static double JOYSTICK_SENSITIVITY = 0.9;
 	public static double DRIVESTRAIGHT_KP = 0.01;
 	// Rangefinder
 	public static int MEDIAN_SMOOTHING_READINGS = 15;
