@@ -130,6 +130,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		log.add("Autonomous Init", LOG_LEVEL);
+		
+		// Reset the values of the encoder - this is done in the Drivetrain_AutoProfileDistanceFollowers,
+		// but we are doing it here again just in case
+		Robot.leftEncoder.reset();
+		Robot.rightEncoder.reset();		
 
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		autonomousCommand = new CGroup_Auto(AutonomousChooser.getPath(gameData));
