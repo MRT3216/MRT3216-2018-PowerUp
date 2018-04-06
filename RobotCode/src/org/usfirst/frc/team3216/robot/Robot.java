@@ -16,6 +16,7 @@ import org.usfirst.frc.team3216.robot.subsystems.Winch;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -59,7 +60,6 @@ public class Robot extends TimedRobot {
 	// Network tables
 	private static NetworkTableInstance defaultTable = NetworkTableInstance.getDefault();
 	private static NetworkTable settings = defaultTable.getTable(RobotMap.networkTableName);
-
 	CommandGroup autonomousCommand;
 
 	/**
@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
 		// but we are doing it here again just in case
 		Robot.leftEncoder.reset();
 		Robot.rightEncoder.reset();	
-
+		CameraServer.getInstance().startAutomaticCapture();
 		setupNetworkTableListeners();
 	}
 
