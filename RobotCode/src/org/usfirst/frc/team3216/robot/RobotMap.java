@@ -104,14 +104,8 @@ public class RobotMap {
 	public static final String TRAJECTORY_LEFTCSV = "/traj_left_detailed.csv";
 	public static final String TRAJECTORY_RIGHTCSV = "/traj_right_detailed.csv";
 	/** Autonomous Settings *******************************************************/
-	public static final String LEFT_SWITCH_LEFT = "LSwitchL";
-	public static final String LEFT_SWITCH_RIGHT = "LSwitchR";
-	public static final String RIGHT_SWITCH_LEFT = "RSwitchL";
-	public static final String RIGHT_SWITCH_RIGHT = "RSwitchR";
-	public static final String LEFT_SCALE_LEFT = "LScaleL";
-	public static final String LEFT_SCALE_RIGHT = "LScaleR";
-	public static final String RIGHT_SCALE_LEFT = "RScaleL";
-	public static final String RIGHT_SCALE_RIGHT = "RScaleR";
+	public static final String CENTER_SWITCH_LEFT = "CSwitchL";
+	public static final String CENTER_SWITCH_RIGHT = "CSwitchR";
 	public static final String DRIVE_STRAIGHT = "DriveStraight";
 
 	/** Logger Settings *******************************************************/
@@ -138,7 +132,7 @@ public class RobotMap {
 
 	/** Commands **/
 	public static final Logger.Level LOG_DRIVEFORWARD = Logger.Level.OFF;
-	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.TRACE;
+	public static final Logger.Level LOG_DRIVETRAIN_DRIVESTRAIGHT = Logger.Level.OFF;
 	public static final Logger.Level LOG_AUTOPROFILE = Logger.Level.OFF;
 
 	/** Network Table Key Names **/
