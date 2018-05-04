@@ -128,11 +128,11 @@ public class OI {
 	
 	public char getSide() {
 		log.add("THROTTLE AT: " + controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS), LOG_LEVEL);
-		if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) > 66) {
+		if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) > .66) {
 			log.add("L", LOG_LEVEL);
 			return 'L';				
 		}
-		else if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) < -66){
+		else if (controlStick.getRawAxis(ControlStick.JOYSTICK_THROTTLE_AXIS) < -.66){
 			log.add("R", LOG_LEVEL);
 			return 'R';
 		}
